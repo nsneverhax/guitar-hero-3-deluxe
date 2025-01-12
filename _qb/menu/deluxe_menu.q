@@ -1,0 +1,248 @@
+custom_menu_fs = {
+	Create = create_custom_menu
+	Destroy = destroy_custom_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = main_menu_fs
+			use_last_flow_state
+		}
+	]
+}
+
+script create_custom_menu
+	Rot_Angle = 2
+
+	if ((IsNGC) || (IsPS2))
+		Spacing = -65
+		<Menu_pos> = (640.0, 250.0)
+	else
+		Spacing = -45
+		<Menu_pos> = (640.0, 240.0)
+	endif
+
+	flame_handlers = [
+			{pad_back back_to_retail_ui_flow}
+			{pad_up generic_menu_up_or_down_sound Params = {UP}}
+			{pad_down generic_menu_up_or_down_sound Params = {UP}}
+		]
+	new_menu {
+		scrollid = custom_scrolling_menu
+		vmenuid = custom_vmenu
+		Menu_pos = <Menu_pos>
+		Rot_Angle = <Rot_Angle>
+		event_handlers = <flame_handlers>
+		Spacing = <Spacing>
+		use_backdrop = (1)
+	}
+
+	create_pause_menu_frame Z = (<pause_z> - 10)
+
+	CreateScreenElement {
+		Type = SpriteElement
+		PARENT = pause_menu_frame_container
+		texture = menu_pause_frame_banner
+		Pos = (640.0, 540.0)
+		just = [Center Center]
+		z_priority = 10
+	}
+	deluxe_text_pos = (125.0, 47.0)
+
+	if ((IsXenon) || (IsPS3))
+		deluxe_text_pos = (125.0, 52.0)
+	endif
+	CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		Text = 'DELUXE'
+		font = text_a6
+		Pos = <deluxe_text_pos>
+		Scale = (0.75, 0.75)
+		rgba = [170 90 30 255]
+		z_priority = 11
+	}
+
+	text_scale = (0.9, 0.9)
+	container_params = {Type = ContainerElement PARENT = custom_vmenu Dims = (0.0, 100.0)}
+    disable_pause
+
+    CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus retail_menu_focus Params = {Id = toggle_bot_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = toggle_bot_menuitem}}
+			{pad_choose toggle_bot}
+		]
+	}
+  	CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Id = toggle_bot_menuitem
+		Text = 'Autoplay: Disabled'
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = 8
+	}
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+	toggle_bot_setprop
+
+	CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus retail_menu_focus Params = {Id = select_slomo_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = select_slomo_menuitem}}
+			{pad_choose select_slomo_custom}
+		]
+	}
+	CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Id = select_slomo_menuitem
+		Text = 'Song Speed: 1.0'
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = 8
+	}
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+	select_slomo_setprop_custom
+
+	CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus retail_menu_focus Params = {Id = debug_func_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = debug_func_menuitem}}
+			{pad_choose toggle_debug}
+		]
+	}
+    CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Id = debug_func_menuitem
+		Text = 'Debug Mode: Off'
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = 8
+	}
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+	toggle_debug_setprop
+
+    add_user_control_helper \{Text = 'SELECT'
+		button = Green
+		Z = 100}
+	add_user_control_helper \{Text = 'BACK'
+		button = RED
+		Z = 100}
+	add_user_control_helper \{Text = 'UP/DOWN'
+		button = Strumbar
+		Z = 100}
+    LaunchEvent \{ Type = Focus Target = custom_vmenu }
+endscript
+
+script destroy_custom_menu 
+    if ScreenElementExists \{ Id = custom_scrolling_menu }
+        DestroyScreenElement \{ Id = custom_scrolling_menu }
+    endif
+    clean_up_user_control_helpers
+	destroy_pause_menu_frame
+	destroy_menu \{menu_id = scrolling_custom_menu}
+	destroy_menu \{menu_id = pause_menu_frame_container}
+endscript
+
+script select_slomo_custom 
+    ui_menu_select_sfx
+    speedfactor = ($current_speedfactor * 10.0)
+    speedfactor = (<speedfactor> + 0.5)
+    if (<speedfactor> > 20)
+        speedfactor = 1
+    endif
+    if (<speedfactor> < 1)
+        speedfactor = 1
+    endif
+    Change current_speedfactor = (<speedfactor> / 10.0)
+    update_slomo_custom
+    select_slomo_setprop_custom
+endscript
+
+script update_slomo_custom 
+    SetSlomo \{ $current_speedfactor }
+    setslomo_song \{ slomo = $current_speedfactor }
+    Player = 1
+    begin
+        FormatText ChecksumName = player_status 'player%i_status' i = <Player>
+        Change StructureName = <player_status> check_time_early = ($check_time_early * $current_speedfactor)
+        Change StructureName = <player_status> check_time_late = ($check_time_late * $current_speedfactor)
+        Player = (<Player> + 1)
+    repeat $current_num_players
+endscript
+
+script select_slomo_setprop_custom 
+    FormatText \{ textname = slomo_text 'Song Speed: %s' s = $current_speedfactor }
+    select_slomo_menuitem :SetProps text = <slomo_text>
+endscript
+
+script toggle_bot_setprop 
+    if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+        toggle_bot_menuitem :SetProps text = "Autoplay: Disabled"
+    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play = 0)
+        toggle_bot_menuitem :SetProps text = "Autoplay: P1"
+    elseif ($player1_status.bot_play = 0 && $player2_status.bot_play != 0)
+        toggle_bot_menuitem :SetProps text = "Autoplay: P2"
+    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
+        toggle_bot_menuitem :SetProps text = "Autoplay: P1 + P2"
+    endif
+
+endscript
+
+script toggle_bot 
+    ui_menu_select_sfx
+    if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+        Change StructureName = player1_status bot_play = 1
+        Change StructureName = player2_status bot_play = 0
+    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play = 0)
+        Change StructureName = player1_status bot_play = 0
+        Change StructureName = player2_status bot_play = 1
+    elseif ($player1_status.bot_play = 0 && $player2_status.bot_play != 0)
+        Change StructureName = player1_status bot_play = 1
+        Change StructureName = player2_status bot_play = 1
+    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
+        Change StructureName = player1_status bot_play = 0
+        Change StructureName = player2_status bot_play = 0
+    endif
+    toggle_bot_setprop
+endscript
+
+script toggle_debug 
+    ui_menu_select_sfx
+	if ($enable_button_cheats = 0)
+		Change enable_button_cheats = 1
+	elseif
+		Change enable_button_cheats = 0
+	endif
+	toggle_debug_setprop
+endscript
+
+script toggle_debug_setprop 
+    if ($enable_button_cheats = 1)
+		debug_func_menuitem :SetProps text = "Debug Mode: On"
+	elseif
+		debug_func_menuitem :SetProps text = "Debug Mode: Off"
+	endif
+endscript
