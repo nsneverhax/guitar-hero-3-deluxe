@@ -10,8 +10,9 @@ custom_menu_fs = {
 	]
 }
 
-script create_custom_menu
+script create_custom_menu \{Popup = 0}
 	Rot_Angle = 2
+	pause_z = 10000
 
 	if ((IsNGC) || (IsPS2))
 		Spacing = -65
@@ -21,11 +22,15 @@ script create_custom_menu
 		<Menu_pos> = (640.0, 240.0)
 	endif
 
+	if (<Popup> = 0)
+		create_menu_backdrop
+	endif
+
 	flame_handlers = [
 			{pad_back back_to_retail_ui_flow}
 			{pad_up generic_menu_up_or_down_sound Params = {UP}}
-			{pad_down generic_menu_up_or_down_sound Params = {UP}}
-		]
+			{pad_down generic_menu_up_or_down_sound Params = {DOWN}}
+	]
 	new_menu {
 		scrollid = custom_scrolling_menu
 		vmenuid = custom_vmenu
@@ -44,7 +49,7 @@ script create_custom_menu
 		texture = menu_pause_frame_banner
 		Pos = (640.0, 540.0)
 		just = [Center Center]
-		z_priority = 10
+		z_priority = (<pause_z> + 100)
 	}
 	deluxe_text_pos = (125.0, 47.0)
 
@@ -59,12 +64,11 @@ script create_custom_menu
 		Pos = <deluxe_text_pos>
 		Scale = (0.75, 0.75)
 		rgba = [170 90 30 255]
-		z_priority = 11
+		z_priority = (<pause_z> + 101)
 	}
 
 	text_scale = (0.9, 0.9)
 	container_params = {Type = ContainerElement PARENT = custom_vmenu Dims = (0.0, 100.0)}
-    disable_pause
 
     CreateScreenElement {
 		<container_params>
@@ -86,7 +90,8 @@ script create_custom_menu
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
-		z_priority = 8
+		z_priority = (<pause_z>)
+
 	}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
@@ -112,7 +117,7 @@ script create_custom_menu
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
-		z_priority = 8
+		z_priority = (<pause_z>)
 	}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
@@ -138,7 +143,7 @@ script create_custom_menu
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
-		z_priority = 8
+		z_priority = (<pause_z>)
 	}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
@@ -146,13 +151,13 @@ script create_custom_menu
 
     add_user_control_helper \{Text = 'SELECT'
 		button = Green
-		Z = 100}
+		Z = 100000}
 	add_user_control_helper \{Text = 'BACK'
 		button = RED
-		Z = 100}
+		Z = 100000}
 	add_user_control_helper \{Text = 'UP/DOWN'
 		button = Strumbar
-		Z = 100}
+		Z = 100000}
     LaunchEvent \{ Type = Focus Target = custom_vmenu }
 endscript
 
@@ -164,6 +169,7 @@ script destroy_custom_menu
 	destroy_pause_menu_frame
 	destroy_menu \{menu_id = scrolling_custom_menu}
 	destroy_menu \{menu_id = pause_menu_frame_container}
+	destroy_menu_backdrop
 endscript
 
 script select_slomo_custom 

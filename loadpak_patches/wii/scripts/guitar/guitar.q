@@ -2029,7 +2029,7 @@ script guitar_startup
 		SpawnScriptLater \{autolaunch_spawned}
 	endif
 	// Deluxe Start
-	LoadPak 'pak/deluxe/gh3dx.pak'
+	LoadPak 'deluxe/gh3dx.pak'
 	// Deluxe End
 endscript
 force_encore_autolaunch = 0
