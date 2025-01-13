@@ -74,7 +74,7 @@ career_pause_options_fs = {
 	]
 }
 
-practice__fs = {
+practice_options_fs = {
 	Create = create_pause_menu
 	create_params = {
 		for_options = 1
