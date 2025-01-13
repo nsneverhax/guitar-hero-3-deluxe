@@ -6,8 +6,6 @@ file_extensions:
   - q
 scope: source.q
 
-
-
 contexts:
   main:
     # Strings begin and end with quotes, and use backslashes as an escape
@@ -20,6 +18,32 @@ contexts:
     - match: ';'
       scope: punctuation.definition.comment.example-c
       push: line_comment
+    # Comments begin with a '//' and finish at the end of the line
+    - match: '//'
+      scope: punctuation.definition.comment.example-c
+      push: line_comment
+      #block comments copied from c++ syntax
+    - match: ^(/\*) =\s*(.*?)\s*= (\*/)$\n?
+      scope: comment.block.banner.c
+      captures:
+        1: punctuation.definition.comment.begin.c
+        2: meta.toc-list.banner.block.c
+        3: punctuation.definition.comment.end.c
+    # empty block comments
+    - match: /\*\*+/
+      scope: comment.block.empty.c punctuation.definition.comment.c
+    # documentation block comments
+    - match: (?:/\*!|/\*{2,})
+      scope: punctuation.definition.comment.begin.c
+      push: block-comment-documentation-body
+    # normal block comments
+    - match: /\*
+      scope: punctuation.definition.comment.begin.c
+      push: block-comment-body
+    # stray block comment end
+    - match: \*+/(?!\*)
+      scope: invalid.illegal.stray-comment-end.c
+
 
     # Keywords are if, else for and while.
     # Note that blackslashes don't need to be escaped within single quoted
@@ -75,6 +99,27 @@ contexts:
         - match: '\{'
           scope: punctuation.definition.block.begin
           set: function-block
+
+
+  block-comment-documentation-body:
+    - meta_include_prototype: false
+    - meta_scope: comment.block.documentation.c
+    - match: \*+/
+      scope: punctuation.definition.comment.end.c
+      pop: true
+    - match: ^\s*(\*)(?!\**/)
+      captures:
+        1: punctuation.definition.comment.c
+
+  block-comment-body:
+    - meta_include_prototype: false
+    - meta_scope: comment.block.c
+    - match: \*/
+      scope: punctuation.definition.comment.end.c
+      pop: true
+    - match: ^\s*(\*)(?!\**/)
+      captures:
+        1: punctuation.definition.comment.c
 
   function-block:
   - meta_scope: meta.block.function
