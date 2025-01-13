@@ -1,0 +1,76 @@
+base-version: 0
+licenses:
+- bits: 1
+  flags: 0
+  id: -1
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+- bits: 0
+  flags: 0
+  id: 0
+media-id: 0
+package-description:
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+package-name:
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+- ''
+sign-live: true
+title-id: 0
+title-name: ''
+transfer-flags: 192
+version: 0
