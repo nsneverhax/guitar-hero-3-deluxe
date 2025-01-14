@@ -69,3 +69,6 @@ script move_highway_2d
 		endif
 	endif
 endscript
+
+script create_highway_prepass
+endscript
