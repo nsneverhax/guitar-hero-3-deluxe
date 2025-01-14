@@ -139,9 +139,9 @@ script create_main_menu
 		multiplayer_text_scale = (1.6, 1.4667)
 		training_text_off = (<multiplayer_text_off> + (60.0, 42.0))
 		training_text_scale = (2.0, 2.0)
-		custom_menu_text_off = (<training_text_off> + (-20.0, 77.0))
+		custom_menu_text_off = (<training_text_off> + (-60.0, 77.0))
 		custom_menu_text_scale = (1.4667, 1.333)
-		options_text_off = (<custom_menu_text_off> + (-20.0, 48.0))
+		options_text_off = (<custom_menu_text_off> + (20.0, 48.0))
 		options_text_scale = (1.6, 1.4667)
 		leaderboards_text_off = (<options_text_off> + (25.0, 55.0))
 		leaderboards_text_scale = (1.4667, 1.333)
@@ -158,9 +158,9 @@ script create_main_menu
 		multiplayer_text_scale = (1.2, 1.1)
 		training_text_off = (<multiplayer_text_off> + (60.0, 47.0))
 		training_text_scale = (1.5, 1.5)
-		custom_menu_text_off = (<training_text_off> + (-20.0, 63.0))
+		custom_menu_text_off = (<training_text_off> + (-60.0, 63.0))
 		custom_menu_text_scale = (1.1, 1.0)
-		options_text_off = (<custom_menu_text_off> + (-20.0, 45.0))
+		options_text_off = (<custom_menu_text_off> + (20.0, 45.0))
 		options_text_scale = (1.2, 1.1)
 		leaderboards_text_off = (<options_text_off> + (20.0, 48.0))
 		leaderboards_text_scale = (1.1, 1.0)
@@ -354,7 +354,7 @@ script create_main_menu
 		Id = main_menu_custom_menu_text
 		PARENT = main_menu_text_container
 		font = <main_menu_font>
-		Text = 'DELUXE MENU'
+		Text = 'DELUXE SETTINGS'
 		font_spacing = 0
 		Pos = {(<custom_menu_text_off>) Relative}
 		Scale = (<custom_menu_text_scale>)
