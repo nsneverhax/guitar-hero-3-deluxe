@@ -1379,34 +1379,93 @@ script create_pause_menu \{Player = 1
 			z_priority = <pause_z>
 			exclusive_device = <player_device>
 		}
+		if ((IsWinPort) || (IsMacPort))
+			GetScreenElementDims Id = <Id>
+			fit_text_in_rectangle Id = <Id> Dims = (<fit_dims> + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+			CreateScreenElement {
+				Type = ContainerElement
+				PARENT = vmenu_pause
+				Dims = (0.0, 100.0)
+				event_handlers = [
+					{Focus retail_menu_focus Params = {Id = options_calibrate_lag}}
+					{Focus generic_menu_up_or_down_sound}
+					{unfocus retail_menu_unfocus Params = {Id = options_calibrate_lag}}
+					{pad_choose ui_flow_manager_respond_to_action Params = {action = select_calibrate_lag create_params = {Player = <Player>}}}
+				]
+			}
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = <Id>
+				font = fontgrid_title_gh3
+				Scale = <text_scale>
+				rgba = [210 130 0 250]
+				Text = 'CALIBRATE VIDEO LAG'
+				Id = options_calibrate_lag
+				just = [Center Center]
+				Shadow
+				shadow_offs = (3.0, 3.0)
+				shadow_rgba [0 0 0 255]
+				z_priority = <pause_z>
+				exclusive_device = <player_device>
+			}
+			GetScreenElementDims Id = <Id>
+			fit_text_in_rectangle Id = <Id> Dims = (<fit_dims> + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+			CreateScreenElement {
+				Type = ContainerElement
+				PARENT = vmenu_pause
+				Dims = (0.0, 100.0)
+				event_handlers = [
+					{Focus retail_menu_focus Params = {Id = 0x06c938f2}}
+					{Focus generic_menu_up_or_down_sound}
+					{unfocus retail_menu_unfocus Params = {Id = 0x06c938f2}}
+					{pad_choose ui_flow_manager_respond_to_action Params = {action = 0xb1f15fbe create_params = {Player = <Player>}}}
+				]
+			}
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = <Id>
+				font = fontgrid_title_gh3
+				Scale = <text_scale>
+				rgba = [210 130 0 250]
+				Text = 'CALIBRATE AUDIO LAG'
+				Id = 0x06c938f2
+				just = [Center Center]
+				Shadow
+				shadow_offs = (3.0, 3.0)
+				shadow_rgba [0 0 0 255]
+				z_priority = <pause_z>
+				exclusive_device = <player_device>
+			}
+		else
 		GetScreenElementDims Id = <Id>
-		fit_text_in_rectangle Id = <Id> Dims = (<fit_dims> + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
-		CreateScreenElement {
-			Type = ContainerElement
-			PARENT = vmenu_pause
-			Dims = (0.0, 100.0)
-			event_handlers = [
-				{Focus retail_menu_focus Params = {Id = options_calibrate_lag}}
-				{Focus generic_menu_up_or_down_sound}
-				{unfocus retail_menu_unfocus Params = {Id = options_calibrate_lag}}
-				{pad_choose ui_flow_manager_respond_to_action Params = {action = select_calibrate_lag create_params = {Player = <Player>}}}
-			]
-		}
-		CreateScreenElement {
-			Type = TextElement
-			PARENT = <Id>
-			font = fontgrid_title_gh3
-			Scale = <text_scale>
-			rgba = [210 130 0 250]
-			Text = 'CALIBRATE LAG'
-			Id = options_calibrate_lag
-			just = [Center Center]
-			Shadow
-			shadow_offs = (3.0, 3.0)
-			shadow_rgba [0 0 0 255]
-			z_priority = <pause_z>
-			exclusive_device = <player_device>
-		}
+			fit_text_in_rectangle Id = <Id> Dims = (<fit_dims> + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+			CreateScreenElement {
+				Type = ContainerElement
+				PARENT = vmenu_pause
+				Dims = (0.0, 100.0)
+				event_handlers = [
+					{Focus retail_menu_focus Params = {Id = options_calibrate_lag}}
+					{Focus generic_menu_up_or_down_sound}
+					{unfocus retail_menu_unfocus Params = {Id = options_calibrate_lag}}
+					{pad_choose ui_flow_manager_respond_to_action Params = {action = select_calibrate_lag create_params = {Player = <Player>}}}
+				]
+			}
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = <Id>
+				font = fontgrid_title_gh3
+				Scale = <text_scale>
+				rgba = [210 130 0 250]
+				Text = 'CALIBRATE LAG'
+				Id = options_calibrate_lag
+				just = [Center Center]
+				Shadow
+				shadow_offs = (3.0, 3.0)
+				shadow_rgba [0 0 0 255]
+				z_priority = <pause_z>
+				exclusive_device = <player_device>
+			}
+		endif
 		GetScreenElementDims Id = <Id>
 		fit_text_in_rectangle Id = <Id> Dims = (<fit_dims> + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 		if IsGuitarController controller = <player_device>
