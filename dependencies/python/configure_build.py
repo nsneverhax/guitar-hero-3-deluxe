@@ -55,7 +55,7 @@ def main():
 			shutil.copy2(platform_item, dest_item)
 
 	# compile q scripts to qb and build pak file using honeycomb
-	command = f"{os.path.abspath(os.path.join("dependencies", platform.system().lower(), "Honeycomb-CLI", "Honeycomb"))} pak compile {os.path.abspath('_qb')} -g {game_name} -c {args.platform}"
+	command = f"{os.path.abspath(os.path.join('dependencies', platform.system().lower(), 'Honeycomb-CLI', 'Honeycomb'))} pak compile {os.path.abspath('_qb')} -g {game_name} -c {args.platform}"
 	os.system(command)
 
 	_qb_pak = f"_qb.pak.{plat_extension}"
