@@ -55,17 +55,24 @@ def main():
 			shutil.copy2(platform_item, dest_item)
 
 	# compile q scripts to qb and build pak file using honeycomb
-	command = f"{os.path.abspath(os.path.join("dependencies", platform.system(), "Honeycomb-CLI", "Honeycomb"))} pak compile {os.path.abspath('_qb')} -g {game_name} -c {args.platform}"
+	command = f"{os.path.abspath(os.path.join("dependencies", platform.system().lower(), "Honeycomb-CLI", "Honeycomb"))} pak compile {os.path.abspath('_qb')} -g {game_name} -c {args.platform}"
 	os.system(command)
 
+	_qb_pak = f"_qb.pak.{plat_extension}"
+	if args.platform == "ps3": # linux fix when building for ps3
+		_qb_pak = _qb_pak.upper()
 	# rename and move new pak file
-	built_pak_file = os.path.abspath(os.path.join(f"_qb.pak.{plat_extension}"))
+	built_pak_file = os.path.abspath(os.path.join(_qb_pak))
 	if os.path.exists(built_pak_file):
 		full_pak_file_name = pak_file_name + ".pak." + plat_extension  # this is why we set the extension earlier
-		# capitalize pak file name on ps3 because fuck you thats why
 		if args.platform == "ps3":
+			# capitalize pak file name on ps3 because fuck you thats why
 			full_pak_file_name = full_pak_file_name.upper()
-		shutil.move(built_pak_file, os.path.join(pak_file_dir, full_pak_file_name))
+			shutil.move(built_pak_file, os.path.join(pak_file_dir, full_pak_file_name))
+			# everyone say it with me fuck the ps3
+			shutil.copy2(os.path.join(pak_file_dir, full_pak_file_name), os.path.join(pak_file_dir, (pak_file_name + "_vram.pak." + plat_extension).upper()))
+		else:
+			shutil.move(built_pak_file, os.path.join(pak_file_dir, full_pak_file_name))
 	else:
 		print("\nBuild failed! :(")
 		sys.exit(1)

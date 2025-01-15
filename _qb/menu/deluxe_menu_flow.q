@@ -17,7 +17,6 @@ quickplay_pause_options_fs = {
 			action = select_calibrate_lag
 			flow_state = quickplay_calibrate_lag_warning
 		}
-		// audio lag button for pc
 		{
 			action = 0xb1f15fbe
 			flow_state = 0x8862eebe
@@ -60,7 +59,6 @@ career_pause_options_fs = {
 			action = select_calibrate_lag
 			flow_state = career_calibrate_lag_warning
 		}
-		// audio lag button for pc
 		{
 			action = 0xb1f15fbe
 			flow_state = 0x8862eebe
@@ -103,7 +101,6 @@ practice_options_fs = {
 			action = select_calibrate_lag
 			flow_state = practice_calibrate_lag_warning
 		}
-		// audio lag button for pc
 		{
 			action = 0xb1f15fbe
 			flow_state = 0x8862eebe
@@ -146,7 +143,6 @@ coop_career_pause_options_fs = {
 			action = select_calibrate_lag
 			flow_state = coop_career_calibrate_lag_warning
 		}
-		// audio lag button for pc
 		{
 			action = 0xb1f15fbe
 			flow_state = 0x8862eebe
@@ -189,7 +185,6 @@ mp_faceoff_pause_options_fs = {
 			action = select_calibrate_lag
 			flow_state = mp_faceoff_calibrate_lag_warning
 		}
-		// audio lag button for pc
 		{
 			action = 0xb1f15fbe
 			flow_state = 0x8862eebe
