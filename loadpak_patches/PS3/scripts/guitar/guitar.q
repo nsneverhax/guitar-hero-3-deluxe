@@ -1054,9 +1054,13 @@ script guitar_startup
 	repeat
 	HideLoadingScreen
 
-	// Deluxe Start
 	LoadPak 'deluxe/gh3dx.pak'
-	// Deluxe End
+endscript
+
+script reload_gh3dx 
+	ui_menu_select_sfx
+	WaitUnloadPak 'deluxe/gh3dx.pak'
+	LoadPak 'deluxe/gh3dx.pak'
 endscript
 
 script autolaunch_spawned 

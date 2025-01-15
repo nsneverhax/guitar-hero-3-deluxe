@@ -832,7 +832,6 @@ script create_pause_menu \{Player = 1
 	endif
 	Change \{bunny_flame_index = 1}
 	pause_z = 10000
-	Rot_Angle = 2
 	Spacing = -65
 	if (<for_options> = 0)
 		Menu_pos = (730.0, 220.0)
@@ -840,7 +839,6 @@ script create_pause_menu \{Player = 1
 			<Menu_pos> = (640.0, 190.0)
 		endif
 		<Spacing> = -65
-		<Rot_Angle> = 0
 	else
 		<Spacing> = -55
 		if IsGuitarController controller = <player_device>
@@ -853,7 +851,7 @@ script create_pause_menu \{Player = 1
 		scrollid = scrolling_pause
 		vmenuid = vmenu_pause
 		Menu_pos = <Menu_pos>
-		Rot_Angle = <Rot_Angle>
+		Rot_Angle = 2
 		event_handlers = <flame_handlers>
 		Spacing = <Spacing>
 		use_backdrop = (0)

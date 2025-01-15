@@ -2028,10 +2028,16 @@ script guitar_startup
 		StartRendering
 		SpawnScriptLater \{autolaunch_spawned}
 	endif
-	// Deluxe Start
+
 	LoadPak 'deluxe/gh3dx.pak'
-	// Deluxe End
 endscript
+
+script reload_gh3dx 
+	ui_menu_select_sfx
+	WaitUnloadPak 'deluxe/gh3dx.pak'
+	LoadPak 'deluxe/gh3dx.pak'
+endscript
+
 force_encore_autolaunch = 0
 
 script autolaunch_spawned 

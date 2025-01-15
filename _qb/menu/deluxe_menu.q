@@ -149,6 +149,33 @@ script create_custom_menu \{Popup = 0}
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	toggle_debug_setprop
 
+	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesn't work on those platforms
+		CreateScreenElement {
+			<container_params>
+			event_handlers = [
+				{Focus retail_menu_focus Params = {Id = reload_gh3dx_menuitem}}
+				{unfocus retail_menu_unfocus Params = {Id = reload_gh3dx_menuitem}}
+				{pad_choose reload_gh3dx}
+			]
+		}
+   	 	CreateScreenElement {
+			Type = TextElement
+			PARENT = <Id>
+			font = fontgrid_title_gh3
+			Scale = (0.2, 0.2)
+			rgba = [210 130 0 250]
+			Id = reload_gh3dx_menuitem
+			Text = 'Reload gh3dx.pak'
+			just = [Center Top]
+			Shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba [0 0 0 255]
+			z_priority = (<pause_z>)
+		}
+		GetScreenElementDims Id = <Id>
+		fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+	endif
+
     add_user_control_helper \{Text = 'SELECT'
 		button = Green
 		Z = 100000}
@@ -189,13 +216,13 @@ endscript
 
 script update_slomo_custom 
     SetSlomo \{ $current_speedfactor }
-    setslomo_song \{ slomo = $current_speedfactor }
+   	setslomo_song \{ slomo = $current_speedfactor }
     Player = 1
     begin
-        FormatText ChecksumName = player_status 'player%i_status' i = <Player>
-        Change StructureName = <player_status> check_time_early = ($check_time_early * $current_speedfactor)
-        Change StructureName = <player_status> check_time_late = ($check_time_late * $current_speedfactor)
-        Player = (<Player> + 1)
+    FormatText ChecksumName = player_status 'player%i_status' i = <Player>
+    Change StructureName = <player_status> check_time_early = ($check_time_early * $current_speedfactor)
+    Change StructureName = <player_status> check_time_late = ($check_time_late * $current_speedfactor)
+    Player = (<Player> + 1)
     repeat $current_num_players
 endscript
 
