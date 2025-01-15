@@ -88,7 +88,7 @@ contexts:
       scope: constant.numeric.pascal
 
       #cfuncs4 (sorry for the big line )
-    - match: \b(?i:IsNGC|IsPS2|IsWinDX)\b 
+    - match: \b(?i:IsNGC|IsPS2|IsWinDX|IsMacPort)\b 
       scope: constant.numeric.pascal
 
 
