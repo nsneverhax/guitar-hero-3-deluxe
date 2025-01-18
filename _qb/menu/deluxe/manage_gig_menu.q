@@ -209,7 +209,7 @@ script menu_dx_manage_gig_up_selection_venue
 	selected_venue = $forced_venue
 
 	selected_venue = (<selected_venue> - 1)
-	if (<selected_venue> = 9) ; yuck (this is to prevent selection of z_viewer)
+	if (<selected_venue> = 9)
 		selected_venue = (<selected_venue> - 1)
 	endif
 
@@ -229,7 +229,7 @@ script menu_dx_manage_gig_down_selection_venue
 	selected_venue = $forced_venue
 
 	selected_venue = (<selected_venue> + 1)
-	if (<selected_venue> = 9) ; yuck here too
+	if (<selected_venue> = 9)
 		selected_venue = (<selected_venue> + 1)
 	endif
 
