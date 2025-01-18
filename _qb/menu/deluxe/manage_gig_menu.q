@@ -90,8 +90,6 @@ script create_dx_manage_gig_menu \{Popup = 0}
 			{unfocus retail_menu_unfocus Params = {Id = mg_venue}}
 			{pad_choose menu_dx_manage_gig_lock_selection}
 			{pad_back menu_dx_manage_gig_press_back}
-			{PAD_LEFT menu_dx_manage_gig_move_down_selection}
-			{pad_right menu_dx_manage_gig_move_up_selection}
 		]
 	}
     CreateScreenElement {
@@ -119,8 +117,6 @@ script create_dx_manage_gig_menu \{Popup = 0}
 			{unfocus retail_menu_unfocus Params = {Id = mg_guitarist}}
 			{pad_choose menu_dx_manage_gig_lock_selection}
 			{pad_back menu_dx_manage_gig_press_back}
-			{PAD_LEFT menu_dx_manage_gig_move_down_selection}
-			{pad_right menu_dx_manage_gig_move_up_selection}
 		]
 	}
     CreateScreenElement {
