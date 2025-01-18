@@ -16,10 +16,10 @@ script create_custom_menu \{Popup = 0}
 
 	if ((IsNGC) || (IsPS2))
 		Spacing = -65
-		<Menu_pos> = (640.0, 250.0)
+		<Menu_pos> = (640.0, 220.0)
 	else
 		Spacing = -45
-		<Menu_pos> = (640.0, 240.0)
+		<Menu_pos> = (640.0, 210.0)
 	endif
 
 	if (<Popup> = 0)
@@ -31,6 +31,7 @@ script create_custom_menu \{Popup = 0}
 			{pad_up generic_menu_up_or_down_sound Params = {UP}}
 			{pad_down generic_menu_up_or_down_sound Params = {DOWN}}
 	]
+
 	new_menu {
 		scrollid = custom_scrolling_menu
 		vmenuid = custom_vmenu
@@ -41,29 +42,41 @@ script create_custom_menu \{Popup = 0}
 		use_backdrop = (1)
 	}
 
-	create_pause_menu_frame Z = (<pause_z> - 10)
+	create_pause_menu_frame x_scale = 1.2 y_scale = 1.2 Z = (<pause_z> - 10)
 
 	CreateScreenElement {
 		Type = SpriteElement
 		PARENT = pause_menu_frame_container
-		texture = menu_pause_frame_banner
-		Pos = (640.0, 540.0)
+		texture = Dialog_Title_BG
+		flip_v
+		Dims = (300.0, 224.0)
+		Pos = (490.0, 130.0)
 		just = [Center Center]
 		z_priority = (<pause_z> + 100)
 	}
-	deluxe_text_pos = (125.0, 47.0)
 
-	if ((IsXenon) || (IsPS3))
-		deluxe_text_pos = (125.0, 52.0)
-	endif
+	CreateScreenElement {
+		Type = SpriteElement
+		PARENT = pause_menu_frame_container
+		texture = Dialog_Title_BG
+		Dims = (300.0, 224.0)
+		Pos = (790.0, 130.0)
+		just = [Center Center]
+		z_priority = (<pause_z> + 100)
+	}
+
 	CreateScreenElement {
 		Type = TextElement
 		PARENT = <Id>
-		Text = 'DELUXE'
-		font = text_a6
-		Pos = <deluxe_text_pos>
-		Scale = (0.75, 0.75)
-		rgba = [170 90 30 255]
+		font = text_a5
+		Scale = (0.6, 0.6)
+		Pos = (0.0, 47)
+		Id = dx_settings_text
+		Text = 'DELUXE SETTINGS'
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z> + 101)
 	}
 
@@ -91,7 +104,6 @@ script create_custom_menu \{Popup = 0}
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
-
 	}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
@@ -148,6 +160,31 @@ script create_custom_menu \{Popup = 0}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	toggle_debug_setprop
+
+	CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus retail_menu_focus Params = {Id = open_mangig_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = open_mangig_menuitem}}
+			{pad_choose ui_flow_manager_respond_to_action Params = {action = select_manage_gig}}
+		]
+	}
+    CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Id = open_mangig_menuitem
+		Text = 'Manage Gig'
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z>)
+	}
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 
 	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesn't work on those platforms
 		CreateScreenElement {
