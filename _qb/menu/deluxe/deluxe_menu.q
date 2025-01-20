@@ -186,7 +186,7 @@ script create_custom_menu \{Popup = 0}
 	GetScreenElementDims Id = <Id>
 	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 
-	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesn't work on those platforms
+	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesnt work on those platforms
 		CreateScreenElement {
 			<container_params>
 			event_handlers = [
