@@ -1,0 +1,84 @@
+name: Build GH3DX
+
+on: [push, pull_request]
+
+jobs:
+  build_ps3:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build Files
+        run: scripts/linux/build_ps3.sh
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH3DXPS3
+          path: out/ps3
+
+  build_xbox:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build Files
+        run: scripts/linux/build_xbox.sh
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH3DX360
+          path: out/xbox
+
+  build_wii:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build Files
+        run: scripts/linux/build_wii.sh
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH3DXWII
+          path: out/wii
+
+  build_ps2:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build Files
+        run: scripts/linux/build_ps2.sh
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH3DXPS2
+          path: out/ps2
+
+  build_pc:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Build Files
+        run: scripts/linux/build_pc.sh
+      - name: Upload result
+        uses: actions/upload-artifact@v4
+        with:
+          name: GH3DXPC
+          path: out/pc
