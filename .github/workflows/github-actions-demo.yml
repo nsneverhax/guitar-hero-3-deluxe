@@ -15,5 +15,5 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: PS3DX
-          path: out/PS3
+          name: GH3DXPS3
+          path: out/ps3
