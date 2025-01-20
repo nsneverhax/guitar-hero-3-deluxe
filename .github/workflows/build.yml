@@ -1,6 +1,7 @@
 name: Build GH3DX
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+
+on: [push, pull_request]
+
 jobs:
   build_ps3:
     runs-on: ubuntu-latest
