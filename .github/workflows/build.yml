@@ -1,4 +1,4 @@
-name: Build GH3DX
+name: CI
 
 on: [push, pull_request]
 
@@ -16,7 +16,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DXPS3
+          name: GH3DX-PS3
           path: out/ps3
 
   build_xbox:
@@ -32,7 +32,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DX360
+          name: GH3DX-360
           path: out/xbox
 
   build_wii:
@@ -48,7 +48,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DXWII
+          name: GH3DX-WII
           path: out/wii
 
   build_ps2:
@@ -64,7 +64,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DXPS2
+          name: GH3DX-PS2
           path: out/ps2
 
   build_pc:
@@ -80,5 +80,5 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DXPC
+          name: GH3DX-PC
           path: out/pc
