@@ -88,6 +88,77 @@ mp_faceoff_deluxe_settings_fs = {
 	]
 }
 
+quickplay_modifiers_fs = {
+	Create = create_dx_mods_menu
+	create_params = {
+		Popup = 1
+	}
+	Destroy = destroy_dx_mods_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = quickplay_deluxe_settings_fs
+		}
+	]
+}
+
+career_modifiers_fs = {
+	Create = create_dx_mods_menu
+	create_params = {
+		Popup = 1
+	}
+	Destroy = destroy_dx_mods_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = career_deluxe_settings_fs
+		}
+	]
+}
+
+practice_modifiers_fs = {
+	Create = create_dx_mods_menu
+	create_params = {
+		Popup = 1
+	}
+	Destroy = destroy_dx_mods_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = practice_deluxe_settings_fs
+		}
+	]
+}
+
+coop_career_modifiers_fs = {
+	Create = create_dx_mods_menu
+	create_params = {
+		Popup = 1
+	}
+	Destroy = destroy_dx_mods_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = coop_career_deluxe_settings_fs
+		}
+	]
+}
+
+mp_faceoff_modifiers_fs = {
+	Create = create_dx_mods_menu
+	create_params = {
+		Popup = 1
+	}
+	Destroy = destroy_dx_mods_menu
+	actions = [
+		{
+			action = go_back
+			flow_state = mp_faceoff_deluxe_settings_fs
+		}
+	]
+}
+
+
 quickplay_manage_gig_fs = {
 	Create = create_dx_manage_gig_menu
 	create_params = {

@@ -982,6 +982,11 @@ script guitar_startup
 		StartKeyboardHandler \{max_length = 128}
 	endif
 	Printf \{"Done initializing - into game..."}
+
+	// Deluxe Start
+	LoadPak 'deluxe/gh3dx.pak'
+	// Deluxe End
+
 	InitAtoms
 	SetProgressionMaxDifficulty \{DIFFICULTY = 3}
 	setup_globaltags
@@ -1053,8 +1058,6 @@ script guitar_startup
 	endif
 	repeat
 	HideLoadingScreen
-
-	LoadPak 'deluxe/gh3dx.pak'
 endscript
 
 script reload_gh3dx 

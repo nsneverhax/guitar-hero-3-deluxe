@@ -1992,6 +1992,10 @@ script guitar_startup
 	0xc1c4e84c \{mode = 0x64912155}
 	AddEditableList \{ped_editable_list}
 
+	// Deluxe Start
+	LoadPak 'deluxe/gh3dx.pak'
+	// Deluxe End
+
 	InitAtoms
 	SetProgressionMaxDifficulty \{DIFFICULTY = 3}
 	setup_globaltags
@@ -2028,8 +2032,6 @@ script guitar_startup
 		StartRendering
 		SpawnScriptLater \{autolaunch_spawned}
 	endif
-
-	LoadPak 'deluxe/gh3dx.pak'
 endscript
 
 script reload_gh3dx 

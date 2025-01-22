@@ -1,0 +1,1 @@
+memcard_content_name = "DX-Progress"

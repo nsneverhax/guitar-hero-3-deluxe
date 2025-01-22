@@ -10,6 +10,8 @@ musician_profile_pool = $Musician_Profiles
 musician_profile_poolsize = 0
 
 script create_dx_manage_gig_menu \{Popup = 0}
+	disable_pause
+
 	set_musician_profile_pool
 	Rot_Angle = 2
 	pause_z = 10000
@@ -155,7 +157,6 @@ script destroy_dx_manage_gig_menu
     endif
     clean_up_user_control_helpers
 	destroy_pause_menu_frame
-	destroy_menu \{menu_id = scrolling_custom_menu}
 	destroy_menu \{menu_id = pause_menu_frame_container}
 	destroy_menu_backdrop
 endscript
@@ -306,7 +307,7 @@ script menu_dx_manage_gig_lock_selection
 	if NOT ($manage_gig_locked)
 		SoundEvent \{Event = ui_sfx_select}
 	endif
-	menu_dx_manage_gig_highlight_item
+	menu_dx_highlight_item
 	GetTags
 	LaunchEvent \{Type = unfocus
 		Target = mangig_vmenu}
@@ -326,7 +327,7 @@ endscript
 
 script menu_dx_manage_gig_press_back 
 	SoundEvent \{Event = Generic_Menu_Back_SFX}
-	menu_dx_manage_gig_remove_highlight
+	menu_dx_remove_highlight
 	GetTags
 	LaunchEvent Type = unfocus Target = <Id>
 	Wait \{1
@@ -342,14 +343,4 @@ script menu_dx_manage_gig_press_back
 		Replace_Handlers
 	}
 	Change \{manage_gig_locked = 0}
-endscript
-
-script menu_dx_manage_gig_highlight_item
-	GetTags
-	set_focus_color rgba = [0 255 255 250] ; i would rather not do this but none of the other ways i tried worked
-endscript
-
-script menu_dx_manage_gig_remove_highlight 
-	GetTags
-	set_focus_color rgba = [210 210 210 250] ; same goes
 endscript
