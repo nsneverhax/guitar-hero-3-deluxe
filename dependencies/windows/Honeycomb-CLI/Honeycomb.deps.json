@@ -23,7 +23,7 @@
           }
         }
       },
-      "Instances/3.0.0": {
+      "Instances/3.0.1": {
         "runtime": {
           "lib/netstandard2.0/Instances.dll": {
             "assemblyVersion": "1.0.0.0",
@@ -211,7 +211,7 @@
       },
       "FFMpegCore/5.1.1": {
         "dependencies": {
-          "Instances": "3.0.0",
+          "Instances": "3.0.1",
           "System.Text.Json": "9.0.0"
         },
         "runtime": {
@@ -255,12 +255,12 @@
       "path": "ini-parser/2.5.2",
       "hashPath": "ini-parser.2.5.2.nupkg.sha512"
     },
-    "Instances/3.0.0": {
+    "Instances/3.0.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-wlZ0V+S7X7kMKbjC7EZJf5A1FNlldQrS0tKMNXP1Ued/6XCo6t5kpFDS3X72cd+SGaX+q+FOlWO7r18GlxcKAQ==",
-      "path": "instances/3.0.0",
-      "hashPath": "instances.3.0.0.nupkg.sha512"
+      "sha512": "sha512-HSMGZF4g/VcmVyoWH2fRkgZMAW50FcsKvDttwH1jVS2oIz7V9xw9e/b2KhbCO4RSJKJEgTuPKQb6sQvqcDOl2A==",
+      "path": "instances/3.0.1",
+      "hashPath": "instances.3.0.1.nupkg.sha512"
     },
     "Melanchall.DryWetMidi/7.2.0": {
       "type": "package",
