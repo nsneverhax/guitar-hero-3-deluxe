@@ -1,5 +1,5 @@
 script quickplay_start_song \{device_num = 0}
-
+	GetGlobalTags \{user_options}
 	get_progression_globals game_mode = ($game_mode)
 	SongList = <tier_global>
 	cs_get_total_guitarists
@@ -40,6 +40,12 @@ script quickplay_start_song \{device_num = 0}
 	else
 		level_checksum = ($LevelZoneArray [($forced_venue - 1)])
 	endif
-	Change current_level = <level_checksum>
+
+	if (<black_background> = 0)
+		Change current_level = <level_checksum>
+	else
+		Change current_level = z_viewer
+	endif
+	
 	start_song device_num = <device_num>
 endscript

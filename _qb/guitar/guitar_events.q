@@ -1,3 +1,15 @@
+script GuitarEvent_HitNote_Spawned 
+	GetGlobalTags \{user_options}
+	if ($game_mode = p2_battle || $boss_battle = 1)
+		Change StructureName = <player_status> last_hit_note = <Color>
+	endif
+	Wait \{1
+		GameFrame}
+	if (<no_flames> = 0)
+		SpawnScriptNow hit_note_fx Params = {Name = <fx_id> Pos = <Pos> player_Text = <player_Text> Star = ($<player_status>.star_power_used) Player = <Player>}
+	endif
+endscript
+
 script hit_note_fx 
 	NoteFX <...>
 	Wait \{100
@@ -9,6 +21,7 @@ script hit_note_fx
 		DestroyScreenElement Id = <fx_id>
 	endif
 endscript
+
 
 script GuitarEvent_StarSequenceBonus 
 	if ($is_attract_mode = 1)
