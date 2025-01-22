@@ -6,6 +6,10 @@ quickplay_deluxe_settings_fs = {
 	Destroy = destroy_custom_menu
 	actions = [
 		{
+			action = select_modifiers
+			flow_state = quickplay_modifiers_fs
+		}
+		{
 			action = select_manage_gig
 			flow_state = quickplay_manage_gig_fs
 		}
@@ -23,6 +27,10 @@ career_deluxe_settings_fs = {
 	}
 	Destroy = destroy_custom_menu
 	actions = [
+		{
+			action = select_modifiers
+			flow_state = career_modifiers_fs
+		}
 		{
 			action = select_manage_gig
 			flow_state = career_manage_gig_fs
@@ -42,6 +50,10 @@ practice_deluxe_settings_fs = {
 	Destroy = destroy_custom_menu
 	actions = [
 		{
+			action = select_modifiers
+			flow_state = practice_modifiers_fs
+		}
+		{
 			action = select_manage_gig
 			flow_state = practice_manage_gig_fs
 		}
@@ -60,6 +72,10 @@ coop_career_deluxe_settings_fs = {
 	Destroy = destroy_custom_menu
 	actions = [
 		{
+			action = select_modifiers
+			flow_state = coop_career_modifiers_fs
+		}
+		{
 			action = select_manage_gig
 			flow_state = coop_career_manage_gig_fs
 		}
@@ -77,6 +93,10 @@ mp_faceoff_deluxe_settings_fs = {
 	}
 	Destroy = destroy_custom_menu
 	actions = [
+		{
+			action = select_modifiers
+			flow_state = mp_faceoff_modifiers_fs
+		}
 		{
 			action = select_manage_gig
 			flow_state = mp_faceoff_manage_gig_fs

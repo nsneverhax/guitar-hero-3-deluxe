@@ -11,43 +11,36 @@ modifier_options = [
 	{
 		Name = "Black Highway"
 		Id = BLACK_HIGHWAY
-		Variable = black_highway
 		Description = "Your highway will be all black. This is very useful for note readability."
 	}
 	{
 		Name = "Black Background"
 		Id = BLACK_BACKGROUND
-		Variable = black_background
 		Description = "Nothing can distract me now!"
 	}
 	{
 		Name = "Song Title Always On"
 		Id = SONG_TITLE
-		Variable = song_title
 		Description = "Now you won't have to answer to \"Hey what song is this?\""
 	}
 	{
-		Name = "Highway Shake"
+		Name = "No Highway Shake"
 		Id = HIGHWAY_SHAKE
-		Variable = highway_shake
 		Description = "Your highway no longer shakes when breaking combo."
 	}
 	{
 		Name = "Show Early Timing"
 		Id = EARLY_TIMING
-		Variable = early_timing
 		Description = "Guitar Hero 3 only destroys gems as soon as they cross the strikeline. No more!"
 	}
 	{
 		Name = "No Flames"
 		Id = NO_FLAMES
-		Variable = no_flames
 		Description = "Flames no longer appear when hitting notes."
 	}
 	{
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
-		Variable = select_restart
 		Description = "You can now press select to restart in Practice mode."
 	}
 	{
@@ -271,9 +264,33 @@ script menu_dx_mods_select ; spaaaaghetti
 		case BLACK_HIGHWAY
 			if (<black_highway> = 0)
 			 	SetGlobalTags user_options Params = {black_highway = 1}
+			 	Change highway_normal = [
+					0
+					0
+					0
+					255
+				]
+				Change highway_starpower = [
+					0
+					0
+					0
+					255
+				]
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				SetGlobalTags user_options Params = {black_highway = 0}
+				Change highway_normal = [
+					255
+					255
+					255
+					255
+				]
+				Change highway_starpower = [
+					64
+					255
+					255
+					255
+				]
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case BLACK_BACKGROUND
