@@ -1,3 +1,5 @@
+set_speeds_locked = 0
+
 custom_menu_fs = {
 	Create = create_custom_menu
 	Destroy = destroy_custom_menu
@@ -11,6 +13,8 @@ custom_menu_fs = {
 }
 
 script create_custom_menu \{Popup = 0}
+	disable_pause
+
 	Rot_Angle = 2
 	pause_z = 10000
 
@@ -86,9 +90,9 @@ script create_custom_menu \{Popup = 0}
     CreateScreenElement {
 		<container_params>
 		event_handlers = [
-			{Focus retail_menu_focus Params = {Id = toggle_bot_menuitem}}
-			{unfocus retail_menu_unfocus Params = {Id = toggle_bot_menuitem}}
-			{pad_choose toggle_bot}
+			{Focus retail_menu_focus Params = {Id = modifiers_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = modifiers_menuitem}}
+			{pad_choose ui_flow_manager_respond_to_action Params = {action = select_modifiers}}
 		]
 	}
   	CreateScreenElement {
@@ -97,39 +101,68 @@ script create_custom_menu \{Popup = 0}
 		font = fontgrid_title_gh3
 		Scale = <text_scale>
 		rgba = [210 130 0 250]
-		Id = toggle_bot_menuitem
-		Text = 'Autoplay: Disabled'
+		Id = modifiers_menuitem
+		Text = 'MODIFIERS'
 		just = [Center Top]
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	toggle_bot_setprop
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 
 	CreateScreenElement {
 		<container_params>
 		event_handlers = [
-			{Focus retail_menu_focus Params = {Id = select_slomo_menuitem}}
-			{unfocus retail_menu_unfocus Params = {Id = select_slomo_menuitem}}
-			{pad_choose select_slomo_custom}
+			{Focus retail_menu_focus Params = {Id = open_mangig_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = open_mangig_menuitem}}
+			{pad_choose ui_flow_manager_respond_to_action Params = {action = select_manage_gig}}
 		]
 	}
-	CreateScreenElement {
+    CreateScreenElement {
 		Type = TextElement
 		PARENT = <Id>
 		font = fontgrid_title_gh3
 		Scale = <text_scale>
 		rgba = [210 130 0 250]
-		Id = select_slomo_menuitem
-		Text = 'Song Speed: 1.0'
+		Id = open_mangig_menuitem
+		Text = 'MANAGE GIG'
 		just = [Center Top]
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	select_slomo_setprop_custom
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+
+	CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus menu_dx_set_speeds_focus Params = {Id = song_speed_menuitem}}
+			{unfocus retail_menu_unfocus Params = {Id = song_speed_menuitem}}
+			{pad_choose menu_dx_set_speeds_lock_selection}
+			{pad_back menu_dx_set_speeds_press_back}
+		]
+	}
+    CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Id = song_speed_menuitem
+		Text = "Song Speed: "
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z>)
+	}
+	GetScreenElementDims Id = <Id>
+	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+	menu_dx_set_speeds_song_speed_setprop
 
 	CreateScreenElement {
 		<container_params>
@@ -154,29 +187,6 @@ script create_custom_menu \{Popup = 0}
 		z_priority = (<pause_z>)
 	}
 	toggle_debug_setprop
-
-	CreateScreenElement {
-		<container_params>
-		event_handlers = [
-			{Focus retail_menu_focus Params = {Id = open_mangig_menuitem}}
-			{unfocus retail_menu_unfocus Params = {Id = open_mangig_menuitem}}
-			{pad_choose ui_flow_manager_respond_to_action Params = {action = select_manage_gig}}
-		]
-	}
-    CreateScreenElement {
-		Type = TextElement
-		PARENT = <Id>
-		font = fontgrid_title_gh3
-		Scale = <text_scale>
-		rgba = [210 130 0 250]
-		Id = open_mangig_menuitem
-		Text = 'Manage Gig'
-		just = [Center Top]
-		Shadow
-		shadow_offs = (3.0, 3.0)
-		shadow_rgba [0 0 0 255]
-		z_priority = (<pause_z>)
-	}
 
 	CreateScreenElement {
 		<container_params>
@@ -246,24 +256,88 @@ script destroy_custom_menu
     endif
     clean_up_user_control_helpers
 	destroy_pause_menu_frame
-	destroy_menu \{menu_id = scrolling_custom_menu}
 	destroy_menu \{menu_id = pause_menu_frame_container}
 	destroy_menu_backdrop
 endscript
 
-script select_slomo_custom 
-    ui_menu_select_sfx
-    speedfactor = ($current_speedfactor * 10.0)
-    speedfactor = (<speedfactor> + 0.5)
-    if (<speedfactor> > 20)
-        speedfactor = 1
-    endif
+script menu_dx_set_song_speed
+	generic_menu_up_or_down_sound
+
+	speedfactor = ($current_speedfactor * 10.0)
+
+	switch (<direction>)
+    	case UP
+    		speedfactor = (<speedfactor> + 0.5)
+    	case DOWN 
+    		speedfactor = (<speedfactor> - 0.5)
+    endswitch
+
+	if (<speedfactor> > 20)
+     	speedfactor = 20
+   	endif
+
     if (<speedfactor> < 1)
         speedfactor = 1
     endif
+
     Change current_speedfactor = (<speedfactor> / 10.0)
     update_slomo_custom
-    select_slomo_setprop_custom
+ 	menu_dx_set_speeds_song_speed_setprop
+endscript
+
+script menu_dx_set_speeds_song_speed_setprop 
+	speedfactor = $current_speedfactor
+	speedfactor = (<speedfactor> * 100)
+	CastToInteger speedfactor
+    FormatText TextName = songs_text 'Song Speed: %s\%' s = <speedfactor>
+    song_speed_menuitem :SetProps text = <songs_text>
+endscript
+
+script menu_dx_set_speeds_focus 
+	retail_menu_focus Id = <Id>
+endscript
+
+script menu_dx_set_speeds_lock_selection 
+	if NOT ($set_speeds_locked)
+		SoundEvent \{Event = ui_sfx_select}
+	endif
+	menu_dx_highlight_item
+	GetTags
+	LaunchEvent \{Type = unfocus
+		Target = custom_vmenu}
+	Wait \{1
+		GameFrame}
+	LaunchEvent Type = Focus Target = <Id>
+	SetScreenElementProps {
+		Id = <Id>
+		event_handlers = [
+			{pad_up menu_dx_set_song_speed Params = {direction = UP}}
+			{pad_down menu_dx_set_song_speed Params = {direction = DOWN}}
+		]
+		Replace_Handlers
+	}
+	Change \{set_speeds_locked = 1}
+endscript
+
+script menu_dx_set_speeds_press_back 
+	SoundEvent \{Event = Generic_Menu_Back_SFX}
+	menu_dx_remove_highlight
+	GetTags
+	LaunchEvent Type = unfocus Target = <Id>
+	Wait \{1
+		GameFrame}
+	LaunchEvent \{Type = Focus
+		Target = custom_vmenu}
+	SetScreenElementProps {
+		Id = <Id>
+		event_handlers = [
+			{pad_up null_script}
+			{pad_down null_script}
+		]
+		Replace_Handlers
+	}
+	update_song_speed
+	Change \{set_speeds_locked = 0}
 endscript
 
 script update_slomo_custom 
@@ -276,41 +350,6 @@ script update_slomo_custom
     Change StructureName = <player_status> check_time_late = ($check_time_late * $current_speedfactor)
     Player = (<Player> + 1)
     repeat $current_num_players
-endscript
-
-script select_slomo_setprop_custom 
-    FormatText \{ textname = slomo_text 'Song Speed: %s' s = $current_speedfactor }
-    select_slomo_menuitem :SetProps text = <slomo_text>
-endscript
-
-script toggle_bot_setprop 
-    if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-        toggle_bot_menuitem :SetProps text = "Autoplay: Disabled"
-    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play = 0)
-        toggle_bot_menuitem :SetProps text = "Autoplay: P1"
-    elseif ($player1_status.bot_play = 0 && $player2_status.bot_play != 0)
-        toggle_bot_menuitem :SetProps text = "Autoplay: P2"
-    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
-        toggle_bot_menuitem :SetProps text = "Autoplay: P1 + P2"
-    endif
-endscript
-
-script toggle_bot 
-    ui_menu_select_sfx
-    if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-        Change StructureName = player1_status bot_play = 1
-        Change StructureName = player2_status bot_play = 0
-    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play = 0)
-        Change StructureName = player1_status bot_play = 0
-        Change StructureName = player2_status bot_play = 1
-    elseif ($player1_status.bot_play = 0 && $player2_status.bot_play != 0)
-        Change StructureName = player1_status bot_play = 1
-        Change StructureName = player2_status bot_play = 1
-    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
-        Change StructureName = player1_status bot_play = 0
-        Change StructureName = player2_status bot_play = 0
-    endif
-    toggle_bot_setprop
 endscript
 
 script toggle_debug 
@@ -427,4 +466,13 @@ endscript
 
 script 0x1e5afd34 
 	SetGlobalTags <...>
+endscript
+script menu_dx_highlight_item
+	GetTags
+	set_focus_color rgba = [0 255 255 250] ; i would rather not do this but none of the other ways i tried worked
+endscript
+
+script menu_dx_remove_highlight 
+	GetTags
+	set_focus_color rgba = [210 210 210 250] ; same goes
 endscript

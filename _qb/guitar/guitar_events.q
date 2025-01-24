@@ -1,3 +1,133 @@
+script GuitarEvent_HitNote_Spawned 
+	GetGlobalTags \{user_options}
+	if ($game_mode = p2_battle || $boss_battle = 1)
+		Change StructureName = <player_status> last_hit_note = <Color>
+	endif
+	Wait \{1
+		GameFrame}
+	if (<no_flames> = 0)
+		SpawnScriptNow hit_note_fx Params = {Name = <fx_id> Pos = <Pos> player_Text = <player_Text> Star = ($<player_status>.star_power_used) Player = <Player>}
+	endif
+endscript
+
+script GuitarEvent_SongFailed_Spawned 
+	if NOT ($boss_battle = 1)
+		disable_highway_prepass
+		disable_bg_viewport
+	endif
+	if ($is_network_game)
+		KillSpawnedScript \{Name = dispatch_player_state}
+		kill_start_key_binding
+		if ($ui_flow_manager_state [0] = online_pause_fs)
+			net_unpausegh3
+		endif
+		mark_unsafe_for_shutdown
+	endif
+	GetSongTimeMS
+	Change failed_song_time = <Time>
+	Achievements_SongFailed
+	PauseGame
+	Progression_SongFailed
+	if ($boss_battle = 1)
+		kill_start_key_binding
+		if ($current_song = bossdevil)
+			preload_movie = 'Satan-Battle_LOSS'
+		else
+			preload_movie = 'Player2_wins'
+		endif
+		KillMovie \{TextureSlot = 1}
+		PreLoadMovie {
+			movie = <preload_movie>
+			TextureSlot = 1
+			TexturePri = 70
+			no_looping
+			no_hold
+			noWait
+		}
+		FormatText TextName = winner_text "%s Rocks!" S = ($current_boss.character_name)
+		winner_space_between = (50.0, 0.0)
+		winner_scale = 1.0
+		if ($current_boss.character_profile = Morello)
+			<winner_space_between> = (40.0, 0.0)
+			<winner_scale> = 1.0
+		endif
+		if ($current_boss.character_profile = Slash)
+			<winner_space_between> = (40.0, 0.0)
+			<winner_scale> = 1.0
+		endif
+		if ($current_boss.character_profile = SATAN)
+			<winner_space_between> = (40.0, 0.0)
+			<winner_scale> = 1.0
+		endif
+		SpawnScriptNow \{wait_and_play_you_rock_movie}
+		Wait \{0.2
+			Seconds}
+		destroy_menu \{menu_id = YouRock_text}
+		destroy_menu \{menu_id = yourock_text_2}
+		StringLength String = <winner_text>
+		<fit_dims> = (<str_len> * (23.0, 0.0))
+		if (<fit_dims>.(1.0, 0.0) >= 350)
+			<fit_dims> = (350.0, 0.0)
+		endif
+		split_text_into_array_elements {
+			Id = YouRock_text
+			Text = <winner_text>
+			text_pos = (640.0, 360.0)
+			space_between = <winner_space_between>
+			just = [Center Center]
+			fit_dims = <fit_dims>
+			flags = {
+				rgba = [255 255 255 255]
+				Scale = <winner_scale>
+				z_priority = 95
+				font = text_a10_Large
+				rgba = [223 223 223 255]
+				just = [Center Center]
+				Alpha = 1
+			}
+			centered
+		}
+		SpawnScriptNow \{waitAndKillHighway}
+		KillSpawnedScript \{Name = jiggle_text_array_elements}
+		SpawnScriptNow \{jiggle_text_array_elements
+			Params = {
+				Id = YouRock_text
+				Time = 1.0
+				wait_time = 3000
+				explode = 1
+			}}
+	endif
+	if ($is_network_game = 0)
+		xenon_singleplayer_session_begin_uninit
+		SpawnScriptNow \{xenon_singleplayer_session_complete_uninit}
+	endif
+	UnPauseGame
+	SoundEvent \{Event = Crowd_Fail_Song_SFX}
+	SoundEvent \{Event = GH_SFX_You_Lose_Single_Player}
+
+	get_current_level_name
+	if NOT (<level_name> = 'credits')
+		Transition_Play \{Type = songlost}
+		Transition_Wait
+	endif
+
+	Change \{current_transition = NONE}
+	PauseGame
+	restore_start_key_binding
+	SpawnScriptNow \{ui_flow_manager_respond_to_action
+		Params = {
+			action = fail_song
+		}}
+	if ($current_num_players = 1)
+		SoundEvent \{Event = Crowd_Fail_Song_SFX}
+	else
+		SoundEvent \{Event = Crowd_Med_To_Good_SFX}
+	endif
+	if ($is_network_game)
+		mark_safe_for_shutdown
+	endif
+endscript
+
 script hit_note_fx 
 	NoteFX <...>
 	Wait \{100
@@ -9,6 +139,7 @@ script hit_note_fx
 		DestroyScreenElement Id = <fx_id>
 	endif
 endscript
+
 
 script GuitarEvent_StarSequenceBonus 
 	if ($is_attract_mode = 1)
