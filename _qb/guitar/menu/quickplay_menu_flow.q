@@ -1,5 +1,4 @@
-script quickplay_start_song \{device_num = 0}
-
+script quickplay_start_song \{device_num = 0} 
 	get_progression_globals game_mode = ($game_mode)
 	SongList = <tier_global>
 	cs_get_total_guitarists

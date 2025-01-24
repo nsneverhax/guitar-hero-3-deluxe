@@ -16,10 +16,10 @@ script create_custom_menu \{Popup = 0}
 
 	if ((IsNGC) || (IsPS2))
 		Spacing = -65
-		<Menu_pos> = (640.0, 220.0)
+		<Menu_pos> = (640.0, 200.0)
 	else
 		Spacing = -45
-		<Menu_pos> = (640.0, 210.0)
+		<Menu_pos> = (640.0, 190.0)
 	endif
 
 	if (<Popup> = 0)
@@ -105,8 +105,6 @@ script create_custom_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	GetScreenElementDims Id = <Id>
-	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	toggle_bot_setprop
 
 	CreateScreenElement {
@@ -131,8 +129,6 @@ script create_custom_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	GetScreenElementDims Id = <Id>
-	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	select_slomo_setprop_custom
 
 	CreateScreenElement {
@@ -157,8 +153,6 @@ script create_custom_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	GetScreenElementDims Id = <Id>
-	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	toggle_debug_setprop
 
 	CreateScreenElement {
@@ -183,8 +177,31 @@ script create_custom_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z>)
 	}
-	GetScreenElementDims Id = <Id>
-	fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
+
+	CreateScreenElement {
+		<container_params>
+		event_handlers = [
+			{Focus retail_menu_focus Params = {Id = 0xb44a0b9b}}
+			{unfocus retail_menu_unfocus Params = {Id = 0xb44a0b9b}}
+			{pad_choose select_dispfps}
+		]
+	}
+	CreateScreenElement {
+		Type = TextElement
+		PARENT = <Id>
+		font = fontgrid_title_gh3
+		Id = 0xb44a0b9b
+		Scale = <text_scale>
+		rgba = [210 130 0 250]
+		Text = "Display FPS: Off"
+		just = [Center Top]
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba = [0 0 0 255]
+		z_priority = (<pause_z>)
+		OSFPSPos = <OSFPSPos>
+	}
+	toggle_dispfps_setprop
 
 	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesnt work on those platforms
 		CreateScreenElement {
@@ -209,8 +226,6 @@ script create_custom_menu \{Popup = 0}
 			shadow_rgba [0 0 0 255]
 			z_priority = (<pause_z>)
 		}
-		GetScreenElementDims Id = <Id>
-		fit_text_in_rectangle Id = <Id> Dims = ((300.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
 	endif
 
     add_user_control_helper \{Text = 'SELECT'
@@ -278,7 +293,6 @@ script toggle_bot_setprop
     elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
         toggle_bot_menuitem :SetProps text = "Autoplay: P1 + P2"
     endif
-
 endscript
 
 script toggle_bot 
@@ -315,4 +329,102 @@ script toggle_debug_setprop
 	elseif
 		debug_func_menuitem :SetProps text = "Debug Mode: Off"
 	endif
+endscript
+
+script toggle_dispfps_setprop 
+	change_dispfps_text
+	if (<ondisp_dispfps_text> = 0)
+		FormatText TextName = 0x0b076348 "Display FPS: Off"
+	else
+		FormatText TextName = 0x0b076348 "Display FPS: On"
+	endif
+	SetScreenElementProps Id = 0xb44a0b9b Text = <0x0b076348>
+endscript
+0x3b1abe4a = 0
+
+script select_dispfps 
+	ui_menu_select_sfx
+	change_dispfps_text
+	0x34e762be ondisp_dispfps_text = (1 - <ondisp_dispfps_text>)
+	enable_dispfps
+	toggle_dispfps_setprop
+endscript
+
+script 0x4511087e 
+	begin
+	FormatText TextName = 0x0b076348 "%a FPS" A = ($framerate_value)
+	SetScreenElementProps Id = 0xeb440d42 Text = <0x0b076348>
+	Wait 0.4 Second
+	repeat
+endscript
+
+script change_dispfps_text 
+	ondisp_dispfps_text = 0
+	GetGlobalTags $0xaebf2394 noassert = 1
+	return ondisp_dispfps_text = <ondisp_dispfps_text>
+endscript
+
+script 0x34e762be 
+	0x1e5afd34 $0xaebf2394 Params = {ondisp_dispfps_text = <ondisp_dispfps_text>}
+endscript
+0xaebf2394 = 0x838c0d91
+
+script enable_dispfps 
+	if ((IsNGC) || (IsPS2))
+		<OSFPSPos> = (160.0, 35.0)
+	else
+		<OSFPSPos> = (80.0, 35.0)
+	endif
+
+	change_dispfps_text
+
+	if (<ondisp_dispfps_text> = 1)
+		if NOT ObjectExists Id = 0x419bc9e7
+			SetScreenElementLock Id = root_window OFF
+			CreateScreenElement {
+				Type = ContainerElement
+				PARENT = root_window
+				Id = 0x419bc9e7
+				Pos = <OSFPSPos>
+				just = [LEFT Center]
+			}
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = 0x419bc9e7
+				Id = 0xeb440d42
+				Pos = (4.0, 6.0)
+				Text = "??? FPS"
+				font = fontgrid_title_gh3
+				rgba = [255 255 255 255]
+				just = [LEFT Center]
+				Scale = 0.65
+				z_priority = 100
+			}
+			CreateScreenElement {
+				Type = SpriteElement
+				PARENT = 0x419bc9e7
+				Pos = (0.0, 0.0)
+				texture = white2
+				rgba = [0 0 0 255]
+				just = [LEFT Center]
+				Scale = (2.5, 0.5)
+				z_priority = 99
+			}
+			SetScreenElementLock Id = root_window ON
+		endif
+		if NOT ScriptIsRunning 0x4511087e
+			SpawnScriptLater 0x4511087e
+		endif
+	else
+		if ScriptIsRunning 0x4511087e
+			KillSpawnedScript Name = 0x4511087e
+		endif
+		if ObjectExists Id = 0x419bc9e7
+			DestroyScreenElement Id = 0x419bc9e7
+		endif
+	endif
+endscript
+
+script 0x1e5afd34 
+	SetGlobalTags <...>
 endscript

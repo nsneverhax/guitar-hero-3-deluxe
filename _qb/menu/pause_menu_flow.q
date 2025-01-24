@@ -47,7 +47,7 @@ practice_deluxe_settings_fs = {
 		}
 		{
 			action = go_back
-			flow_state = practice_pause_options_fs
+			flow_state = practice_options_fs
 		}
 	]
 }
