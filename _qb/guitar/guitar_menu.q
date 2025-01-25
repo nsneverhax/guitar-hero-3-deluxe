@@ -43,6 +43,7 @@ main_menu_fs = {
 		{
 			action = select_custom_menu
 			flow_state = custom_menu_fs
+			transition_right
 		}
 		{
 			action = online_enabled

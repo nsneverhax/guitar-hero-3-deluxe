@@ -13,6 +13,7 @@ custom_menu_fs = {
 		{
 			action = go_back
 			flow_state = main_menu_fs
+			transition_left
 		}
 	]
 }
