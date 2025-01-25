@@ -87,6 +87,11 @@ modifier_options = [
 		Id = ENABLE_VIEWER
 		Description = "This enables the menu that appears when pressing select. It's a thing that exists. This cannot be disabled until the game is closed."
 	}
+	{
+		Name = "Awesomeness Detection"
+		Id = AWESOMENESS
+		Description = "Let NeverHax know that you are awesome!"
+	}
 ]
 script create_dx_mods_menu \{Popup = 0}
 	disable_pause
@@ -398,6 +403,14 @@ script menu_dx_mods_select ; spaaaaghetti
 			ui_menu_select_sfx
 			LaunchViewer
 			Change \{select_shift = 1}
+		case AWESOMENESS
+			if (<awesomeness> = 0)
+			 	SetGlobalTags user_options Params = {awesomeness = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {awesomeness = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 	endswitch
 	; jank way of resetting black/transparent highway text if the other is toggled on
 	if (($mods_menu_index = 0) && (<black_highway> = 0))
@@ -498,6 +511,14 @@ script menu_dx_mods_setprop ; yeah this sucks my other approach didnt work
 			endif
 		case ENABLE_VIEWER
 			<Element_Id> :SetProps text = ($modifier_options [<Index>].Name)
+		case AWESOMENESS
+			if (<awesomeness> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
 	endswitch
 endscript
 

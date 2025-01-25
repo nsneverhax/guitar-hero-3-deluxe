@@ -44,5 +44,6 @@ script setup_user_option_tags
 			early_timing = 0
 			no_flames = 0
 			select_restart = 0
+			awesomeness = 0
 		}}
 endscript
