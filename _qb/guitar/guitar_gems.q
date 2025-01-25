@@ -1,6 +1,6 @@
 script kill_object_later 
 	GetGlobalTags \{user_options}
-	if (<early_timing = 0)
+	if (<early_timing> = 0)
 		begin
 		if ScreenElementExists Id = <gem_id>
 			GetScreenElementPosition Id = <gem_id> local
