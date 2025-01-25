@@ -21,7 +21,7 @@ modifier_options = [
 	{
 		Name = "Song Title Always On"
 		Id = SONG_TITLE
-		Description = "Now you won't have to answer to \"Hey what song is this?\""
+		Description = "Now you won't have to answer to \'Hey what song is this?\'"
 	}
 	{
 		Name = "No Highway Shake"
