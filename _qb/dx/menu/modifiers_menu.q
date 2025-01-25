@@ -1,4 +1,28 @@
-; sorry
+highway_normal_original = [
+	255
+	255
+	255
+	255
+]
+highway_starpower_original = [
+	64
+	255
+	255
+	255
+]
+highway_black = [
+	0
+	0
+	0
+	255
+]
+highway_transparent = [
+	0
+	0
+	0
+	0
+]
+
 modifiers_editing = 0
 
 selected_modifier_index = 0
@@ -12,6 +36,11 @@ modifier_options = [
 		Name = "Black Highway"
 		Id = BLACK_HIGHWAY
 		Description = "Your highway will be all black. This is very useful for note readability."
+	}
+	{
+		Name = "Transparent Highway"
+		Id = TRANSPARENT_HIGHWAY
+		Description = "Your highway will be Transparent. See the Backgrounds with less of a distracting highway!"
 	}
 	{
 		Name = "Black Background"
@@ -263,34 +292,32 @@ script menu_dx_mods_select ; spaaaaghetti
 	switch (($modifier_options [$selected_modifier_index].Id))
 		case BLACK_HIGHWAY
 			if (<black_highway> = 0)
+				if (<transparent_highway> = 1)
+					SetGlobalTags user_options Params = {transparent_highway = 0}
+				endif
 			 	SetGlobalTags user_options Params = {black_highway = 1}
-			 	Change highway_normal = [
-					0
-					0
-					0
-					255
-				]
-				Change highway_starpower = [
-					0
-					0
-					0
-					255
-				]
+			 	Change highway_normal = $highway_black
+				Change highway_starpower = $highway_black
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				SetGlobalTags user_options Params = {black_highway = 0}
-				Change highway_normal = [
-					255
-					255
-					255
-					255
-				]
-				Change highway_starpower = [
-					64
-					255
-					255
-					255
-				]
+				Change highway_normal = $highway_normal_original
+				Change highway_starpower = $highway_starpower_original
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
+		case TRANSPARENT_HIGHWAY
+			if (<transparent_highway> = 0)
+				if (<black_highway> = 1)
+					SetGlobalTags user_options Params = {black_highway = 0}
+				endif
+			 	SetGlobalTags user_options Params = {transparent_highway = 1}
+			 	Change highway_normal = $highway_transparent
+				Change highway_starpower = $highway_transparent
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {transparent_highway = 0}
+				Change highway_normal = $highway_normal_original
+				Change highway_starpower = $highway_starpower_original
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case BLACK_BACKGROUND
@@ -372,6 +399,14 @@ script menu_dx_mods_select ; spaaaaghetti
 			LaunchViewer
 			Change \{select_shift = 1}
 	endswitch
+	; jank way of resetting black/transparent highway text if the other is toggled on
+	if (($mods_menu_index = 0) && (<black_highway> = 0))
+		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
+		menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (1)
+	elseif (($mods_menu_index = 1) && (<transparent_highway> = 0))
+		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (0)
+		menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (0)
+	endif
 
 	FormatText ChecksumName = mods_text_id 'mods_text_%d' D = ($mods_menu_index)
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)
@@ -383,6 +418,14 @@ script menu_dx_mods_setprop ; yeah this sucks my other approach didnt work
 	switch (<mod_id>)
 		case BLACK_HIGHWAY
 			if (<black_highway> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case TRANSPARENT_HIGHWAY
+			if (<transparent_highway> = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif

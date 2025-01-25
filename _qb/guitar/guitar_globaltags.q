@@ -38,6 +38,7 @@ script setup_user_option_tags
 			0x3c573231 = 0
 			black_highway = 0
 			black_background = 0
+			transparent_highway = 0
 			song_title = 0
 			highway_shake = 0
 			early_timing = 0

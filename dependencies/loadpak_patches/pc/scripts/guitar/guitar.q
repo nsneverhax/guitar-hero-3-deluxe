@@ -1068,7 +1068,7 @@ script guitar_startup
 	endif
 	begin
 	GetTrueElapsedTime StartTime = <legal_start_time>
-	if (<ElapsedTime> >= 6000)
+	if (<ElapsedTime> >= 1)
 		Change \{legal_timer = 1}
 		break
 	endif
