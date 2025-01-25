@@ -270,3 +270,39 @@ script GuitarEvent_StarSequenceBonus
 	gem_count = (<gem_count> + 1)
 	repeat <array_Size>
 endscript
+script GuitarEvent_Multiplier4xOn_Spawned 
+	GetGlobalTags \{user_options}
+	if (<black_background> = 1)
+		return
+	endif
+	if ($disable_band = 0)
+		ObjID = (<player_status>.band_Member)
+		GetPakManCurrent \{map = Zones}
+		if NOT (<pak> = Z_Soundcheck)
+			Wait \{1
+				GameFrame}
+			SafeGetUniqueCompositeObjectID PreferredId = FingerSparks01 ObjID = <ObjID>
+			CreateParticleSystem_Fast Name = <UniqueId> ObjID = <ObjID> groupID = zoneParticles Bone = Bone_Hand_Middle_Mid_L params_Script = $GP_4X_FingerSparks01
+			MangleChecksums A = <UniqueId> B = <ObjID>
+			Change StructureName = <player_status> FourX_FingerFXID01 = <mangled_ID>
+			Wait \{1
+				GameFrame}
+			SafeGetUniqueCompositeObjectID PreferredId = FingerFlames01 ObjID = <ObjID>
+			CreateParticleSystem_Fast Name = <UniqueId> ObjID = <ObjID> groupID = zoneParticles Bone = Bone_Hand_Middle_Mid_L params_Script = $GP_4X_FingerFlames01
+			MangleChecksums A = <UniqueId> B = <ObjID>
+			Change StructureName = <player_status> FourX_FingerFXID02 = <mangled_ID>
+			Wait \{1
+				GameFrame}
+			SafeGetUniqueCompositeObjectID PreferredId = FingerSparks02 ObjID = <ObjID>
+			CreateParticleSystem_Fast Name = <UniqueId> ObjID = <ObjID> groupID = zoneParticles Bone = Bone_Hand_Middle_Mid_R params_Script = {$GP_4X_FingerSparks01 Emit_Target = (0.0, -1.0, 0.0)}
+			MangleChecksums A = <UniqueId> B = <ObjID>
+			Change StructureName = <player_status> FourX_FingerFXID03 = <mangled_ID>
+			Wait \{1
+				GameFrame}
+			SafeGetUniqueCompositeObjectID PreferredId = FingerFlames02 ObjID = <ObjID>
+			CreateParticleSystem_Fast Name = <UniqueId> ObjID = <ObjID> groupID = zoneParticles Bone = Bone_Hand_Middle_Mid_R params_Script = $GP_4X_FingerFlames01
+			MangleChecksums A = <UniqueId> B = <ObjID>
+			Change StructureName = <player_status> FourX_FingerFXID04 = <mangled_ID>
+		endif
+	endif
+endscript
