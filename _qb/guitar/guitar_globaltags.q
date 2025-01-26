@@ -46,6 +46,5 @@ script setup_user_option_tags
 			no_whammy_particles = 0
 			select_restart = 0
 			awesomeness = 0
-			Cheat_Hyperspeed = 0
 		}}
 endscript
