@@ -313,3 +313,15 @@ script GuitarEvent_WhammyOn
 		WhammyFXOn <...>
 	endif
 endscript
+
+script highway_pulse_black 
+	GetGlobalTags \{user_options}
+	if ((<black_highway> = 1) || (<transparent_highway> = 1))
+		return
+	endif
+	<half_time> = ($highway_pulse_time / 2.0)
+	FormatText ChecksumName = Highway 'Highway_2D%p' P = <player_Text> AddToStringLookup = TRUE
+	DoScreenElementMorph Id = <Highway> rgba = ($highway_pulse) Time = <half_time>
+	Wait <half_time> Seconds
+	DoScreenElementMorph Id = <Highway> rgba = ($highway_normal) Time = <half_time>
+endscript
