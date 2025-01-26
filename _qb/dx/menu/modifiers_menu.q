@@ -68,6 +68,11 @@ modifier_options = [
 		Description = "Flames no longer appear when hitting notes."
 	}
 	{
+		Name = "No Whammy Particles"
+		Id = NO_WHAMMY_PARTICLES
+		Description = "Whammy Particles no longer appear when hitting sustains."
+	}
+	{
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
 		Description = "You can now press select to restart in Practice mode."
@@ -366,6 +371,14 @@ script menu_dx_mods_select ; spaaaaghetti
 				SetGlobalTags user_options Params = {no_flames = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case NO_WHAMMY_PARTICLES
+			if (<no_whammy_particles> = 0)
+			 	SetGlobalTags user_options Params = {no_whammy_particles = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {no_whammy_particles = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case SELECT_RESTART
 			if (<select_restart> = 0)
 			 	SetGlobalTags user_options Params = {select_restart = 1}
@@ -480,6 +493,14 @@ script menu_dx_mods_setprop ; yeah this sucks my other approach didnt work
 			endif
 		case NO_FLAMES
 			if (<no_flames> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case NO_WHAMMY_PARTICLES
+			if (<no_whammy_particles> = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif

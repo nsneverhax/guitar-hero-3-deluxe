@@ -306,3 +306,10 @@ script GuitarEvent_Multiplier4xOn_Spawned
 		endif
 	endif
 endscript
+
+script GuitarEvent_WhammyOn 
+	GetGlobalTags \{user_options}
+	if (<no_whammy_particles> = 0)
+		WhammyFXOn <...>
+	endif
+endscript
