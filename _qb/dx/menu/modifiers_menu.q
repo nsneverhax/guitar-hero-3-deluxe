@@ -293,6 +293,7 @@ script menu_dx_mods_scroll_down
 endscript
 
 script menu_dx_mods_select ; spaaaaghetti
+	Change dx_settings_changed = 1
 	GetGlobalTags \{user_options}
 	switch (($modifier_options [$selected_modifier_index].Id))
 		case BLACK_HIGHWAY

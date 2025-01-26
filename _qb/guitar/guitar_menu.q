@@ -1,3 +1,20 @@
+dx_menu_autosave_fs = {
+	Create = dx_memcard_sequence_begin_autosave
+	Destroy = memcard_sequence_cleanup_generic
+	actions = [
+		{
+			action = memcard_sequence_save_success
+			flow_state = main_menu_fs
+			transition_left
+		}
+		{
+			action = memcard_sequence_save_failed
+			flow_state = main_menu_fs
+			transition_left
+		}
+	]
+}
+
 main_menu_fs = {
 	Create = create_main_menu
 	Destroy = destroy_main_menu

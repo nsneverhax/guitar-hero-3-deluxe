@@ -1,4 +1,5 @@
 set_speeds_locked = 0
+dx_settings_changed = 0
 
 custom_menu_fs = {
 	Create = create_custom_menu
@@ -382,6 +383,7 @@ endscript
 0x3b1abe4a = 0
 
 script select_dispfps 
+	Change dx_settings_changed = 1
 	ui_menu_select_sfx
 	change_dispfps_text
 	0x34e762be ondisp_dispfps_text = (1 - <ondisp_dispfps_text>)

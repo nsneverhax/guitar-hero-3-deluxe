@@ -12,7 +12,7 @@ custom_menu_fs = {
 		}
 		{
 			action = go_back
-			flow_state = main_menu_fs
+			flow_state = dx_menu_autosave_fs
 			transition_left
 		}
 	]
