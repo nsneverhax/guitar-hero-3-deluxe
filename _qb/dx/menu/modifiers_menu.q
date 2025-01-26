@@ -93,6 +93,11 @@ modifier_options = [
 		Description = "This enables the menu that appears when pressing select. It's a thing that exists. This cannot be disabled until the game is closed."
 	}
 	{
+		Name = "Unlock All"
+		Id = UNLOCK_ALL
+		Description = "Unlocks everything, including cheats"
+	}
+	{
 		Name = "Awesomeness Detection"
 		Id = AWESOMENESS
 		Description = "Let NeverHax know that you are awesome!"
@@ -297,7 +302,7 @@ script menu_dx_mods_scroll_down
 	endif
 endscript
 
-script menu_dx_mods_select ; spaaaaghetti
+script menu_dx_mods_select
 	Change dx_settings_changed = 1
 	GetGlobalTags \{user_options}
 	switch (($modifier_options [$selected_modifier_index].Id))
@@ -417,6 +422,16 @@ script menu_dx_mods_select ; spaaaaghetti
 			ui_menu_select_sfx
 			LaunchViewer
 			Change \{select_shift = 1}
+		case UNLOCK_ALL
+			ui_menu_select_sfx
+			playday_unlockall
+			SetGlobalTags user_options Params = {unlock_Cheat_AirGuitar = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_PerformanceMode = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_Hyperspeed = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_NoFail = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_EasyExpert = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_PrecisionMode = 1}
+			SetGlobalTags user_options Params = {unlock_Cheat_BretMichaels = 1}
 		case AWESOMENESS
 			if (<awesomeness> = 0)
 			 	SetGlobalTags user_options Params = {awesomeness = 1}
@@ -426,7 +441,6 @@ script menu_dx_mods_select ; spaaaaghetti
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 	endswitch
-	; jank way of resetting black/transparent highway text if the other is toggled on
 	if (($mods_menu_index = 0) && (<black_highway> = 0))
 		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
 		menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (1)
@@ -439,7 +453,7 @@ script menu_dx_mods_select ; spaaaaghetti
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)
 endscript
 
-script menu_dx_mods_setprop ; yeah this sucks my other approach didnt work
+script menu_dx_mods_setprop
 	GetGlobalTags \{user_options}
 	mod_id = ($modifier_options [<Index>].Id)
 	switch (<mod_id>)
@@ -532,6 +546,8 @@ script menu_dx_mods_setprop ; yeah this sucks my other approach didnt work
 				<Element_Id> :SetProps text = "Debug Mode: Off"
 			endif
 		case ENABLE_VIEWER
+			<Element_Id> :SetProps text = ($modifier_options [<Index>].Name)
+		case UNLOCK_ALL
 			<Element_Id> :SetProps text = ($modifier_options [<Index>].Name)
 		case AWESOMENESS
 			if (<awesomeness> = 1)
