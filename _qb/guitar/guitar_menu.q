@@ -77,7 +77,24 @@ main_menu_fs = {
 	]
 }
 
+script load_dx_settings
+	GetGlobalTags \{user_options}
+	if (<black_highway> = 1)
+		Change highway_normal = $highway_black
+		Change highway_starpower = $highway_black
+	endif
+	if (<transparent_highway> = 1)
+		Change highway_normal = $highway_transparent
+		Change highway_starpower = $highway_transparent
+	endif
+	GetGlobalTags $0xaebf2394 noassert = 1
+	if (<ondisp_dispfps_text> = 1)
+		enable_dispfps
+	endif
+endscript
+
 script create_main_menu 
+	load_dx_settings
 	set_home_button_allowed
 	GetGlobalTags \{user_options}
 	menu_audio_settings_update_guitar_volume vol = <guitar_volume>
