@@ -32,7 +32,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DX-360
+          name: GH3DX-Xbox
           path: out/xbox
 
   build_wii:
