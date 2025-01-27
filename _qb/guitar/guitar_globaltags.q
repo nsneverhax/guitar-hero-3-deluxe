@@ -46,5 +46,6 @@ script setup_user_option_tags
 			no_whammy_particles = 0
 			select_restart = 0
 			awesomeness = 0
+			nopostproc = 0
 		}}
 endscript
