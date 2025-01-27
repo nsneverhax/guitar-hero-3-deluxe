@@ -102,6 +102,11 @@ modifier_options = [
 		Id = AWESOMENESS
 		Description = "Let NeverHax know that you are awesome!"
 	}
+	{
+		Name = "No Post Processing"
+		Id = NOPOSTPROC
+		Description = "Removes all post-processing effects."
+	}
 ]
 script create_dx_mods_menu \{Popup = 0}
 	disable_pause
@@ -440,6 +445,17 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {awesomeness = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case NOPOSTPROC
+			; custom scripts with arguments :money_mouth: - Charlotte/kernaltrap8
+			if (<nopostproc> = 0)
+				dx_set_postproc {Action = Disable}
+				SetGlobalTags user_options Params = {nopostproc = 1}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				dx_set_postproc {Action = Enable}
+				SetGlobalTags user_options Params = {nopostproc = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 	endswitch
 	if (($mods_menu_index = 0) && (<black_highway> = 0))
 		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
@@ -453,6 +469,39 @@ script menu_dx_mods_select
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)
 endscript
 
+script dx_set_postproc {Action = NONE}
+	; this looks bad i know, but if it aint broke dont fix it - Charlotte/kernaltrap8
+	switch <Action>
+		case Disable
+			Change {Default_TOD_Manager = $dx_Default_TOD_Manager}
+			Change {DOF_CloseUp01_TOD_Manager = $dx_DOF_CloseUp01_TOD_Manager}
+			Change {DOF_CloseUp02_TOD_Manager = $dx_DOF_CloseUp02_TOD_Manager}
+			Change {DOF_CloseUp03_TOD_Manager = $dx_DOF_CloseUp03_TOD_Manager}
+			Change {DOF_Medium01_TOD_Manager = $dx_DOF_Medium01_TOD_Manager}
+			Change {DOF_Medium02_TOD_Manager = $dx_DOF_Medium02_TOD_Manager}
+			Change {DOF_Medium03_TOD_Manager = $dx_DOF_Medium03_TOD_Manager}
+			Change {DOF_Medium04_TOD_Manager = $dx_DOF_Medium04_TOD_Manager}
+			Change {DOF_OFF_TOD_Manager = $dx_DOF_OFF_TOD_Manager}
+			Change {DOF_Temp_tod_manager = $dx_DOF_Temp_tod_manager}
+			Change {ScreenFlash_TOD_Manager = $dx_ScreenFlash_TOD_Manager}
+			Change {ScreenToBlack_TOD_Manager = $dx_ScreenToBlack_TOD_Manager}
+		case Enable
+			Change {Default_TOD_Manager = $nx_Default_TOD_Manager}
+			Change {DOF_CloseUp01_TOD_Manager = $nx_DOF_CloseUp01_TOD_Manager}
+			Change {DOF_CloseUp02_TOD_Manager = $nx_DOF_CloseUp02_TOD_Manager}
+			Change {DOF_CloseUp03_TOD_Manager = $nx_DOF_CloseUp03_TOD_Manager}
+			Change {DOF_Medium02_TOD_Manager = $nx_DOF_Medium02_TOD_Manager}
+			Change {DOF_Medium01_TOD_Manager = $nx_DOF_Medium01_TOD_Manager}
+			Change {DOF_Medium03_TOD_Manager = $nx_DOF_Medium03_TOD_Manager}
+			Change {DOF_Medium04_TOD_Manager = $nx_DOF_Medium04_TOD_Manager}
+			Change {DOF_OFF_TOD_Manager = $nx_DOF_OFF_TOD_Manager}
+			Change {DOF_Temp_tod_manager = $nx_DOF_Temp_tod_manager}
+			Change {ScreenFlash_TOD_Manager = $nx_ScreenFlash_TOD_Manager}
+			Change {ScreenToBlack_TOD_Manager = $nx_ScreenToBlack_TOD_Manager}
+		case NONE
+			ScriptAssert "hey, you forgot to pass an Action to dx_set_postproc!"
+	endswitch
+endscript
 script menu_dx_mods_setprop
 	GetGlobalTags \{user_options}
 	mod_id = ($modifier_options [<Index>].Id)
@@ -557,6 +606,14 @@ script menu_dx_mods_setprop
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
+		case NOPOSTPROC
+			if (<nopostproc> = 1)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif	
 	endswitch
 endscript
 
