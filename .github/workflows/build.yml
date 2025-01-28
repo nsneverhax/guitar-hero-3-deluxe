@@ -48,7 +48,7 @@ jobs:
       - name: Upload result
         uses: actions/upload-artifact@v4
         with:
-          name: GH3DX-WII
+          name: GH3DX-Wii
           path: out/wii
 
   build_ps2:
