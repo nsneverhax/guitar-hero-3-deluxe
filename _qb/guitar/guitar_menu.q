@@ -44,6 +44,10 @@ main_menu_fs = {
 			flow_state = online_signin_fs
 		}
 		{
+			action = select_winport_online
+			flow_state = online_winport_start_connection_fs
+		}
+		{
 			action = select_options
 			flow_state = options_select_option_fs
 			transition_right
@@ -72,7 +76,12 @@ main_menu_fs = {
 		}
 		{
 			action = enter_attract_mode
-			flow_state = 0xea90f674
+			flow_state = main_menu_attract_mode_fs
+		}
+		{
+			action = select_winport_exit
+			flow_state = winport_confirm_exit_fs
+			transition_left
 		}
 	]
 }
@@ -132,11 +141,6 @@ script create_main_menu
 			setflag = 1
 		}}
 	0xe5282627
-	if ($is_demo_mode = 1)
-		demo_mode_disable = {rgba = [128 128 128 255] NOT_FOCUSABLE}
-	else
-		demo_mode_disable = {}
-	endif
 	DeRegisterAtoms
 	RegisterAtoms \{Name = Achievement
 		$Achievement_Atoms}
@@ -199,7 +203,9 @@ script create_main_menu
 		options_text_scale = (1.2, 1.1)
 		leaderboards_text_off = (<options_text_off> + (20.0, 48.0))
 		leaderboards_text_scale = (1.1, 1.0)
-		debug_menu_text_off = (<leaderboards_text_off> + (-30.0, 160.0))
+		exit_text_off = (<leaderboards_text_off> + (-20.0, 65.0))
+		exit_text_scale = (1.1, 1.0)
+		debug_menu_text_off = (<exit_text_off> + (0.0, 160.0))
 		debug_menu_text_scale = 0.8
 	endif
 
@@ -302,7 +308,6 @@ script create_main_menu
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba = [0 0 0 255]
 		z_priority = 60
-		<demo_mode_disable>
 	}
 	GetScreenElementDims Id = <Id>
 	if (<width> > 345)
@@ -316,7 +321,29 @@ script create_main_menu
 	Offset = ((<old_height> * ((<old_height> -24.0) / <old_height>)) - (<Height> * ((<Height> - (24.0 * ((1.0 * <Height>) / <old_height>))) / <Height>)))
 	leaderboards_text_off = (<leaderboards_text_off> - <Offset> * (0.0, 1.0))
 	options_text_off = (<options_text_off> - <Offset> * (0.0, 1.0))
-	if IsXENON
+	if ((IsWinPort) || (IsMacPort))
+		createscreenelement {
+			type = textelement
+			id = main_menu_leaderboards_text
+			parent = main_menu_text_container
+			font = <main_menu_font>
+			text = "ONLINE"
+			font_spacing = 0
+			pos = {(<leaderboards_text_off>) relative}
+			scale = (<leaderboards_text_scale>)
+			rgba = ($menu_text_color)
+			just = [left top]
+			shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba = [0 0 0 255]
+			z_priority = 60
+		}
+		getscreenelementdims id = <id>
+		if (<width> > 360)
+			setscreenelementprops id = <id> scale = 1
+			fit_text_in_rectangle id = <id> dims = ((360.0, 0.0) + <height> * (0.0, 1.0))
+		endif
+	elseif IsXENON
 		CreateScreenElement {
 			Type = TextElement
 			Id = main_menu_leaderboards_text
@@ -332,7 +359,6 @@ script create_main_menu
 			shadow_offs = (3.0, 3.0)
 			shadow_rgba = [0 0 0 255]
 			z_priority = 60
-			<demo_mode_disable>
 		}
 		GetScreenElementDims Id = <Id>
 		if (<width> > 360)
@@ -425,6 +451,29 @@ script create_main_menu
 	if (<width> > 420)
 		SetScreenElementProps Id = <Id> Scale = 1
 		fit_text_in_rectangle Id = <Id> Dims = ((420.0, 0.0) + <Height> * (0.0, 1.0))
+	endif
+	if ((IsWinPort) || (IsMacPort))
+		createscreenelement {
+			type = textelement
+			id = main_menu_exit_text
+			parent = main_menu_text_container
+			font = <main_menu_font>
+			text = "EXIT"
+			font_spacing = 0
+			pos = {(<exit_text_off>) relative}
+			scale = (<exit_text_scale>)
+			rgba = ($menu_text_color)
+			just = [left top]
+			shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba = [0 0 0 255]
+			z_priority = 60
+		}
+		getscreenelementdims id = <id>
+		if (<width> > 420)
+			setscreenelementprops id = <id> scale = 1
+			fit_text_in_rectangle id = <id> dims = ((420.0, 0.0) + <height> * (0.0, 1.0))
+		endif
 	endif
 	if ($enable_button_cheats = 1)
 		CreateScreenElement {
@@ -561,7 +610,14 @@ script create_main_menu
 				beDims = (36.0, 36.0)
 				posH = (<options_text_off> + <hilite_off> + (-14.0, 0.0))
 				hDims = (205.0, 43.0)
-			}
+			} ,
+			{
+				posl = (<exit_text_off> + <hilite_off> + (-36.0, 5.0))
+				posr = (<exit_text_off> + <hilite_off> + (183.0, 5.0))
+				bedims = (36.0, 36.0)
+				posh = (<exit_text_off> + <hilite_off> + (-12.0, 0.0))
+				hdims = (205.0, 43.0)
+			} 
 		]
 	endif
 	<gm_hlIndex> = 0
@@ -707,7 +763,6 @@ script create_main_menu
 			{pad_choose main_menu_select_training}
 		]
 		z_priority = -1
-		<demo_mode_disable>
 	}
 	CreateScreenElement {
 			Type = TextElement
@@ -755,7 +810,31 @@ script create_main_menu
 		]
 		z_priority = -1
 	}
-	if ((IsXENON) || (IsPS3) || (IsNGC))
+	if ((IsWinPort) || (IsMacPort))
+		CreateScreenElement {
+			type = textelement
+			parent = vmenu_main_menu
+			font = <main_menu_font>
+			text = ""
+			event_handlers = [
+				{focus retail_menu_focus params = {id = main_menu_leaderboards_text}}
+				{focus setscreenelementprops params = {id = main_menu_leaderboards_text no_shadow}}
+				{focus guitar_menu_highlighter params = {
+						hlindex = 5
+						hlinfolist = <gm_hlinfolist>
+						be1id = <bookend1id>
+						be2id = <bookend2id>
+						wthlid = <whitetexhighlightid>
+						text_id = main_menu_leaderboards_text
+					}
+				}
+				{unfocus setscreenelementprops params = {id = main_menu_leaderboards_text shadow shadow_offs = (3.0, 3.0) shadow_rgba = [0 0 0 255]}}
+				{unfocus retail_menu_unfocus params = {id = main_menu_leaderboards_text}}
+				{pad_choose main_menu_select_winport_online}
+			]
+			z_priority = -1
+		}
+	elseif ((IsXENON) || (IsPS3) || (IsNGC))
 		CreateScreenElement {
 			Type = TextElement
 			PARENT = vmenu_main_menu
@@ -778,7 +857,31 @@ script create_main_menu
 				{pad_choose main_menu_select_xbox_live}
 			]
 			z_priority = -1
-			<demo_mode_disable>
+		}
+	endif
+	if ((IsWinPort) || (IsMacPort))
+		createscreenelement {
+			type = textelement
+			parent = vmenu_main_menu
+			font = <main_menu_font>
+			text = ''
+			event_handlers = [
+				{focus retail_menu_focus params = {id = main_menu_exit_text}}
+				{focus setscreenelementprops params = {id = main_menu_exit_text no_shadow}}
+				{focus guitar_menu_highlighter params = {
+						hlindex = 8
+						hlinfolist = <gm_hlinfolist>
+						be1id = <bookend1id>
+						be2id = <bookend2id>
+						wthlid = <whitetexhighlightid>
+						text_id = main_menu_exit_text
+					}
+				}
+				{unfocus setscreenelementprops params = {id = main_menu_exit_text shadow shadow_offs = (3.0, 3.0) shadow_rgba = [0 0 0 255]}}
+				{unfocus retail_menu_unfocus params = {id = main_menu_exit_text}}
+				{pad_choose main_menu_select_exit}
+			]
+			z_priority = -1
 		}
 	endif
 	if ($enable_button_cheats = 1)
@@ -1254,11 +1357,6 @@ script create_pause_menu \{Player = 1
 					}
 					GetScreenElementDims Id = <Id>
 					fit_text_in_rectangle Id = <Id> Dims = ((250.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
-					if ($is_demo_mode = 1)
-						demo_mode_disable = {rgba = [80 80 80 255] NOT_FOCUSABLE}
-					else
-						demo_mode_disable = {}
-					endif
 					if (($game_mode = p1_career && $boss_battle = 0) || ($game_mode = p1_quickplay))
 						CreateScreenElement {
 							<container_params>
@@ -1282,7 +1380,6 @@ script create_pause_menu \{Player = 1
 							shadow_rgba [0 0 0 255]
 							z_priority = <pause_z>
 							exclusive_device = <player_device>
-							<demo_mode_disable>
 						}
 						GetScreenElementDims Id = <Id>
 						fit_text_in_rectangle Id = <Id> Dims = ((260.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
