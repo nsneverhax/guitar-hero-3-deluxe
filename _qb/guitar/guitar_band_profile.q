@@ -16,7 +16,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Explorer_White
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x414e0cbe
+		acc_anim_set = Axel_acc_animation
 		finger_anims = guitarist_finger_anims_Axel
 		fret_anims = fret_anims_lrg
 		strum_anims = NormalAxel
@@ -76,7 +76,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Les_Paul_Black
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xf6e823d7
+		acc_anim_set = Casey_acc_animation
 		finger_anims = guitarist_finger_anims_Casey
 		fret_anims = fret_anims_sml
 		strum_anims = NormalCasey
@@ -137,7 +137,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Les_Paul_Black
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x9d0b4a15
+		acc_anim_set = Izzy_acc_animation
 		finger_anims = guitarist_finger_anims_Izzy
 		fret_anims = fret_anims_med
 		strum_anims = NormalIzzy
@@ -199,8 +199,8 @@ Musician_Profiles_PSWii = [
 		}
 		Scale = (0.9, 0.9, 0.9)
 		Type = GUITARIST
-		0x6a7a41d3 = 0x77aa6c97
-		0xa41a8d84 = 0xbf8874c8
+		acc_anim_set = Judy_acc_animation
+		acc_anim_alt = Judy_acc_animation_alt
 		finger_anims = guitarist_finger_anims_Judy
 		fret_anims = fret_anims_sml
 		strum_anims = NormalJudy
@@ -261,7 +261,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_SG_Worn_Red
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x1cda384e
+		acc_anim_set = Johnny_acc_animation
 		finger_anims = guitarist_finger_anims_Johnny
 		fret_anims = fret_anims_med
 		strum_anims = NormalJohnny
@@ -322,7 +322,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Explorer_White
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xcf3644cc
+		acc_anim_set = Lars_acc_animation
 		finger_anims = guitarist_finger_anims_Lars
 		fret_anims = fret_anims_lrg
 		strum_anims = NormalLars
@@ -383,7 +383,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_SG_Worn_Red
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xfe7a559e
+		acc_anim_set = Midori_acc_animation
 		finger_anims = guitarist_finger_anims_Midori
 		fret_anims = fret_anims_sml
 		strum_anims = NormalMidori
@@ -444,7 +444,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Les_Paul_Black
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x319c4ce8
+		acc_anim_set = Xavier_acc_animation
 		finger_anims = guitarist_finger_anims_Xavier
 		fret_anims = fret_anims_med
 		strum_anims = NormalXavier
@@ -502,7 +502,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Guitar_Slash01
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x9d43cd51
+		acc_anim_set = Slash_acc_animation
 		finger_anims = guitarist_finger_anims_Slash
 		fret_anims = fret_anims_med
 		strum_anims = NormalSlash
@@ -526,7 +526,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Morello
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0x50bfcaea
+		acc_anim_set = Morello_acc_animation
 		finger_anims = guitarist_finger_anims_Morello
 		fret_anims = fret_anims_med
 		strum_anims = NormalMorello
@@ -553,7 +553,7 @@ Musician_Profiles_PSWii = [
 			desc_id = Instrument_Guitar_Demonik
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xce6ab844
+		acc_anim_set = Satan_acc_animation
 		finger_anims = guitarist_finger_anims_Satan
 		fret_anims = fret_anims_lrg
 		strum_anims = NormalSatan
@@ -574,20 +574,20 @@ Musician_Profiles_PSWii = [
 		ragdoll_collision_group2 = RagdollCollisionGroups_Lars_2
 		ik_params = Hero_IK_Params
 		musician_body = {
-			desc_id = 0x8806fc53
+			desc_id = Guitarist_Fowlvis_Outfit1_Style1
 		}
 		musician_instrument = {
-			desc_id = 0xa94be55f
+			desc_id = Instrument_Felvis
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xeb8a9640
-		finger_anims = 0x7198c09f
+		acc_anim_set = Elroy_acc_animation
+		finger_anims = guitarist_finger_anims_Elroy
 		fret_anims = fret_anims_lrg
-		strum_anims = 0xcd91c8d1
-		anim_set = 0x50dc893e
+		strum_anims = NormalElroy
+		anim_set = Elroy_animations
 		stance = Stance_A
-		icon_off = 0xbee56b80
-		icon_on = 0xe0a01826
+		icon_off = Char_Select_Fowlvis_Off
+		icon_on = Char_Select_Fowlvis_On
 		blurb = $string_ps2_fowlvis_blurb
 		outfits = [
 			{
@@ -619,17 +619,17 @@ Musician_Profiles_PSWii = [
 		ragdoll_collision_group2 = RagdollCollisionGroups_Axel_2
 		ik_params = Hero_IK_Params
 		musician_body = {
-			desc_id = 0xcd6bf4f0
+			desc_id = Guitarist_Robot_Outfit1_Style1
 		}
 		musician_instrument = {
-			desc_id = 0x9cf1b143
+			desc_id = Instrument_Rifle
 		}
 		Type = GUITARIST
-		0x6a7a41d3 = 0xb32f1012
-		finger_anims = 0xd37afb2e
+		acc_anim_set = Robot_acc_animation
+		finger_anims = guitarist_finger_anims_Robot
 		fret_anims = fret_anims_lrg
-		strum_anims = 0x6f73f360
-		anim_set = 0xa262182e
+		strum_anims = NormalRobot
+		anim_set = Robot_animations
 		stance = Stance_A
 		icon_off = Char_Select_robot_off
 		icon_on = Char_Select_robot_on
@@ -675,7 +675,7 @@ Musician_Profiles_PSWii = [
 		strum_anims = Bass_Slap
 		anim_set = bassist_animations
 		stance = Stance_A
-		0x6a7a41d3 = 0xf49ae2ff
+		acc_anim_set = Bassist_acc_animation
 	}
 	{
 		Name = 'Drummer'
@@ -708,7 +708,7 @@ Musician_Profiles_PSWii = [
 		Type = VOCALIST
 		anim_set = singer_male_animations
 		stance = Stance_A
-		0x6a7a41d3 = 0xd8d181cd
+		acc_anim_set = Singer_Male_acc_animation
 	}
 	{
 		Name = 'Singer_Bret'
@@ -725,7 +725,7 @@ Musician_Profiles_PSWii = [
 		Type = VOCALIST
 		anim_set = singer_male_animations
 		stance = Stance_A
-		0x6a7a41d3 = 0xd8d181cd
+		acc_anim_set = Singer_Male_acc_animation
 	}
 	{
 		Name = 'Singer_Female'
@@ -742,7 +742,7 @@ Musician_Profiles_PSWii = [
 		Type = VOCALIST
 		anim_set = singer_female_animations
 		stance = Stance_A
-		0x6a7a41d3 = 0x062f1410
+		acc_anim_set = Singer_Female_acc_animation
 	}
 	{
 		Name = 'BoneMan_Axel'
