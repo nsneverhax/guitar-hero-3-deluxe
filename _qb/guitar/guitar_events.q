@@ -140,8 +140,12 @@ script hit_note_fx
 	endif
 endscript
 
-
 script GuitarEvent_StarSequenceBonus 
+	if ((IsPS2) || IsNGC)
+		guitarevent_starsequencebonus_PSWii <...>
+		return
+	endif
+
 	if ($is_attract_mode = 1)
 		return
 	endif
@@ -270,6 +274,63 @@ script GuitarEvent_StarSequenceBonus
 	gem_count = (<gem_count> + 1)
 	repeat <array_Size>
 endscript
+
+script guitarevent_starsequencebonus_PSWii 
+	wait_for_correct_frame player = ($<player_status>.player)
+	if ($is_attract_mode = 1)
+		return
+	endif
+	change structurename = <player_status> sp_phrases_hit = ($<player_status>.sp_phrases_hit + 1)
+	soundevent \{event = star_power_awarded_sfx}
+	formattext checksumname = container_id 'gem_container%p' p = ($<player_status>.text) addtostringlookup = true
+	getarraysize \{$gem_colors}
+	gem_count = 0
+	begin
+	<note> = ($<song> [<array_entry>] [(<gem_count> + 1)])
+	if (<note> > 0)
+		color = ($gem_colors [<gem_count>])
+		if ($<player_status>.lefthanded_button_ups = 1)
+			<pos2d> = ($button_up_models.<color>.left_pos_2d)
+			<angle> = ($button_models.<color>.angle)
+		else
+			<pos2d> = ($button_up_models.<color>.pos_2d)
+			<angle> = ($button_models.<color>.left_angle)
+		endif
+		formattext checksumname = name 'big_bolt%p%e' p = ($<player_status>.text) e = <gem_count> addtostringlookup = true
+		createscreenelement {
+			type = spriteelement
+			id = <name>
+			parent = <container_id>
+			material = sys_big_bolt01_sys_big_bolt01
+			blend = add
+			use_animated_uvs = true
+			top_down_v
+			frame_length = 0.005
+			num_uv_frames = (8.0, 1.0)
+			rgba = [255 255 255 255]
+			pos = <pos2d>
+			rot_angle = <angle>
+			scale = (0.5 * $star_power_bolt_scale)
+			just = [center bottom]
+			z_priority = 6
+		}
+	endif
+	gem_count = (<gem_count> + 1)
+	repeat <array_size>
+	wait \{$star_power_bolt_time
+		seconds}
+	gem_count = 0
+	begin
+	<note> = ($<song> [<array_entry>] [(<gem_count> + 1)])
+	if (<note> > 0)
+		formattext checksumname = name 'big_bolt%p%e' p = ($<player_status>.text) e = <gem_count> addtostringlookup = true
+		destroyscreenelement id = <name>
+		waitonegameframe
+	endif
+	gem_count = (<gem_count> + 1)
+	repeat <array_size>
+endscript
+
 script GuitarEvent_Multiplier4xOn_Spawned 
 	GetGlobalTags \{user_options}
 	if (<black_background> = 1)
