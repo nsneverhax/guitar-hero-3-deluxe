@@ -22,8 +22,8 @@
 
 *Guitar Hero 3 Deluxe recieves very frequent updates. You can click the `Watch` button (All Activity) to be notified about any updates that occur.*
 
-![last updated:](https://img.shields.io/github/last-commit/LlysiX/guitar-hero-3-deluxe?label=last%20updated%3A)
-### 📥 [Playstation 3](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip)
+![last updated:](https://img.shields.io/github/last-commit/nsneverhax/guitar-hero-3-deluxe?label=last%20updated%3A)
+### 📥 [Playstation 3](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip)
 
 <br/>
 
@@ -31,22 +31,22 @@
     - [Installing on RPCS3](#-installing-on-rpcs3)
     - [Installing on PS3](#-installing-on-ps3)
 
-### 📥 [Xbox 360](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip)
+### 📥 [Xbox 360](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip)
 
 <br/>
 
 > Continue to: 
     - [Installing on Xbox 360](#-installing-on-xbox-360)
 
-### 📥 [Playstation 2](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS2.zip)
+### 📥 [Playstation 2](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS2.zip)
 
 <br/>
 
-### 📥 [Wii](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Wii.zip)
+### 📥 [Wii](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Wii.zip)
 
 <br/>
 
-### 📥 [PC](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
+### 📥 [PC](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
 
 <br/>
 
@@ -66,7 +66,7 @@
 
 * **Install your copy of Guitar Hero 3** through the emulator. The [**official RPCS3 site covers this nicely**](https://rpcs3.net/quickstart).
 
-* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip). 
+* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip). 
   * Extract the zip and copy the contents to the Disc Game Folder to install it. You can get to the disc game folder by right clicking on Guitar Hero 3, going down to `Open Folder`, and selecting `Open Disc Game Folder`.
   	* Do not copy it to the update folder! If the path does not include `PS3_GAME`, you are copying it to the wrong location!
   * Replace all existing files in the location.
@@ -80,7 +80,7 @@
 **NOTE: You WILL need a HACKED/MODDED (CFW or HFW/HEN) PS3 in order to play this mod on console. We hope this is clear.**
 
 * **Install your vanilla copy of Guitar Hero 3** to your console's hard drive.
-* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip). 
+* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip). 
   * Extract the zip and copy the contents to the extracted game folder on your console's hard drive.
   	* Do not copy it to the update folder! If the path does not include `PS3_GAME`, you are copying it to the wrong location!
   * Replace all existing files in the location.
@@ -98,7 +98,7 @@
 
 * **Disable updates** for Guitar Hero 3 in Aurora. *Guitar Hero 3 Deluxe* rolls `TU3` into its base installation.
 
-* Download [**Guitar Hero 3 Deluxe for Xbox 360**](https://nightly.link/LlysiX/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip). 
+* Download [**Guitar Hero 3 Deluxe for Xbox 360**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip). 
   * **Copy the contents of it to where your copy of Guitar Hero 3 is installed** (we recommend using FTP to do so).
   * Select `Yes` to overwrite the files if it asks you to.
 
