@@ -35,7 +35,7 @@ script setup_user_option_tags
 			unlock_Cheat_EasyExpert = 0
 			unlock_Cheat_PrecisionMode = 0
 			unlock_Cheat_BretMichaels = 0
-			0x3c573231 = 0
+			unlock_Cheat_LargeGems = 0
 			black_highway = 0
 			black_background = 0
 			transparent_highway = 0
