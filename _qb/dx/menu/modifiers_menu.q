@@ -73,6 +73,11 @@ modifier_options = [
 		Description = "Whammy Particles no longer appear when hitting sustains."
 	}
 	{
+		Name = "No Whammy Pitch Shifting"
+		Id = NO_WHAMMY_PITCH_SHIFT
+		Description = "Whammy no longer changes the pitch of the song."
+	}
+	{
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
 		Description = "You can now press select to restart in Practice mode."
@@ -389,6 +394,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_whammy_particles = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case NO_WHAMMY_PITCH_SHIFT
+			if (<no_whammy_pitch_shift> = 0)
+			 	SetGlobalTags user_options Params = {no_whammy_pitch_shift = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {no_whammy_pitch_shift = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case SELECT_RESTART
 			if (<select_restart> = 0)
 			 	SetGlobalTags user_options Params = {select_restart = 1}
@@ -502,6 +515,7 @@ script dx_set_postproc {Action = NONE}
 			ScriptAssert "hey, you forgot to pass an Action to dx_set_postproc!"
 	endswitch
 endscript
+
 script menu_dx_mods_setprop
 	GetGlobalTags \{user_options}
 	mod_id = ($modifier_options [<Index>].Id)
@@ -564,6 +578,14 @@ script menu_dx_mods_setprop
 			endif
 		case NO_WHAMMY_PARTICLES
 			if (<no_whammy_particles> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case NO_WHAMMY_PITCH_SHIFT
+			if (<no_whammy_pitch_shift> = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
