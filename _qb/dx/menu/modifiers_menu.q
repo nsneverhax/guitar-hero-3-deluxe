@@ -320,6 +320,8 @@ script menu_dx_mods_select
 			if (<black_highway> = 0)
 				if (<transparent_highway> = 1)
 					SetGlobalTags user_options Params = {transparent_highway = 0}
+					FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
+					menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (1)
 				endif
 			 	SetGlobalTags user_options Params = {black_highway = 1}
 			 	Change highway_normal = $highway_black
@@ -335,6 +337,8 @@ script menu_dx_mods_select
 			if (<transparent_highway> = 0)
 				if (<black_highway> = 1)
 					SetGlobalTags user_options Params = {black_highway = 0}
+					FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (0)
+					menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (0)
 				endif
 			 	SetGlobalTags user_options Params = {transparent_highway = 1}
 			 	Change highway_normal = $highway_transparent
@@ -470,13 +474,6 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 	endswitch
-	if (($mods_menu_index = 0) && (<black_highway> = 0))
-		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
-		menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (1)
-	elseif (($mods_menu_index = 1) && (<transparent_highway> = 0))
-		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (0)
-		menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (0)
-	endif
 
 	FormatText ChecksumName = mods_text_id 'mods_text_%d' D = ($mods_menu_index)
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)
