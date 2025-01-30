@@ -96,6 +96,12 @@ script load_dx_settings
 		Change highway_normal = $highway_transparent
 		Change highway_starpower = $highway_transparent
 	endif
+	if (<song_title> = 1)
+		Change intro_sequence_props = $dx_intro_sequence_props
+		Change fastintro_sequence_props = $dx_fastintro_sequence_props
+		Change practice_sequence_props = $dx_practice_sequence_props
+		Change immediate_sequence_props = $dx_immediate_sequence_props
+	endif
 	GetGlobalTags $0xaebf2394 noassert = 1
 	if (<ondisp_dispfps_text> = 1)
 		enable_dispfps
