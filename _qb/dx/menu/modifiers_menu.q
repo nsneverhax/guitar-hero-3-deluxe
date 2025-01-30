@@ -31,6 +31,9 @@ mods_max_entries = 0
 
 mods_menu_index = 0
 
+;dont save these options
+firework_gems = 0
+
 modifier_options = [
 	{
 		Name = "Black Highway"
@@ -71,6 +74,11 @@ modifier_options = [
 		Name = "No Whammy Particles"
 		Id = NO_WHAMMY_PARTICLES
 		Description = "Whammy Particles no longer appear when hitting sustains."
+	}
+	{
+		Name = "Firework Gems"
+		Id = FIREWORK_GEMS
+		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
 	}
 	{
 		Name = "No Whammy Pitch Shifting"
@@ -406,6 +414,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_whammy_particles = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case FIREWORK_GEMS
+			if ($firework_gems = 0)
+			 	change firework_gems = 1
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				change firework_gems = 0
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 0)
 			 	SetGlobalTags user_options Params = {no_whammy_pitch_shift = 1}
@@ -583,6 +599,14 @@ script menu_dx_mods_setprop
 			endif
 		case NO_WHAMMY_PARTICLES
 			if (<no_whammy_particles> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case FIREWORK_GEMS
+			if ($firework_gems = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif

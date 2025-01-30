@@ -1,3 +1,11 @@
+script GuitarEvent_HitNote 
+	SpawnScriptNow GuitarEvent_HitNote_Spawned Params = {<...>}
+	if ($firework_gems = 1)
+		SpawnScriptNow GuitarEvent_StarSequenceBonus Params = {<...> fireworks = 1}
+	endif
+endscript
+
+
 script GuitarEvent_HitNote_Spawned 
 	GetGlobalTags \{user_options}
 	if ($game_mode = p2_battle || $boss_battle = 1)
@@ -600,7 +608,9 @@ script GuitarEvent_StarSequenceBonus
 		return
 	endif
 	Change StructureName = <player_status> sp_phrases_hit = ($<player_status>.sp_phrases_hit + 1)
-	SoundEvent \{Event = Star_Power_Awarded_SFX}
+	if NOT (<fireworks> = 1)
+		SoundEvent \{Event = Star_Power_Awarded_SFX}
+	endif
 	FormatText ChecksumName = container_id 'gem_container%p' P = ($<player_status>.Text) AddToStringLookup = TRUE
 	GetArraySize \{$gem_colors}
 	gem_count = 0
@@ -731,7 +741,9 @@ script guitarevent_starsequencebonus_PSWii
 		return
 	endif
 	change structurename = <player_status> sp_phrases_hit = ($<player_status>.sp_phrases_hit + 1)
-	soundevent \{event = star_power_awarded_sfx}
+	if NOT (<fireworks> = 1)
+		soundevent \{event = star_power_awarded_sfx}
+	endif
 	formattext checksumname = container_id 'gem_container%p' p = ($<player_status>.text) addtostringlookup = true
 	getarraysize \{$gem_colors}
 	gem_count = 0
