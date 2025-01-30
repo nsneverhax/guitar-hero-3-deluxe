@@ -359,12 +359,20 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case SONG_TITLE
-			if (<song_title> = 0)
-			 	SetGlobalTags user_options Params = {song_title = 1}
-			 	SoundEvent \{Event = CheckBox_Check_SFX}
-			else
-				SetGlobalTags user_options Params = {song_title = 0}
-				SoundEvent \{Event = CheckBox_SFX}
+			if (<song_title> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+				Change {intro_sequence_props = $dx_intro_sequence_props}
+				Change {fastintro_sequence_props = $dx_fastintro_sequence_props}
+				Change {practice_sequence_props = $dx_practice_sequence_props}
+				Change {immediate_sequence_props = $dx_immediate_sequence_props}
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+				Change {intro_sequence_props = $nx_intro_sequence_props}
+				Change {fastintro_sequence_props = $nx_fastintro_sequence_props}
+				Change {practice_sequence_props = $nx_practice_sequence_props}
+				Change {immediate_sequence_props = $nx_immediate_sequence_props}
 			endif
 		case HIGHWAY_SHAKE
 			if (<highway_shake> = 0)
