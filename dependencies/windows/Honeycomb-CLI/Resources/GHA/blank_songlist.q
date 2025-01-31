@@ -5,7 +5,7 @@ GH3_Download_Songs = {
 		Title = "Downloaded songs"
 		songs = [
 		]
-		defaultunlocked = 4
+		unlockall
 		Level = load_z_Nipmuc
 	}
 }
