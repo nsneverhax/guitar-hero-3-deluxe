@@ -598,6 +598,78 @@ script guitarevent_songwon_spawned
 	endif
 endscript
 
+script Guitar_Wrong_Note_Sound_Logic
+	GetGlobalTags \{user_options}
+	if (<no_miss_sfx> = 0)
+		if ($current_num_players = 1)
+			get_song_rhythm_track Song = ($current_song)
+			if ($<player_status>.part = RHYTHM)
+				if (<rhythm_track> = 1)
+					SoundEvent \{Event = Single_Player_Bad_Note_Guitar}
+				else
+					SoundEvent \{Event = Single_Player_Bad_Note_Bass}
+				endif
+			else
+				SoundEvent \{Event = Single_Player_Bad_Note_Guitar}
+			endif
+		else
+			if ($<player_status>.Player = 1)
+				get_song_rhythm_track Song = ($current_song)
+				if ($<player_status>.part = RHYTHM)
+					if (<rhythm_track> = 1)
+						SoundEvent \{Event = First_Player_Bad_Note_Guitar}
+					else
+						SoundEvent \{Event = First_Player_Bad_Note_Bass}
+					endif
+				else
+					SoundEvent \{Event = First_Player_Bad_Note_Guitar}
+				endif
+			else
+				get_song_rhythm_track Song = ($current_song)
+				if ($boss_battle = 1)
+					SoundEvent \{Event = Second_Player_Bad_Note_Guitar}
+				else
+					if ($<player_status>.part = RHYTHM)
+						if (<rhythm_track> = 1)
+							SoundEvent \{Event = Second_Player_Bad_Note_Guitar}
+						else
+							SoundEvent \{Event = Second_Player_Bad_Note_Bass}
+						endif
+					else
+						SoundEvent \{Event = Second_Player_Bad_Note_Guitar}
+					endif
+				endif
+			endif
+		endif
+	endif
+endscript
+
+script GuitarEvent_Multiplier4xOff 
+	GetGlobalTags \{user_options}
+	if (<no_miss_sfx> = 0)
+		SoundEvent \{Event = UI_SFX_Lose_Multiplier_4X}
+		SoundEvent \{Event = Lose_Multiplier_Crowd}
+	endif
+	SpawnScriptNow highway_pulse_multiplier_loss Params = {player_Text = ($<player_status>.Text) Multiplier = 4}
+	kill_4x_fx <...>
+endscript
+
+script GuitarEvent_Multiplier3xOff 
+	GetGlobalTags \{user_options}
+	if (<no_miss_sfx> = 0)
+		SoundEvent \{Event = UI_SFX_Lose_Multiplier_3X}
+	endif
+	SpawnScriptNow highway_pulse_multiplier_loss Params = {player_Text = ($<player_status>.Text) Multiplier = 3}
+endscript
+
+script GuitarEvent_Multiplier2xOff 
+	GetGlobalTags \{user_options}
+	if (<no_miss_sfx> = 0)
+		SoundEvent \{Event = UI_SFX_Lose_Multiplier_2X}
+	endif
+	SpawnScriptNow highway_pulse_multiplier_loss Params = {player_Text = ($<player_status>.Text) Multiplier = 2}
+endscript
+
 script GuitarEvent_StarSequenceBonus 
 	if ((IsPS2) || IsNGC)
 		guitarevent_starsequencebonus_PSWii <...>

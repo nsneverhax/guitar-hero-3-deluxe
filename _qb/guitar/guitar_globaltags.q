@@ -84,6 +84,7 @@ script setup_user_option_tags
 			no_flames = 0
 			no_whammy_particles = 0
 			no_whammy_pitch_shift = 0
+			no_miss_sfx = 0
 			select_restart = 0
 			awesomeness = 0
 			nopostproc = 0

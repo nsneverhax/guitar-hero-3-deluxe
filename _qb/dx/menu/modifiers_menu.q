@@ -86,6 +86,11 @@ modifier_options = [
 		Description = "Whammy no longer changes the pitch of the song."
 	}
 	{
+		Name = "No Miss SFX"
+		Id = NO_MISS_SFX
+		Description = "Disables miss sound effects"
+	}
+	{
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
 		Description = "You can now press select to restart in Practice mode."
@@ -430,6 +435,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_whammy_pitch_shift = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case NO_MISS_SFX
+			if (<no_miss_sfx> = 0)
+			 	SetGlobalTags user_options Params = {no_miss_sfx = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {no_miss_sfx = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case SELECT_RESTART
 			if (<select_restart> = 0)
 			 	SetGlobalTags user_options Params = {select_restart = 1}
@@ -615,6 +628,14 @@ script menu_dx_mods_setprop
 			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case NO_MISS_SFX
+			if (<no_miss_sfx> = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
