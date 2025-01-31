@@ -243,6 +243,76 @@ script create_dx_mods_menu \{Popup = 0}
 	<I> = (<I> + 1)
 	repeat 4
 
+	CreateScreenElement {
+		Type = ContainerElement
+		Id = dx_desc_container
+		PARENT = mods_vmenu
+		Alpha = 1
+		Scale = 0.5
+		Pos = (640.0, 560.0)
+		Z = (<pause_z> + 10)
+	}
+	desc_text = "Your highway will be all black. This is very useful for note readability."
+	CreateScreenElement {
+		Type = TextBlockElement
+		Id = dx_desc_text
+		PARENT = dx_desc_container
+		font = text_a6
+		Scale = 0.5
+		Text = ""
+		rgba = [186 105 0 255]
+		just = [Center Center]
+		z_priority = (<pause_z> + 10)
+		Pos = (0.0, 20.0)
+		Dims = (820.0, 80.0)
+		allow_expansion
+	}
+	GetScreenElementDims {Id = dx_desc_text}
+	bg_dims = (<width> * (0.7, 0.0) + (<Height> * (0.0, 0.6) + (0.0, 30.0)))
+	displaySprite {
+		PARENT = dx_desc_container
+		Id = dx_desc_pill
+		tex = Control_pill_body
+		Pos = (0.0, 20.0)
+		just = [
+			Center
+			Center
+		]
+		rgba = [
+			96
+			0
+			0
+			255
+		]
+		Z = (<pause_z> + 10)
+		Dims = (<bg_dims> * 1.0)
+		Alpha = 0
+	}
+	dx_desc_pill :SetProps Dims = <bg_dims>
+	displaySprite {
+		PARENT = dx_desc_container
+		tex = Control_pill_end
+		Pos = (-1 * <width> * (0.4, -0.045))
+		rgba = [96 0 0 255]
+		Dims = ((40.0, 6.0) + (<Height> * (0.0, 0.6) + (0.0, 30.0)))
+		just = [RIGHT Center]
+		flip_v
+		Z = (<pause_z> + 10)
+		Alpha = 0
+	}
+	displaySprite {
+		PARENT = dx_desc_container
+		tex = Control_pill_end
+		Pos = (<width> * (0.35, 0.045))
+		rgba = [96 0 0 255]
+		Dims = ((40.0, 0.0) + (<Height> * (0.0, 0.6) + (0.0, 30.0)))
+		just = [LEFT Center]
+		Z = (<pause_z> + 10)
+		Alpha = 0
+	}
+
+	dx_desc_text :SetProps Text = ($modifier_options [0].Description)
+
 	SetScreenElementProps Id = mods_text_0 rgba = [210 210 210 250]
 
     add_user_control_helper \{Text = 'SELECT'
@@ -267,7 +337,7 @@ script destroy_dx_mods_menu
 	destroy_menu_backdrop
 endscript
 
-script menu_dx_mods_scroll_up
+script menu_dx_mods_scroll_up 
 	make_sound = 1
 	if ($mods_menu_index > 0)
 		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = $mods_menu_index
@@ -294,9 +364,10 @@ script menu_dx_mods_scroll_up
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{DOWN}
 	endif
+	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 endscript
 
-script menu_dx_mods_scroll_down
+script menu_dx_mods_scroll_down 
 	make_sound = 1
 	if ($mods_menu_index < 3)
 		FormatText ChecksumName = mods_text_id 'mods_text_%d' D = $mods_menu_index
@@ -323,6 +394,7 @@ script menu_dx_mods_scroll_down
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{DOWN}
 	endif
+	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 endscript
 
 script menu_dx_mods_select
