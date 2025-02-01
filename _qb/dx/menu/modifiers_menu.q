@@ -791,11 +791,9 @@ script menu_dx_mods_setprop
 				if (<dx_large_gems> = 1)
 					FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
-					dx_desc_text :SetProps Text = "dx_large_gems = 1"
 				elseif
 					FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
-					dx_desc_text :SetProps Text = "dx_large_gems = 0"
 				endif
 			endif
 	endswitch
