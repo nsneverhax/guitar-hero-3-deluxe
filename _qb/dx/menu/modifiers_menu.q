@@ -23,6 +23,15 @@ highway_transparent = [
 	0
 ]
 
+; some stuff for newgen
+dx_large_gem_scale = 1.5
+gem_start_scale1_normal = 0.25
+gem_end_scale1_normal = 0.8
+gem_start_scale2_normal = 0.27
+gem_end_scale2_normal = 0.8
+whammy_top_width1_normal = 10.0
+whammy_top_width2_normal = 9.2
+
 modifiers_editing = 0
 
 selected_modifier_index = 0
@@ -124,6 +133,11 @@ modifier_options = [
 		Name = "No Post Processing"
 		Id = NOPOSTPROC
 		Description = "Removes all post-processing effects."
+	}
+	{
+		Name = "Large Gems"
+		Id = LARGEGEMS
+		Description = "Large gems but you don't have to use a PS2/Wii."
 	}
 ]
 script create_dx_mods_menu \{Popup = 0}
@@ -582,6 +596,28 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {nopostproc = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case LARGEGEMS
+			if ((IsPS3) || (IsXenon))
+				if (<dx_large_gems> = 0)
+					SetGlobalTags user_options Params = {dx_large_gems = 1}
+					SoundEvent \{Event = CheckBox_Check_SFX}
+					Change gem_start_scale1 = ($gem_start_scale1_normal * $dx_large_gem_scale)
+					Change gem_end_scale1 = ($gem_end_scale1_normal * $dx_large_gem_scale)
+					Change gem_start_scale2 = ($gem_start_scale2_normal * $dx_large_gem_scale)
+					Change gem_end_scale2 = ($gem_end_scale2_normal * $dx_large_gem_scale)
+					Change whammy_top_width1 = ($whammy_top_width1_normal * $dx_large_gem_scale)
+					Change whammy_top_width2 = ($whammy_top_width2_normal * $dx_large_gem_scale)
+				elseif (<dx_large_gems> = 1)
+					SetGlobalTags user_options Params = {dx_large_gems = 0}
+					SoundEvent \{Event = CheckBox_SFX}
+					Change {gem_start_scale1 = $gem_start_scale1_normal}
+					Change {gem_end_scale1 = $gem_end_scale1_normal}
+					Change {gem_start_scale2 = $gem_start_scale2_normal}
+					Change {gem_end_scale2 = $gem_end_scale2_normal}
+					Change {whammy_top_width1 = $whammy_top_width1_normal}
+					Change {whammy_top_width2 = $whammy_top_width2_normal}
+				endif
+			endif
 	endswitch
 
 	FormatText ChecksumName = mods_text_id 'mods_text_%d' D = ($mods_menu_index)
@@ -757,7 +793,17 @@ script menu_dx_mods_setprop
 			elseif
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
-			endif	
+			endif
+		case LARGEGEMS
+			if ((IsPS3) || (IsXenon))
+				if (<dx_large_gems> = 1)
+					FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+					<Element_Id> :SetProps text = <mod_text>
+				elseif
+					FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+					<Element_Id> :SetProps text = <mod_text>
+				endif
+			endif
 	endswitch
 endscript
 

@@ -88,5 +88,6 @@ script setup_user_option_tags
 			select_restart = 0
 			awesomeness = 0
 			nopostproc = 0
+			dx_large_gems = 0
 		}}
 endscript
