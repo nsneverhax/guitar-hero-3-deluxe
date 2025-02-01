@@ -951,16 +951,6 @@ script create_main_menu
 	0x5c83e977
 endscript
 
-script main_menu_select_quickplay 
-	change \{game_mode = p1_quickplay}
-	change \{current_num_players = 1}
-	change \{structurename = player1_status
-		part = guitar}
-	change \{structurename = player2_status
-		part = guitar}
-	ui_flow_manager_respond_to_action \{action = select_quickplay}
-endscript
-
 script create_pause_menu \{Player = 1
 		for_options = 0
 		for_practice = 0}
@@ -1373,7 +1363,7 @@ script create_pause_menu \{Player = 1
 					}
 					GetScreenElementDims Id = <Id>
 					fit_text_in_rectangle Id = <Id> Dims = ((250.0, 0.0) + <Height> * (0.0, 1.0)) only_if_larger_x = 1 start_x_scale = (<text_scale>.(1.0, 0.0)) start_y_scale = (<text_scale>.(0.0, 1.0))
-					if (($game_mode = p1_career && $boss_battle = 0) || ($game_mode = p1_quickplay) || ($game_mode = p1_bass_quickplay))
+					if (($game_mode = p1_career && $boss_battle = 0) || ($game_mode = p1_quickplay))
 						CreateScreenElement {
 							<container_params>
 							event_handlers = [
@@ -1797,7 +1787,7 @@ script create_pause_menu \{Player = 1
 endscript
 
 script issingleplayergame 
-	if ($game_mode = p1_career || $game_mode = p1_quickplay || $game_mode = p1_bass_quickplay || $game_mode = training)
+	if ($game_mode = p1_career || $game_mode = p1_quickplay || $game_mode = training)
 		return \{true}
 	else
 		return \{false}
