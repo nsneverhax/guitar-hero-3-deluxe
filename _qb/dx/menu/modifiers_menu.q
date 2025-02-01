@@ -253,6 +253,24 @@ script create_dx_mods_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z> + 103)
 	}
+	CreateScreenElement {
+		Type = TextBlockElement
+		Id = dx_desc_text
+		PARENT = pause_menu_frame_container
+		font = text_a1
+		Pos = (640.0, 475.0)
+		Dims = (950.0, 0.0)
+		Text = ""
+		rgba = $scroller_rgba
+		just = [Center Top]
+		Scale = 0.32
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z> + 103)
+		allow_expansion
+	}
+	dx_desc_text :SetProps Text = ($modifier_options [0].Description)
 	
 	text_scale = (0.9, 0.9)
 	container_params = {Type = ContainerElement PARENT = mods_vmenu Dims = (0.0, 100.0)}
@@ -337,6 +355,7 @@ script menu_dx_mods_scroll_up
 			<make_sound> = 0
 		endif
 	endif
+	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{UP}
 		dx_settings_scroller_up :SetProps rgba = [255 255 255 240]
@@ -372,6 +391,7 @@ script menu_dx_mods_scroll_down
 			<make_sound> = 0
 		endif
 	endif
+	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{DOWN}
 		dx_settings_scroller_down :SetProps rgba = [255 255 255 240]
@@ -579,7 +599,7 @@ script menu_dx_mods_select
 					Change gem_end_scale2 = ($gem_end_scale2_normal * $dx_large_gem_scale)
 					Change whammy_top_width1 = ($whammy_top_width1_normal * $dx_large_gem_scale)
 					Change whammy_top_width2 = ($whammy_top_width2_normal * $dx_large_gem_scale)
-				elseif (<dx_large_gems> = 1)
+				else
 					SetGlobalTags user_options Params = {dx_large_gems = 0}
 					SoundEvent \{Event = CheckBox_SFX}
 					Change {gem_start_scale1 = $gem_start_scale1_normal}
@@ -771,9 +791,11 @@ script menu_dx_mods_setprop
 				if (<dx_large_gems> = 1)
 					FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
+					dx_desc_text :SetProps Text = "dx_large_gems = 1"
 				elseif
 					FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
+					dx_desc_text :SetProps Text = "dx_large_gems = 0"
 				endif
 			endif
 	endswitch
