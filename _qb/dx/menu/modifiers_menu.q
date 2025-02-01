@@ -55,24 +55,14 @@ modifier_options = [
 		Description = "Your highway will be Transparent. See the Backgrounds with less of a distracting highway!"
 	}
 	{
-		Name = "Black Background"
-		Id = BLACK_BACKGROUND
-		Description = "Nothing can distract me now!"
+		Name = "Large Gems"
+		Id = LARGEGEMS
+		Description = "Large gems but you don't have to use a PS2/Wii."
 	}
 	{
-		Name = "Song Title Always On"
-		Id = SONG_TITLE
-		Description = "Now you won't have to answer to \'Hey what song is this?\'"
-	}
-	{
-		Name = "No Highway Shake"
-		Id = HIGHWAY_SHAKE
-		Description = "Your highway no longer shakes when breaking combo."
-	}
-	{
-		Name = "Show Early Timing"
-		Id = EARLY_TIMING
-		Description = "Guitar Hero 3 only destroys gems as soon as they cross the strikeline. No more!"
+		Name = "Firework Gems"
+		Id = FIREWORK_GEMS
+		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
 	}
 	{
 		Name = "No Flames"
@@ -85,9 +75,9 @@ modifier_options = [
 		Description = "Whammy Particles no longer appear when hitting sustains."
 	}
 	{
-		Name = "Firework Gems"
-		Id = FIREWORK_GEMS
-		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
+		Name = "No Highway Shake"
+		Id = HIGHWAY_SHAKE
+		Description = "Your highway no longer shakes when breaking combo."
 	}
 	{
 		Name = "No Whammy Pitch Shifting"
@@ -100,14 +90,39 @@ modifier_options = [
 		Description = "Disables miss sound effects"
 	}
 	{
+		Name = "Show Early Timing"
+		Id = EARLY_TIMING
+		Description = "Guitar Hero 3 only destroys gems as soon as they cross the strikeline. No more!"
+	}
+	{
+		Name = "Black Background"
+		Id = BLACK_BACKGROUND
+		Description = "Nothing can distract me now!"
+	}
+	{
+		Name = "No Post Processing"
+		Id = NOPOSTPROC
+		Description = "Removes all post-processing effects."
+	}
+	{
+		Name = "Song Title Always On"
+		Id = SONG_TITLE
+		Description = "Now you won't have to answer to \'Hey what song is this?\'"
+	}
+	{
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
 		Description = "You can now press select to restart in Practice mode."
 	}
 	{
+		Name = "Awesomeness Detection"
+		Id = AWESOMENESS
+		Description = "Let NeverHax know that you are awesome!"
+	}
+	{
 		Name = "Autoplay"
 		Id = AUTOPLAY
-		Description = "The usual"
+		Description = "Hey! No cheating!"
 	}
 	{
 		Name = "Debug Mode"
@@ -123,21 +138,6 @@ modifier_options = [
 		Name = "Unlock All"
 		Id = UNLOCK_ALL
 		Description = "Unlocks everything, including cheats"
-	}
-	{
-		Name = "Awesomeness Detection"
-		Id = AWESOMENESS
-		Description = "Let NeverHax know that you are awesome!"
-	}
-	{
-		Name = "No Post Processing"
-		Id = NOPOSTPROC
-		Description = "Removes all post-processing effects."
-	}
-	{
-		Name = "Large Gems"
-		Id = LARGEGEMS
-		Description = "Large gems but you don't have to use a PS2/Wii."
 	}
 ]
 script create_dx_mods_menu \{Popup = 0}
