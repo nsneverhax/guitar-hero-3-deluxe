@@ -1,4 +1,3 @@
-
 script setup_globaltags 
 	globaltag_checksum = initial_v43
 	setup_songtags globaltag_checksum = <globaltag_checksum>
@@ -89,5 +88,6 @@ script setup_user_option_tags
 			awesomeness = 0
 			nopostproc = 0
 			dx_large_gems = 0
+			insta_fail = 0
 		}}
 endscript

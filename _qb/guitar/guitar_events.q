@@ -5,7 +5,6 @@ script GuitarEvent_HitNote
 	endif
 endscript
 
-
 script GuitarEvent_HitNote_Spawned 
 	GetGlobalTags \{user_options}
 	if ($game_mode = p2_battle || $boss_battle = 1)
@@ -15,6 +14,80 @@ script GuitarEvent_HitNote_Spawned
 		GameFrame}
 	if (<no_flames> = 0)
 		SpawnScriptNow hit_note_fx Params = {Name = <fx_id> Pos = <Pos> player_Text = <player_Text> Star = ($<player_status>.star_power_used) Player = <Player>}
+	endif
+endscript
+
+script GuitarEvent_MissedNote 
+	if (<bum_note> = 1)
+		Guitar_Wrong_Note_Sound_Logic <...>
+	endif
+	if ($is_network_game && ($<player_status>.Player = 2))
+		if (<silent_miss> = 1)
+			SpawnScriptNow highway_pulse_black Params = {player_Text = ($<player_status>.Text)}
+		endif
+	else
+		if NOT ($<player_status>.guitar_volume = 0)
+			if (<silent_miss> = 1)
+				SpawnScriptNow highway_pulse_black Params = {player_Text = ($<player_status>.Text)}
+			else
+				Change StructureName = <player_status> guitar_volume = 0
+				UpdateGuitarVolume
+			endif
+		endif
+	endif
+	CrowdDecrease player_status = <player_status>
+	if ($always_strum = FALSE)
+		if ($disable_band = 0)
+			if CompositeObjectExists Name = (<player_status>.band_Member)
+				LaunchEvent Type = Anim_MissedNote Target = (<player_status>.band_Member)
+			endif
+		endif
+	endif
+	note_time = ($<Song> [<array_entry>] [0])
+	if ($show_play_log = 1)
+		output_log_text "Missed Note (%t)" T = <note_time> Color = Orange
+	endif
+	GetGlobalTags \{user_options}
+	if (<insta_fail> = 1)
+		GuitarEvent_SongFailed
+	endif
+endscript
+
+script GuitarEvent_UnnecessaryNote 
+	Guitar_Wrong_Note_Sound_Logic <...>
+	if NOT ($is_network_game && ($<player_status>.Player = 2))
+		Change StructureName = <player_status> guitar_volume = 0
+		UpdateGuitarVolume
+	endif
+	CrowdDecrease player_status = <player_status>
+	if ($always_strum = FALSE)
+		if ($disable_band = 0)
+			if CompositeObjectExists Name = (<player_status>.band_Member)
+				LaunchEvent Type = Anim_MissedNote Target = (<player_status>.band_Member)
+			endif
+		endif
+	endif
+	if ($show_play_log = 1)
+		if (<array_entry> > 0)
+			<songtime> = (<songtime> - ($check_time_early * 1000.0))
+			next_note = ($<Song> [<array_entry>] [0])
+			prev_note = ($<Song> [(<array_entry> -1)] [0])
+			next_time = (<next_note> - <songtime>)
+			prev_time = (<songtime> - <prev_note>)
+			if (<prev_time> < ($check_time_late * 1000.0))
+				<prev_time> = 1000000.0
+			endif
+			if (<next_time> < <prev_time>)
+				<next_time> = (0 - <next_time>)
+				output_log_text "ME: %n (%t)" N = <next_time> T = <next_note> Color = RED
+			else
+				output_log_text "ML: %n (%t)" N = <prev_time> T = <prev_note> Color = darkred
+			endif
+		endif
+	endif
+	GetGlobalTags \{user_options}
+	if (<insta_fail> = 1)
+		GuitarEvent_SongFailed
 	endif
 endscript
 

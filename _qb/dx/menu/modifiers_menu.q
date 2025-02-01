@@ -97,6 +97,11 @@ modifier_options = [
 		Description = "Guitar Hero 3 only destroys gems as soon as they cross the strikeline. No more!"
 	}
 	{
+		Name = "Insta Fail"
+		Id = INSTA_FAIL
+		Description = "Miss a note, fail the song!"
+	}
+	{
 		Name = "Black Background"
 		Id = BLACK_BACKGROUND
 		Description = "Nothing can distract me now!"
@@ -610,6 +615,14 @@ script menu_dx_mods_select
 					Change {whammy_top_width2 = $whammy_top_width2_normal}
 				endif
 			endif
+		case INSTA_FAIL
+			if (<insta_fail> = 0)
+				SetGlobalTags user_options Params = {insta_fail = 1}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {insta_fail = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 	endswitch
 
 	FormatText ChecksumName = mods_text_id 'mods_text_%d' D = ($mods_menu_index)
@@ -795,6 +808,14 @@ script menu_dx_mods_setprop
 					FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
 				endif
+			endif
+		case INSTA_FAIL
+			if (<insta_fail> = 1)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
 			endif
 	endswitch
 endscript
