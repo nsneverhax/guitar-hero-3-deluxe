@@ -43,6 +43,8 @@ mods_menu_index = 0
 ;dont save these options
 firework_gems = 0
 
+scroller_rgba = [210 130 0 250]
+
 modifier_options = [
 	{
 		Name = "Black Highway"
@@ -221,7 +223,37 @@ script create_dx_mods_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z> + 101)
 	}
-
+	CreateScreenElement {
+		Type = TextElement
+		Id = dx_settings_scroller_up
+		PARENT = <Id>
+		font = text_a1
+		Pos = (83.0, 105.0)
+		Text = '^'
+		rgba = $scroller_rgba
+		just = [Center Top]
+		Scale = (0.8, 1.3)
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z> + 103)
+	}
+	CreateScreenElement {
+		Type = TextElement
+		Id = dx_settings_scroller_down
+		PARENT = pause_menu_frame_container
+		font = text_a1
+		Pos = (638.0, 550.0)
+		Text = '^'
+		rgba = $scroller_rgba
+		just = [Center Top]
+		Scale = (1.2, -1.2)
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z> + 103)
+	}
+	
 	text_scale = (0.9, 0.9)
 	container_params = {Type = ContainerElement PARENT = mods_vmenu Dims = (0.0, 100.0)}
 
@@ -266,7 +298,6 @@ script create_dx_mods_menu \{Popup = 0}
 		Pos = (640.0, 560.0)
 		Z = (<pause_z> + 10)
 	}
-	desc_text = "Your highway will be all black. This is very useful for note readability."
 	CreateScreenElement {
 		Type = TextBlockElement
 		Id = dx_desc_text
@@ -376,7 +407,13 @@ script menu_dx_mods_scroll_up
 		endif
 	endif
 	if (<make_sound> = 1)
-		generic_menu_up_or_down_sound \{DOWN}
+		generic_menu_up_or_down_sound \{UP}
+		dx_settings_scroller_up :SetProps rgba = [255 255 255 240]
+		dx_settings_scroller_up :SetProps Pos = (83.0, 100.0)
+		Wait \{200
+			milliseconds}
+		dx_settings_scroller_up :SetProps rgba = $scroller_rgba
+		dx_settings_scroller_up :SetProps Pos = (83.0, 105.0)
 	endif
 	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 endscript
@@ -407,6 +444,12 @@ script menu_dx_mods_scroll_down
 	endif
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{DOWN}
+		dx_settings_scroller_down :SetProps rgba = [255 255 255 240]
+		dx_settings_scroller_down :SetProps Pos = (638.0, 555.0)
+		Wait \{200
+			milliseconds}
+		dx_settings_scroller_down :SetProps rgba = $scroller_rgba
+		dx_settings_scroller_down :SetProps Pos = (638.0, 550.0)
 	endif
 	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 endscript
