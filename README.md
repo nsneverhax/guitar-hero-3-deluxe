@@ -4,6 +4,8 @@
 
 ## *Guitar Hero 3 Deluxe* is a Quality-of-Life Improvement Mod for Playstation 3, Xbox 360, Playstation 2, Wii, and PC.
 
+### 👉 See [Full Feature List](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/dependencies/features.md#features)
+
 ### 📥 [Download Now!](#%EF%B8%8F-what-youll-need)
 
 </div>
