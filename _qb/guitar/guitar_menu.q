@@ -1804,3 +1804,142 @@ script issingleplayergame
 		return \{false}
 	endif
 endscript
+
+script create_main_menu_backdrop 
+	create_menu_backdrop \{texture = GH3_Main_Menu_BG}
+	base_menu_pos = (730.0, 90.0)
+	CreateScreenElement {
+		Type = ContainerElement
+		Id = main_menu_text_container
+		PARENT = root_window
+		Pos = (<base_menu_pos>)
+		just = [LEFT Top]
+		z_priority = 3
+		Scale = 0.8
+	}
+	CreateScreenElement \{Type = ContainerElement
+		Id = main_menu_bg_container
+		PARENT = root_window
+		Pos = (0.0, 0.0)
+		z_priority = 3}
+	CreateScreenElement \{Type = SpriteElement
+		Id = Main_Menu_BG2
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_BG2
+		Pos = (335.0, 0.0)
+		Dims = (720.0, 720.0)
+		just = [
+			LEFT
+			Top
+		]
+		z_priority = 1}
+	RunScriptOnScreenElement Id = Main_Menu_BG2 glow_menu_element Params = {Time = 1 Id = <Id>}
+	CreateScreenElement \{Type = SpriteElement
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_illustrations
+		Pos = (0.0, 0.0)
+		Dims = (1280.0, 720.0)
+		just = [
+			LEFT
+			Top
+		]
+		z_priority = 2}
+	CreateScreenElement \{Type = SpriteElement
+		Id = eyes_BL
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_eyesBL
+		Pos = (93.0, 676.0)
+		Dims = (128.0, 64.0)
+		just = [
+			Center
+			Center
+		]
+		z_priority = 3}
+	RunScriptOnScreenElement Id = eyes_BL glow_menu_element Params = {Time = 1.0 Id = <Id>}
+	CreateScreenElement \{Type = SpriteElement
+		Id = eyes_BR
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_eyesBR
+		Pos = (1176.0, 659.0)
+		Dims = (128.0, 64.0)
+		just = [
+			Center
+			Center
+		]
+		z_priority = 3}
+	RunScriptOnScreenElement Id = eyes_BR glow_menu_element Params = {Time = 1.0 Id = <Id>}
+	CreateScreenElement \{Type = SpriteElement
+		Id = eyes_C
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_eyesC
+		Pos = (406.0, 398.0)
+		Dims = (128.0, 64.0)
+		just = [
+			Center
+			Center
+		]
+		z_priority = 3}
+	RunScriptOnScreenElement Id = eyes_C glow_menu_element Params = {Time = 1.5 Id = <Id>}
+	CreateScreenElement \{Type = SpriteElement
+		Id = eyes_TL
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_eyesTL
+		Pos = (271.0, 215.0)
+		Dims = (128.0, 64.0)
+		just = [
+			Center
+			Center
+		]
+		z_priority = 3}
+	RunScriptOnScreenElement Id = eyes_TL glow_menu_element Params = {Time = 1.7 Id = <Id>}
+	CreateScreenElement \{Type = SpriteElement
+		Id = eyes_TR
+		PARENT = main_menu_bg_container
+		texture = Main_Menu_eyesTR
+		Pos = (995.0, 71.0)
+		Dims = (128.0, 64.0)
+		just = [
+			Center
+			Center
+		]
+		z_priority = 3}
+	RunScriptOnScreenElement Id = eyes_TR glow_menu_element Params = {Time = 1.0 Id = <Id>}
+	if ((IsWinPort) || (IsMacPort))
+		0xce6c989e
+		FormatText TextName = 0x72de415b "VERSION %s (%v)" S = <0x112c650d> V = $gh3dx_version
+		main_menu_font = fontgrid_title_gh3
+		CreateScreenElement {
+			Type = TextElement
+			Id = version_text
+			PARENT = main_menu_bg_container
+			Text = <0x72de415b>
+			font = <main_menu_font>
+			Pos = (130.0, 600.0)
+			Scale = (0.5, 0.5)
+			rgba = ($menu_text_color)
+			just = [LEFT Top]
+			font_spacing = 0
+			Shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba = [0 0 0 255]
+			z_priority = 60
+		}
+	elseif ((IsPS3) || (IsXENON))
+		CreateScreenElement {
+			Type = TextElement
+			Id = version_text
+			PARENT = main_menu_bg_container
+			Text = $gh3dx_version
+			font = fontgrid_title_gh3
+			Pos = (130.0, 600.0)
+			Scale = (0.5, 0.5)
+			rgba = ($menu_text_color)
+			just = [LEFT Top]
+			font_spacing = 0
+			Shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba = [0 0 0 255]
+			z_priority = 60
+		}
+	endif
+endscript
