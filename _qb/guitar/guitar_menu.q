@@ -1924,7 +1924,7 @@ script create_main_menu_backdrop
 			shadow_rgba = [0 0 0 255]
 			z_priority = 60
 		}
-	elseif ((IsPS3) || (IsXENON))
+	else
 		CreateScreenElement {
 			Type = TextElement
 			Id = version_text
