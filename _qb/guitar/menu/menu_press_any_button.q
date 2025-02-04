@@ -18,13 +18,18 @@ endscript
 
 script create_gh3dx_version_toast 
 	FormatText TextName = Text "%v" V = ($gh3dx_version)
+	if ((IsPS2) || (IsNGC))
+		Pos = (730.0, 680.0)
+	else
+		Pos = (870.0, 680.0)
+	endif
 	CreateScreenElement {
 		Type = TextBlockElement
 		PARENT = pab_container
 		font = text_a6
 		Text = <Text>
 		Dims = (750.0, 400.0)
-		Pos = (870.0, 680.0)
+		Pos = <Pos>
 		just = [LEFT Top]
 		internal_just = [Center Top]
 		rgba = [220 220 220 255]

@@ -1910,20 +1910,38 @@ script create_main_menu_backdrop
 	switch (<Platform>)
 		case PS3
 			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-ps3"
+			version_pos = (160.0, 600.0)
+			version_shadow_offs = (3.0, 3.0)
+			version_scale = (0.5, 0.5)
 		case XENON
 		 	FormatText TextName = version "%v%p" V = $gh3dx_version P = "-xbox"
+		 	version_pos = (160.0, 600.0)
+		 	version_shadow_offs = (3.0, 3.0)
+		 	version_scale = (0.5, 0.5)
 		case NGC
 			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-wii"
+			version_pos = (130.0, 600.0)
+			version_shadow_offs = (1.5, 1.5)
+			version_scale = (0.7, 0.7)
 		case PS2
 			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-ps2"
+			version_pos = (130.0, 600.0)
+			version_shadow_offs = (1.5, 1.5)
+			version_scale = (0.7, 0.7)
 	endswitch
 	; GetPlatform returns XENON on both PC and Mac, so we must have a dedicated if block for those plats.
 	if IsWinPort
 		0xce6c989e
 		FormatText TextName = version "VERSION %s (%v%p)" S = <0x112c650d> V = $gh3dx_version P = "-pc"
+		version_pos = (160.0, 600.0)
+		version_shadow_offs = (3.0, 3.0)
+		version_scale = (0.5, 0.5)
 	elseif IsMacPort
 		0xce6c989e
 		FormatText TextName = version "VERSION %s (%v%p)" S = <0x112c650d> V = $gh3dx_version P = "-mac"
+		version_pos = (160.0, 600.0)
+		version_shadow_offs = (3.0, 3.0)
+		version_scale = (0.5, 0.5)
 	endif
 	CreateScreenElement {
 		Type = TextElement
@@ -1931,13 +1949,13 @@ script create_main_menu_backdrop
 		PARENT = main_menu_bg_container
 		Text = <version>
 		font = fontgrid_title_gh3
-		Pos = (130.0, 600.0)
-		Scale = (0.5, 0.5)
+		Pos = <version_pos>
+		Scale = <version_scale>
 		rgba = ($menu_text_color)
 		just = [LEFT Top]
 		font_spacing = 0
 		Shadow
-		shadow_offs = (3.0, 3.0)
+		shadow_offs = <version_shadow_offs>
 		shadow_rgba = [0 0 0 255]
 		z_priority = 60
 	}
