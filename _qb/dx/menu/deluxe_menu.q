@@ -387,11 +387,18 @@ script enable_dispfps
 				Pos = <OSFPSPos>
 				just = [LEFT Center]
 			}
+			if ((IsPS2) || (IsNGC))
+				fps_pos = (102.0, 6.0)
+				black_pos = (100.0, 0.0)
+			else
+				fps_pos = (4.0, 6.0)
+				black_pos = (0.0, 0.0)
+			endif
 			CreateScreenElement {
 				Type = TextElement
 				PARENT = 0x419bc9e7
 				Id = 0xeb440d42
-				Pos = (4.0, 6.0)
+				Pos = <fps_pos>
 				Text = "??? FPS"
 				font = fontgrid_title_gh3
 				rgba = [255 255 255 255]
@@ -402,7 +409,7 @@ script enable_dispfps
 			CreateScreenElement {
 				Type = SpriteElement
 				PARENT = 0x419bc9e7
-				Pos = (0.0, 0.0)
+				Pos = <black_pos>
 				texture = white2
 				rgba = [0 0 0 255]
 				just = [LEFT Center]
