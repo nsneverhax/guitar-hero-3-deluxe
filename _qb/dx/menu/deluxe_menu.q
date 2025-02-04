@@ -190,7 +190,7 @@ script create_custom_menu \{Popup = 0}
 	}
 	toggle_dispfps_setprop
 
-	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0) ; doesnt work on those platforms
+	if NOT ((IsNGC) || (IsPS2) || $enable_button_cheats = 0)
 		CreateScreenElement {
 			<container_params>
 			event_handlers = [

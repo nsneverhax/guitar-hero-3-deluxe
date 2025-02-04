@@ -1904,42 +1904,41 @@ script create_main_menu_backdrop
 		]
 		z_priority = 3}
 	RunScriptOnScreenElement Id = eyes_TR glow_menu_element Params = {Time = 1.0 Id = <Id>}
-	if ((IsWinPort) || (IsMacPort))
+	main_menu_font = fontgrid_title_gh3
+	GetPlatform
+	; set version based on return value from GetPlatform
+	switch (<Platform>)
+		case PS3
+			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-ps3"
+		case XENON
+		 	FormatText TextName = version "%v%p" V = $gh3dx_version P = "-xbox"
+		case NGC
+			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-wii"
+		case PS2
+			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-ps2"
+	endswitch
+	; GetPlatform returns XENON on both PC and Mac, so we must have a dedicated if block for those plats.
+	if IsWinPort
 		0xce6c989e
-		FormatText TextName = 0x72de415b "VERSION %s (%v)" S = <0x112c650d> V = $gh3dx_version
-		main_menu_font = fontgrid_title_gh3
-		CreateScreenElement {
-			Type = TextElement
-			Id = version_text
-			PARENT = main_menu_bg_container
-			Text = <0x72de415b>
-			font = <main_menu_font>
-			Pos = (130.0, 600.0)
-			Scale = (0.5, 0.5)
-			rgba = ($menu_text_color)
-			just = [LEFT Top]
-			font_spacing = 0
-			Shadow
-			shadow_offs = (3.0, 3.0)
-			shadow_rgba = [0 0 0 255]
-			z_priority = 60
-		}
-	else
-		CreateScreenElement {
-			Type = TextElement
-			Id = version_text
-			PARENT = main_menu_bg_container
-			Text = $gh3dx_version
-			font = fontgrid_title_gh3
-			Pos = (130.0, 600.0)
-			Scale = (0.5, 0.5)
-			rgba = ($menu_text_color)
-			just = [LEFT Top]
-			font_spacing = 0
-			Shadow
-			shadow_offs = (3.0, 3.0)
-			shadow_rgba = [0 0 0 255]
-			z_priority = 60
-		}
+		FormatText TextName = version "VERSION %s (%v%p)" S = <0x112c650d> V = $gh3dx_version P = "-pc"
+	elseif IsMacPort
+		0xce6c989e
+		FormatText TextName = version "VERSION %s (%v%p)" S = <0x112c650d> V = $gh3dx_version P = "-mac"
 	endif
+	CreateScreenElement {
+		Type = TextElement
+		Id = version_text
+		PARENT = main_menu_bg_container
+		Text = <version>
+		font = fontgrid_title_gh3
+		Pos = (130.0, 600.0)
+		Scale = (0.5, 0.5)
+		rgba = ($menu_text_color)
+		just = [LEFT Top]
+		font_spacing = 0
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba = [0 0 0 255]
+		z_priority = 60
+	}
 endscript
