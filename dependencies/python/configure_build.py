@@ -19,6 +19,7 @@ def main():
 	# define extensions to rename and move everything in its place later
 	# i'd rather not do this but eh, if any yas can find a better way to do this lmk - luna
 	platform_extensions = {
+		"gh3ml": "xen",
 		"pc": "xen",
 		"xbox": "xen",
 		"ps3": "ps3",
@@ -33,6 +34,8 @@ def main():
 
 	# account for platform folder differences
 	match args.platform:
+		case "gh3ml":
+			pak_file_dir = os.path.join(out_dir, "gh3ml", "Mods", "GH3Deluxe", "pak")
 		case "ps2":
 			pak_file_dir = os.path.join(out_dir, data_folder_name.lower())
 		case "wii":
