@@ -12,6 +12,7 @@
 * Option to disable whammy pitch-bending
 * "Post Processing" toggle to disable screen effects
 * Press SELECT to restart the section in practice mode
+* Fixed multiplayer hyperspeed being way too fast
 * Selectable song speed by 5% increments
 * Selectable venues and characters in quickplay, including a "Black Background" toggle
 * Song title always visible modifier

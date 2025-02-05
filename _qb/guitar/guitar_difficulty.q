@@ -1,5 +1,5 @@
-p2_scroll_time_factor = 0.9
-p2_game_speed_factor = 0.9
+p2_scroll_time_factor = 1
+p2_game_speed_factor = 1
 
 script difficulty_setup 
 	scroll_time_factor = 1
