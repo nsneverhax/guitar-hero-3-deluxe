@@ -1,0 +1,2 @@
+script gettruestarttime
+endscript
