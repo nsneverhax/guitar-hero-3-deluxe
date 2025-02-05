@@ -27,10 +27,9 @@
 
 ### 📥 [PC (with gh3ml)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-gh3ml.zip) | 📥 [PC (w/o gh3ml)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
 
-
 > Continue to: 
     - [Installing on PC (with gh3ml)](#-installing-on-pc-with-gh3ml)
-    - [Installing on PC (w/o gh3ml)](#-installing-on-pc-w-o-gh3ml)
+    - [Installing on PC (w/o gh3ml)](#-installing-on-pc-wo-gh3ml)
 
 > Installing with [gh3ml](https://github.com/nsneverhax/gh3ml/releases) is recommended, as no vanilla files are modified
 
@@ -53,12 +52,14 @@
 
 <br/>
 
+<br/>
+
 # 📩 How to Install
 
 ### Select your Platform of Choice
 
   - [PC (with gh3ml)](#-installing-on-pc-with-gh3ml)
-  - [PC (w/o gh3ml)](#-installing-on-pc-w-o-gh3ml)
+  - [PC (w/o gh3ml)](#-installing-on-pc-wo-gh3ml)
   - [RPCS3](#-installing-on-rpcs3)
   - [PlayStation 3](#-installing-on-ps3)
   - [Xbox 360](#-installing-on-xbox-360)
