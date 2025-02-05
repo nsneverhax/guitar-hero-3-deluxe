@@ -53,3 +53,21 @@ script setup_user_option_tags
 			insta_fail = 0
 		}}
 endscript
+default_songtagswithdifficulty = {
+	name1 = "D. Stowater"
+	name2 = "Ginkel"
+	name3 = "Bunny"
+	name4 = "BMarvs"
+	name5 = "CVance"
+	stars1 = 0
+	stars2 = 0
+	stars3 = 0
+	stars4 = 0
+	stars5 = 0
+	bestscore = 0
+	beststars = 0
+	achievement_gold_star = 0
+	failedtimes = 0
+	percent100 = 0
+	PercentHit = 0
+}
