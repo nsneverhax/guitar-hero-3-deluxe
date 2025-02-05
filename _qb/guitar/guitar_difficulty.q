@@ -28,6 +28,11 @@ script difficulty_setup
 		endif
 	endif
 	AddParams ($difficulty_list_props.<DIFFICULTY>)
-	Change StructureName = <player_status> scroll_time = (<scroll_time> * <scroll_time_factor>)
-	Change StructureName = <player_status> game_speed = (<game_speed> * <game_speed_factor>)
+	if ($current_speedfactor < 1.0)
+		Change StructureName = <player_status> scroll_time = (<scroll_time> * <scroll_time_factor>)
+		Change StructureName = <player_status> game_speed = (<game_speed> * <game_speed_factor>)
+	else
+		Change StructureName = <player_status> scroll_time = ((<scroll_time> * <scroll_time_factor>) * $current_speedfactor)
+		Change StructureName = <player_status> game_speed = ((<game_speed> * <game_speed_factor>) * $current_speedfactor)
+	endif
 endscript
