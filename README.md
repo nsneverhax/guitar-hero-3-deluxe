@@ -2,7 +2,7 @@
 
 ![Header Image](dependencies/header.png)
 
-## *Guitar Hero 3 Deluxe* is a Quality-of-Life Mod for all platforms.
+## *Guitar Hero III Deluxe* is a Quality-of-Life Mod for all platforms.
 
 ### 👉 See [Full Feature List](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/dependencies/features.md#features)
 
@@ -12,7 +12,7 @@
 
 # ✍️ What You'll Need
 
-### Playing *Guitar Hero 3 Deluxe* requires these things:
+### Playing *Guitar Hero III Deluxe* requires these things:
 
 - **A copy of Guitar Hero III** for whichever platform that you can extract onto your PC, or the PC version itself installed on your PC
 - For Console: A **modded/hacked** console, and a way to transfer files to it.
@@ -21,17 +21,19 @@
 
 # 📥 Downloads
 
-*Guitar Hero 3 Deluxe recieves very frequent updates. You can click the `Watch` button (All Activity) to be notified about any updates that occur.*
+*Guitar Hero III Deluxe recieves very frequent updates. You can click the `Watch` button (All Activity) to be notified about any updates that occur.*
 
 ![last updated:](https://img.shields.io/github/last-commit/nsneverhax/guitar-hero-3-deluxe?label=last%20updated%3A)
 
-### 📥 [PC (with gh3ml)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-gh3ml.zip) | 📥 [PC (w/o gh3ml)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
+### 📥 [PC (with gh3ml)](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/platform/gh3ml/gh3dx.bat) (recommended)
+#### 📥 [PC (w/o gh3ml)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
+
 
 > Continue to: 
     - [Installing on PC (with gh3ml)](#-installing-on-pc-with-gh3ml)
-    - [Installing on PC (w/o gh3ml)](#-installing-on-pc-wo-gh3ml)
+    - [Installing on PC (w/o gh3ml)](#-installing-on-pc-w-o-gh3ml)
 
-> Installing with [gh3ml](https://github.com/nsneverhax/gh3ml/releases) is recommended, as no vanilla files are modified
+> Installing [**with** gh3ml](https://github.com/nsneverhax/gh3ml/releases) is recommended, as no vanilla files need to be touched and the mod will update automatically.
 
 ### 📥 [Xbox 360](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip)
 
@@ -52,14 +54,12 @@
 
 <br/>
 
-<br/>
-
 # 📩 How to Install
 
 ### Select your Platform of Choice
 
   - [PC (with gh3ml)](#-installing-on-pc-with-gh3ml)
-  - [PC (w/o gh3ml)](#-installing-on-pc-wo-gh3ml)
+  - [PC (w/o gh3ml)](#-installing-on-pc-w-o-gh3ml)
   - [RPCS3](#-installing-on-rpcs3)
   - [PlayStation 3](#-installing-on-ps3)
   - [Xbox 360](#-installing-on-xbox-360)
@@ -70,11 +70,13 @@
 
 * Install Guitar Hero III on your PC, then install [**gh3ml**](https://github.com/nsneverhax/gh3ml/releases).
 
-* Download [**Guitar Hero 3 Deluxe for PC (with gh3ml)**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-gh3ml.zip).
+* Download the [**Guitar Hero III Deluxe Initializer**](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/platform/gh3ml/gh3dx.bat) (gh3dx.bat)
 
-  * Extract the zip and copy the contents to where you have Guitar Hero III installed.
+  * Place it in the folder where you have Guitar Hero III installed, then run it.
 
-### ✅ ***Guitar Hero 3 Deluxe is now installed!***
+### ✅ ***Guitar Hero III Deluxe is now installed!***
+
+> When you run *Guitar Hero III Deluxe* from the desktop or start menu shortcuts, it will update automatically!
 
 <br/>
 
@@ -84,13 +86,13 @@
 
 * Install Guitar Hero III on your PC.
 
-* Download [**Guitar Hero 3 Deluxe for PC (w/o gh3ml)**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip).
+* Download [**Guitar Hero III Deluxe for PC (w/o gh3ml)**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip).
 
   * Extract the zip and copy the contents to where you have Guitar Hero III installed.
 
   * Overwrite all files when asked. If you weren't asked, you're in the wrong place!
 
-### ✅ ***Guitar Hero 3 Deluxe is now installed!***
+### ✅ ***Guitar Hero III Deluxe is now installed!***
 
 <br/>
 
@@ -98,14 +100,14 @@
 
 * **Install your copy of Guitar Hero III** through the emulator. The [**official RPCS3 site covers this nicely**](https://rpcs3.net/quickstart).
 
-* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip).
+* Download [**Guitar Hero III Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip).
 
   * Extract the zip and copy the contents to the Disc Game Folder to install it. You can get to the disc game folder by right clicking on Guitar Hero III, going down to `Open Folder`, and selecting `Open Disc Game Folder`.
 
   	* *Do not copy it to the update folder!* If the path does not include `PS3_GAME`, you are copying it to the wrong location!
   * Replace all files when asked. If you weren't asked, you're in the wrong place!
 
-### ✅ ***Guitar Hero 3 Deluxe is now installed!***
+### ✅ ***Guitar Hero III Deluxe is now installed!***
 
 <br/>
 
@@ -115,7 +117,7 @@
 
 * **Install your copy of Guitar Hero III** to your console's hard drive.
 
-* Download [**Guitar Hero 3 Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip).
+* Download [**Guitar Hero III Deluxe for PS3**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PS3.zip).
 
   * Extract the zip and copy the contents to the extracted game folder on your console's hard drive.
 
@@ -123,7 +125,7 @@
 
   * Overwrite all files when asked. If you weren't asked, you're in the wrong place!
 
-### ✅ ***Guitar Hero 3 Deluxe is now installed!***
+### ✅ ***Guitar Hero III Deluxe is now installed!***
 
 <br/>
 
@@ -133,19 +135,19 @@
 
 * **Install your copy of Guitar Hero III** to your console's hard drive.
 
-* **Disable any title updates** you may have for Guitar Hero III in Aurora. *Guitar Hero 3 Deluxe* rolls `TU3` into its base installation.
+* **Disable any title updates** you may have for Guitar Hero III in Aurora. *Guitar Hero III Deluxe* rolls `TU3` into its base installation.
 
   * If you have `TU3` installed from Xbox LIVE, we recommend **clearing your system cache**.
 
     * *To do this, navigate to `System Settings > Storage` and press `Y` to clear the system cache.*
 
-* Download [**Guitar Hero 3 Deluxe for Xbox 360**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip). 
+* Download [**Guitar Hero III Deluxe for Xbox 360**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip). 
 
   * **Copy the contents of it to where you have Guitar Hero III installed**.
 
   * Overwrite all files when asked. If you weren't asked, you're in the wrong place!
 
-### ✅ ***Guitar Hero 3 Deluxe is now installed!***
+### ✅ ***Guitar Hero III Deluxe is now installed!***
 
 <br/>
 
