@@ -67,27 +67,27 @@ modifier_options = [
 		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
 	}
 	{
-		Name = "No Flames"
+		Name = "Flames"
 		Id = NO_FLAMES
 		Description = "Flames no longer appear when hitting notes."
 	}
 	{
-		Name = "No Whammy Particles"
+		Name = "Whammy Particles"
 		Id = NO_WHAMMY_PARTICLES
 		Description = "Whammy Particles no longer appear when hitting sustains."
 	}
 	{
-		Name = "No Highway Shake"
+		Name = "Highway Shake"
 		Id = HIGHWAY_SHAKE
 		Description = "Your highway no longer shakes when breaking combo."
 	}
 	{
-		Name = "No Whammy Pitch Shifting"
+		Name = "Whammy Pitch Shifting"
 		Id = NO_WHAMMY_PITCH_SHIFT
 		Description = "Whammy no longer changes the pitch of the song."
 	}
 	{
-		Name = "No Miss SFX"
+		Name = "Miss SFX"
 		Id = NO_MISS_SFX
 		Description = "Disables miss sound effects"
 	}
@@ -107,12 +107,12 @@ modifier_options = [
 		Description = "Nothing can distract me now!"
 	}
 	{
-		Name = "No Post Processing"
+		Name = "Post Processing"
 		Id = NOPOSTPROC
 		Description = "Removes all post-processing effects."
 	}
 	{
-		Name = "Song Title Always On"
+		Name = "Song Title Always"
 		Id = SONG_TITLE
 		Description = "Now you won't have to answer to \'Hey what song is this?\'"
 	}
@@ -717,18 +717,18 @@ script menu_dx_mods_setprop
 			endif
 		case NO_FLAMES
 			if (<no_flames> = 1)
-			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case NO_WHAMMY_PARTICLES
 			if (<no_whammy_particles> = 1)
-			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case FIREWORK_GEMS
@@ -741,18 +741,18 @@ script menu_dx_mods_setprop
 			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 1)
-			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case NO_MISS_SFX
 			if (<no_miss_sfx> = 1)
-			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case SELECT_RESTART
@@ -793,10 +793,10 @@ script menu_dx_mods_setprop
 			endif
 		case NOPOSTPROC
 			if (<nopostproc> = 1)
-				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case LARGEGEMS
