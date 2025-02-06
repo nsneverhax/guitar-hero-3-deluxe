@@ -237,7 +237,7 @@ script create_dx_mods_menu \{Popup = 0}
 		Text = '^'
 		rgba = $scroller_rgba
 		just = [Center Top]
-		Scale = (0.8, 1.3)
+		Scale = (1.0, 1.3)
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
@@ -247,12 +247,12 @@ script create_dx_mods_menu \{Popup = 0}
 		Type = TextElement
 		Id = dx_settings_scroller_down
 		PARENT = pause_menu_frame_container
-		font = text_a1
-		Pos = (638.0, 550.0)
-		Text = '^'
+		font = text_a3
+		Pos = (640.0, 510.0)
+		Text = 'v'
 		rgba = $scroller_rgba
 		just = [Center Top]
-		Scale = (1.2, -1.2)
+		Scale = (1.6, 0.9)
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
@@ -400,11 +400,11 @@ script menu_dx_mods_scroll_down
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{DOWN}
 		dx_settings_scroller_down :SetProps rgba = [255 255 255 240]
-		dx_settings_scroller_down :SetProps Pos = (638.0, 555.0)
+		dx_settings_scroller_down :SetProps Pos = (640.0, 515.0)
 		Wait \{200
 			milliseconds}
 		dx_settings_scroller_down :SetProps rgba = $scroller_rgba
-		dx_settings_scroller_down :SetProps Pos = (638.0, 550.0)
+		dx_settings_scroller_down :SetProps Pos = (640.0, 510.0)
 	endif
 endscript
 
