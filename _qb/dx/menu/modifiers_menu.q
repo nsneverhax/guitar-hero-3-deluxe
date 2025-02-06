@@ -237,7 +237,7 @@ script create_dx_mods_menu \{Popup = 0}
 		Text = '^'
 		rgba = $scroller_rgba
 		just = [Center Top]
-		Scale = (1.0, 1.3)
+		Scale = (0.9, 1.4)
 		Shadow
 		shadow_offs = (3.0, 3.0)
 		shadow_rgba [0 0 0 255]
