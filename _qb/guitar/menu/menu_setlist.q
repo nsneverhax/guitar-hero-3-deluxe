@@ -272,8 +272,8 @@ script create_sl_assets
 									font = fontgrid_title_gh3
 									just = [RIGHT Top]
 									Shadow
-									shadow_offs = (3.0, 3.0)
-									shadow_rgba = [200 200 200 255]
+									shadow_offs = (1.0, 1.0)
+									shadow_rgba = [0 0 0 255]
 								}
 							elseif ((<PercentHit> = 100) && (<percent100> = 0))
 							 	CreateScreenElement {
@@ -282,13 +282,13 @@ script create_sl_assets
 									Scale = <percent_scale>
 									Text = <NotePctText>
 									Pos = <percent_pos>
-									rgba = [60 60 200 255]
+									rgba = [80 80 220 255]
 									z_priority = $setlist_text_z
 									font = fontgrid_title_gh3
 									just = [RIGHT Top]
 									Shadow
-									shadow_offs = (3.0, 3.0)
-									shadow_rgba = [200 200 200 255]
+									shadow_offs = (1.0, 1.0)
+									shadow_rgba = [0 0 0 255]
 								}
 							else
 								CreateScreenElement {
