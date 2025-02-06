@@ -1,5 +1,7 @@
 set_speeds_locked = 0
 dx_settings_changed = 0
+lock_saving = 0
+reenable_saving = 0
 
 custom_menu_fs = {
 	Create = create_custom_menu

@@ -275,6 +275,28 @@ script create_dx_mods_menu \{Popup = 0}
 		z_priority = (<pause_z> + 103)
 		allow_expansion
 	}
+
+	CreateScreenElement {
+		Type = TextBlockElement
+		Id = modifier_warning
+		PARENT = pause_menu_frame_container
+		font = text_a1
+		Pos = (785.0, 210.0)
+		Dims = (950.0, 0.0)
+		Text = "(SAVING DISABLED)"
+		rgba = [255 0 0 255]
+		just = [Center Top]
+		Scale = 0.75
+		Alpha = 0
+		Shadow
+		shadow_offs = (3.0, 3.0)
+		shadow_rgba [0 0 0 255]
+		z_priority = (<pause_z> + 103)
+		allow_expansion
+	}
+
+	show_modifiers_warning
+
 	dx_desc_text :SetProps Text = ($modifier_options [0].Description)
 	
 	text_scale = (0.9, 0.9)
@@ -324,6 +346,18 @@ script create_dx_mods_menu \{Popup = 0}
 		button = Strumbar
 		Z = 100000}
     LaunchEvent \{ Type = Focus Target = mods_vmenu }
+endscript
+
+script show_modifiers_warning 
+	if ($enable_saving = 0)
+		DoScreenElementMorph \{Id = modifier_warning
+			Alpha = 1
+			Time = 0.1}
+	else
+		DoScreenElementMorph \{Id = modifier_warning
+			Alpha = 0
+			Time = 0.1}
+	endif
 endscript
 
 script destroy_dx_mods_menu 
@@ -538,26 +572,50 @@ script menu_dx_mods_select
 			if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
      		    Change StructureName = player1_status bot_play = 1
       			Change StructureName = player2_status bot_play = 0
+      			SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
       			SoundEvent \{Event = CheckBox_Check_SFX}
     		elseif ($player1_status.bot_play != 0 && $player2_status.bot_play = 0)
    		    	Change StructureName = player1_status bot_play = 0
   		    	Change StructureName = player2_status bot_play = 1
+  		    	SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
   		    	SoundEvent \{Event = CheckBox_Check_SFX}
  		    elseif ($player1_status.bot_play = 0 && $player2_status.bot_play != 0)
 		        Change StructureName = player1_status bot_play = 1
 		        Change StructureName = player2_status bot_play = 1
+		        SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
 		        SoundEvent \{Event = CheckBox_Check_SFX}
 		    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
 		        Change StructureName = player1_status bot_play = 0
 		        Change StructureName = player2_status bot_play = 0
+		        if ($lock_saving = 0 && $enable_button_cheats = 0)
+		        	SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+				elseif ($enable_button_cheats = 0)
+					SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+					Change reenable_saving = 1
+				endif
 		        SoundEvent \{Event = CheckBox_SFX}
 		    endif
     	case DEBUG_MODE
     		if ($enable_button_cheats = 0)
 				Change enable_button_cheats = 1
+				SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
 				SoundEvent \{Event = CheckBox_Check_SFX}
 			elseif
 				Change enable_button_cheats = 0
+				if ($lock_saving = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+					SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+				elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
+					SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+					Change reenable_saving = 1
+				endif
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case ENABLE_VIEWER
@@ -624,6 +682,8 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 	endswitch
+
+	show_modifiers_warning
 
 	FormatText ChecksumName = mods_text_id 'mods_text_%d' D = ($mods_menu_index)
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)

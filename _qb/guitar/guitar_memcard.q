@@ -7,7 +7,67 @@ script dx_memcard_sequence_begin_autosave
 		start_flow_manager \{flow_state = main_menu_fs}
 		return
 	endif
+	if ($enable_saving = 0)
+		start_flow_manager \{flow_state = main_menu_fs}
+		return
+	endif
+	if ($reenable_saving = 1)
+		handle_signin_changed
+		return
+	endif
 	SpawnScriptNow memcard_sequence_begin_autosave_logic Params = <...>
+endscript
+
+script create_signin_changed_menu 
+	destroy_popup_warning_menu
+	if ($reenable_saving = 1)
+		create_popup_warning_menu \{Title = "SAVING RE-ENABLED"
+			title_props = {
+				Scale = 1.0
+			}
+			textblock = {
+				Text = "A deluxe setting that was disabling saving has been disabled. The game has restarted to re-enable saving."
+				Pos = (640.0, 380.0)
+			}
+			Menu_pos = (640.0, 510.0)
+			options = [
+				{
+					func = signing_change_confirm_reboot
+					Text = "CONTINUE"
+					Scale = (1.0, 1.0)
+				}
+			]}
+	else
+		create_popup_warning_menu \{Title = "SIGN-IN CHANGED"
+			title_props = {
+				Scale = 1.0
+			}
+			textblock = {
+				Text = "A user sign-in change has caused the game to lose ownership of saves and achievements. As a result, the game has restarted."
+				Pos = (640.0, 380.0)
+			}
+			Menu_pos = (640.0, 510.0)
+			options = [
+				{
+					func = signing_change_confirm_reboot
+					Text = "CONTINUE"
+					Scale = (1.0, 1.0)
+				}
+			]}
+	endif
+endscript
+
+script signing_change_confirm_reboot 
+	Printf \{"signing_change_confirm_reboot"}
+	if ($reenable_saving = 1)
+		Change reenable_saving = 0
+	endif
+	destroy_signin_changed_menu
+	enable_pause
+	Wait \{5
+		GameFrames}
+	start_flow_manager \{flow_state = bootup_press_any_button_fs}
+	Printf \{"signing_change_confirm_reboot end"}
 endscript
 
 script memcard_save_file \{overwriteconfirmed = 0}
