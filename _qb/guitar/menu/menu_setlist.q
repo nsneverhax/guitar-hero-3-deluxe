@@ -267,7 +267,7 @@ script create_sl_assets
 									Scale = <percent_scale>
 									Text = <NotePctText>
 									Pos = <percent_pos>
-									rgba = [230 185 80 255]
+									rgba = [250 210 100 255]
 									z_priority = $setlist_text_z
 									font = fontgrid_title_gh3
 									just = [RIGHT Top]
