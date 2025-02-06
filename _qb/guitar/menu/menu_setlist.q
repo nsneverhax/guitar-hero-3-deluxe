@@ -1,3 +1,218 @@
+script display_as_made_famous_by \{rot_angle = -7
+		time = 0.25}
+	destroy_menu \{menu_id = setlist_original_artist}
+	CreateScreenElement {
+		Type = ContainerElement
+		parent = root_window
+		id = setlist_original_artist
+		rot_angle = <rot_angle>
+		alpha = 0
+	}
+	displaySprite {
+		parent = setlist_original_artist
+		tex = white
+		dims = (130.0, 50.0)
+		just = [center top]
+		Pos = <Pos>
+		rgba = [0 0 0 255]
+		z = 500
+	}
+	displaySprite {
+		parent = setlist_original_artist
+		tex = white
+		just = [center top]
+		dims = (130.0, 25.0)
+		Pos = (<Pos> + (0.0, 25.0))
+		rgba = [223 223 223 255]
+		z = 501
+	}
+	displayText {
+		parent = setlist_original_artist
+		text = "AS MADE"
+		font = text_a3
+		just = [center top]
+		Pos = (<Pos>)
+		z = 502
+		Scale = (0.8, 0.5)
+		rgba = [223 223 223 255]
+		noshadow
+	}
+	fit_text_in_rectangle id = <id> dims = (75.0, 15.0)
+	displayText {
+		parent = setlist_original_artist
+		text = "FAMOUS BY"
+		just = [center top]
+		font = text_a3
+		Pos = (<Pos> + (0.0, 25.0))
+		z = 502
+		Scale = (0.72499996, 0.5)
+		rgba = [0 0 0 255]
+		noshadow
+	}
+	fit_text_in_rectangle id = <id> dims = (90.0, 15.0)
+	DoScreenElementMorph id = setlist_original_artist alpha = 1 time = <time>
+endscript
+
+script create_as_made_famous_by 
+	CreateScreenElement \{Type = ContainerElement
+		parent = root_window
+		id = setlist_original_artist
+		rot_angle = -7
+		alpha = 0}
+	displaySprite \{parent = setlist_original_artist
+		id = sl_oa_back
+		tex = white
+		dims = (130.0, 50.0)
+		just = [
+			center
+			top
+		]
+		Pos = (50.0, -25.0)
+		rgba = [
+			0
+			0
+			0
+			255
+		]
+		z = 500}
+	displaySprite \{parent = setlist_original_artist
+		id = sl_oa_fore
+		tex = white
+		just = [
+			center
+			top
+		]
+		dims = (130.0, 25.0)
+		Pos = (50.0, 0.0)
+		rgba = [
+			223
+			223
+			223
+			255
+		]
+		z = 501}
+	displayText \{parent = setlist_original_artist
+		id = sl_oa_asmade
+		text = "AS MADE"
+		font = text_a3
+		just = [
+			center
+			top
+		]
+		Pos = (50.0, -25.0)
+		z = 502
+		Scale = (0.8, 0.5)
+		rgba = [
+			223
+			223
+			223
+			255
+		]
+		noshadow}
+	fit_text_in_rectangle id = <id> dims = (75.0, 15.0)
+	displayText \{parent = setlist_original_artist
+		id = sl_oa_famousby
+		text = "FAMOUS BY"
+		just = [
+			center
+			top
+		]
+		font = text_a3
+		Pos = (50.0, 0.0)
+		z = 502
+		Scale = (0.72499996, 0.5)
+		rgba = [
+			0
+			0
+			0
+			255
+		]
+		noshadow}
+	fit_text_in_rectangle id = <id> dims = (90.0, 15.0)
+endscript
+
+script animate_as_made_famous_by \{Pos = (0.0, 0.0)
+		time = 0.25}
+	if ScreenElementExists \{id = setlist_original_artist}
+		setlist_original_artist :SetProps Pos = <Pos>
+		DoScreenElementMorph id = setlist_original_artist alpha = 1 time = <time>
+	endif
+endscript
+
+script set_song_icon 
+	if NOT gotparam \{no_wait}
+		wait \{0.5
+			seconds}
+	endif
+	if NOT gotparam \{song}
+		<song> = ($target_setlist_songpreview)
+	endif
+	if (<song> = none && $current_tab = tab_setlist)
+		return
+	endif
+	if ($current_tab = tab_setlist)
+		get_tier_from_song song = <song>
+		get_progression_globals game_mode = ($game_mode)
+		formattext checksumname = tiername 'tier%d' d = <tier_number>
+		if structurecontains structure = ($<tier_global>.<tiername>) setlist_icon
+			song_icon = ($<tier_global>.<tiername>.setlist_icon)
+		else
+			song_icon = setlist_icon_generic
+		endif
+	elseif ($current_tab = tab_downloads)
+		song_icon = setlist_icon_download
+	else
+		song_icon = setlist_icon_generic
+	endif
+	mini_rot = RandomRange (-5.0, 5.0)
+	if screenelementexists \{id = sl_clipart}
+		setscreenelementprops id = sl_clipart texture = <song_icon>
+		doscreenelementmorph id = sl_clipart alpha = 1 time = 0.25 rot_angle = <mini_rot>
+	endif
+	if screenelementexists \{id = sl_clipart_shadow}
+		setscreenelementprops id = sl_clipart_shadow texture = <song_icon>
+		doscreenelementmorph id = sl_clipart_shadow alpha = 1 time = 0.25 rot_angle = <mini_rot>
+	endif
+	if screenelementexists \{id = sl_clip}
+		getscreenelementprops \{id = sl_clip}
+		rot_clip_a = <rot_angle>
+		rot_clip_b = (<rot_clip_a> + 10)
+		setscreenelementprops id = sl_clip rot_angle = <rot_clip_b>
+		doscreenelementmorph id = sl_clip alpha = 1 rot_angle = <rot_clip_a> time = 0.25
+	endif
+	if ScreenElementExists \{id = setlist_original_artist}
+		setlist_original_artist :SetProps \{alpha = 0}
+	endif
+	if NOT (<song> = none)
+		get_song_original_artist song = <song>
+		if ($we_have_songs = true && <original_artist> = 0)
+			if screenelementexists \{id = sl_clipart}
+				getscreenelementprops \{id = sl_clipart}
+				animate_as_made_famous_by Pos = (<Pos> + (110.0, 120.0)) time = 0.25
+			endif
+		endif
+	endif
+endscript
+
+script clear_setlist_clip_and_art 
+	if ScreenElementExists \{id = setlist_original_artist}
+		SetScreenElementProps \{id = setlist_original_artist
+			alpha = 0}
+	endif
+	if ScreenElementExists \{id = sl_clipart}
+		SetScreenElementProps \{id = sl_clipart
+			alpha = 0}
+	endif
+	if ScreenElementExists \{id = sl_clipart_shadow}
+		SetScreenElementProps \{id = sl_clipart_shadow
+			alpha = 0}
+	endif
+	if ScreenElementExists \{id = sl_clip}
+		SetScreenElementProps \{id = sl_clip
+			alpha = 0}
+	endif
+endscript
+
 script create_sl_assets 
 	CreateScreenElement \{Type = ContainerElement
 		PARENT = root_window
@@ -374,6 +589,7 @@ script create_sl_assets
 	<clip_pos> = (160.0, 390.0)
 	displaySprite Id = sl_clipart PARENT = sl_fixed Pos = <clip_pos> Dims = (160.0, 160.0) Z = ($setlist_text_z + 0.1) rgba = [200 200 200 255]
 	displaySprite Id = sl_clipart_shadow PARENT = sl_fixed Pos = (<clip_pos> + (3.0, 3.0)) Dims = (160.0, 160.0) Z = ($setlist_text_z) rgba = [0 0 0 128]
+	create_as_made_famous_by
 	<clip_pos> = (<clip_pos> + (15.0, 50.0))
 	displaySprite Id = sl_clip PARENT = sl_fixed tex = Setlist_Clip just = [-0.5 -0.9] Pos = <clip_pos> Dims = (141.0, 102.0) Z = ($setlist_text_z + 0.2)
 	if ($current_tab = tab_setlist)
