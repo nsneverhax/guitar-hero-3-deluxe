@@ -1,3 +1,149 @@
+button_models_og = {
+	Green = {
+		gem_material = sys_Gem2D_Green_sys_Gem2D_Green
+		gem_hammer_material = sys_Gem2D_Green_hammer_sys_Gem2D_Green_hammer
+		star_material = sys_Star2D_Green_sys_Star2D_Green
+		star_hammer_material = sys_Star2D_Green_Hammer_sys_Star2D_Green_Hammer
+		battle_star_material = sys_BattleGEM_Green01_sys_BattleGEM_Green01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Green01_sys_BattleGEM_Hammer_Green01
+		whammy_material = sys_Whammy2D_Green_sys_Whammy2D_Green
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_g
+	}
+	RED = {
+		gem_material = sys_Gem2D_Red_sys_Gem2D_Red
+		gem_hammer_material = sys_Gem2D_Red_hammer_sys_Gem2D_Red_hammer
+		star_material = sys_Star2D_Red_sys_Star2D_Red
+		star_hammer_material = sys_Star2D_Red_Hammer_sys_Star2D_Red_Hammer
+		battle_star_material = sys_BattleGEM_RED01_sys_BattleGEM_RED01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_RED01_sys_BattleGEM_Hammer_RED01
+		whammy_material = sys_Whammy2D_Red_sys_Whammy2D_Red
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_r
+	}
+	Yellow = {
+		gem_material = sys_Gem2D_Yellow_sys_Gem2D_Yellow
+		gem_hammer_material = sys_Gem2D_Yellow_hammer_sys_Gem2D_Yellow_hammer
+		star_material = sys_Star2D_Yellow_sys_Star2D_Yellow
+		star_hammer_material = sys_Star2D_Yellow_Hammer_sys_Star2D_Yellow_Hammer
+		battle_star_material = sys_BattleGEM_Yellow01_sys_BattleGEM_Yellow01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Yellow01_sys_BattleGEM_Hammer_Yellow01
+		whammy_material = sys_Whammy2D_Yellow_sys_Whammy2D_Yellow
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_y
+	}
+	BLUE = {
+		gem_material = sys_Gem2D_Blue_sys_Gem2D_Blue
+		gem_hammer_material = sys_Gem2D_Blue_hammer_sys_Gem2D_Blue_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_Blue01_sys_BattleGEM_Blue01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Blue01_sys_BattleGEM_Hammer_Blue01
+		whammy_material = sys_Whammy2D_Blue_sys_Whammy2D_Blue
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_b
+	}
+	Orange = {
+		gem_material = sys_Gem2D_Orange_sys_Gem2D_Orange
+		gem_hammer_material = sys_Gem2D_Orange_hammer_sys_Gem2D_Orange_hammer
+		star_material = sys_Star2D_Orange_sys_Star2D_Orange
+		star_hammer_material = sys_Star2D_Orange_Hammer_sys_Star2D_Orange_Hammer
+		battle_star_material = sys_BattleGEM_Orange01_sys_BattleGEM_Orange01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Orange01_sys_BattleGEM_Hammer_Orange01
+		whammy_material = sys_Whammy2D_Orange_sys_Whammy2D_Orange
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_o
+	}
+}
+
+button_models_overlap = {
+	Green = {
+		gem_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		gem_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_Green01_sys_BattleGEM_Green01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Green01_sys_BattleGEM_Hammer_Green01
+		whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_g
+	}
+	RED = {
+		gem_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		gem_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_RED01_sys_BattleGEM_RED01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_RED01_sys_BattleGEM_Hammer_RED01
+		whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_r
+	}
+	Yellow = {
+		gem_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		gem_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_Yellow01_sys_BattleGEM_Yellow01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Yellow01_sys_BattleGEM_Hammer_Yellow01
+		whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_y
+	}
+	BLUE = {
+		gem_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		gem_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_Blue01_sys_BattleGEM_Blue01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Blue01_sys_BattleGEM_Hammer_Blue01
+		whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_b
+	}
+	Orange = {
+		gem_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		gem_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_material = sys_Star2D_Blue_sys_Star2D_Blue
+		star_hammer_material = sys_Star2D_Blue_Hammer_sys_Star2D_Blue_Hammer
+		battle_star_material = sys_BattleGEM_Orange01_sys_BattleGEM_Orange01
+		battle_star_hammer_material = sys_BattleGEM_Hammer_Orange01_sys_BattleGEM_Hammer_Orange01
+		whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		star_power_material = sys_Gem2D_StarPower_sys_Gem2D_StarPower
+		star_power_hammer_material = sys_Gem2D_StarPower_hammer_sys_Gem2D_StarPower_hammer
+		star_power_whammy_material = sys_Whammy2D_StarPower_sys_Whammy2D_StarPower
+		dead_whammy = sys_Whammy2D_Dead_sys_Whammy2D_Dead
+		Name = button_o
+	}
+}
+
 script control_whammy_pitchshift 
 	if ($boss_battle = 1)
 		if (($<player_status>.Player) = 2)
@@ -79,4 +225,59 @@ script net_whammy_pitch_shift
 			GameFrame}
 		repeat
 	endif
+endscript
+
+script star_power_activate_and_drain 
+	if ($overlapping_sp = 1)
+		Change StructureName = <player_status> star_power_used = 0
+		Change StructureName = <player_status> star_power_overlap = 1
+		;Change \{button_models = $button_models_overlap} ; why dont you work
+	else
+		Change StructureName = <player_status> star_power_used = 1
+	endif
+	SpawnScriptNow hud_activated_star_power Params = {Player = <Player>}
+	Wait \{1
+		GameFrame}
+	LaunchGemEvent Event = star_power_on Player = <Player>
+	ExtendCRC star_power_on <player_Text> out = Type
+	BroadCastEvent Type = <Type> Data = {player_Text = <player_Text> Player = <Player> player_status = <player_status>}
+	SpawnScriptNow \{Crowd_AllPlayAnim
+		Params = {
+			Anim = STARPOWER
+		}}
+	begin
+	Wait \{1
+		GameFrame}
+	if ($game_mode = p2_career || $game_mode = p2_coop)
+		drain = ($star_power_drain_rate_coop * 1000.0 * ($current_deltatime / $<player_status>.playline_song_measure_time))
+	elseif ($game_mode = Tutorial)
+		drain = 0
+	else
+		drain = ($star_power_drain_rate * 1000.0 * ($current_deltatime / $<player_status>.playline_song_measure_time))
+	endif
+	Change StructureName = <player_status> star_power_amount = ($<player_status>.star_power_amount - <drain>)
+	if ($<player_status>.star_power_amount <= 0)
+		Change StructureName = <player_status> star_power_amount = 0
+		break
+	endif
+	repeat
+	SpawnScriptNow \{Crowd_AllPlayAnim
+		Params = {
+			Anim = IDLE
+		}}
+	if ($<player_status>.controller = $primary_controller)
+		Change gStar_Power_Triggered = ($gStar_Power_Triggered + 1)
+	endif
+	Change StructureName = <player_status> star_power_used = 0
+	if ($overlapping_sp = 1)
+		Change StructureName = <player_status> star_power_overlap = 0
+	endif
+	UpdateNixie Player = <Player>
+	Wait \{1
+		GameFrame}
+	LaunchGemEvent Event = star_power_off Player = <Player>
+	ExtendCRC star_power_off <player_Text> out = Type
+	BroadCastEvent Type = <Type> Data = {player_Text = <player_Text> player_status = <player_status>}
+	<do_star> = 0
+	return <...>
 endscript

@@ -42,6 +42,7 @@ mods_menu_index = 0
 
 ;dont save these options
 firework_gems = 0
+overlapping_sp = 0
 
 scroller_rgba = [210 130 0 250]
 
