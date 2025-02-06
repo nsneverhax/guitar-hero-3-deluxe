@@ -16,6 +16,7 @@
 * Selectable song speed by 5% increments
 * Selectable venues and characters in quickplay, including a "Black Background" toggle
 * Song title always visible modifier
+* Notes hit percentage on setlist screen
 
 ## Additional Modifications
 * Option to disable note hit visual effects
