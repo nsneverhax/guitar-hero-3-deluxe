@@ -214,8 +214,7 @@ script create_sl_assets
 						endif
 						if (<STARS> > 2)
 							<star_space> = (20.0, 0.0)
-							<star_pos> = (<text_pos> + (680.0, 0.0))
-							<star_pos> = (<star_pos> - (0.0, 4.0))
+							<star_pos> = (<text_pos> + (660.0, 0.0))
 							begin
 							if (<percent100> = 1)
 								<Star> = Setlist_Goldstar
@@ -242,7 +241,7 @@ script create_sl_assets
 							else
 								FormatText TextName = score_text "%d" D = <Score> UseCommas
 							endif
-							<score_pos> = (<text_pos> + (570.0, 0.0))
+							<score_pos> = (<text_pos> + (660.0, 40.0))
 							CreateScreenElement {
 								Type = TextElement
 								PARENT = setlist_menu
@@ -255,7 +254,9 @@ script create_sl_assets
 								just = [RIGHT Top]
 								noshadow
 							}
-							percent_pos = (<score_pos> + (120.0, 35.0))
+							percent_pos = (<star_pos> - (10.0, 0.0))
+							percent_pos = (<percent_pos> + (0.0, 5.0))
+							percent_scale = (0.55, 0.55)
 							GetGlobalTags <songname> Param = percent100
 							GetGlobalTags <songname> Param = PercentHit
 							FormatText TextName = NotePctText "%i%p" I = <PercentHit> P = "%"
@@ -263,7 +264,7 @@ script create_sl_assets
  								CreateScreenElement {
 									Type = TextElement
 									PARENT = setlist_menu
-									Scale = (0.75, 0.75)
+									Scale = <percent_scale>
 									Text = <NotePctText>
 									Pos = <percent_pos>
 									rgba = [230 185 80 255]
@@ -272,13 +273,28 @@ script create_sl_assets
 									just = [RIGHT Top]
 									Shadow
 									shadow_offs = (3.0, 3.0)
-									shadow_rgba = [230 230 230 255]
+									shadow_rgba = [200 200 200 255]
+								}
+							elseif ((<PercentHit> = 100) && (<percent100> = 0))
+							 	CreateScreenElement {
+									Type = TextElement
+									PARENT = setlist_menu
+									Scale = <percent_scale>
+									Text = <NotePctText>
+									Pos = <percent_pos>
+									rgba = [60 60 200 255]
+									z_priority = $setlist_text_z
+									font = fontgrid_title_gh3
+									just = [RIGHT Top]
+									Shadow
+									shadow_offs = (3.0, 3.0)
+									shadow_rgba = [200 200 200 255]
 								}
 							else
 								CreateScreenElement {
 									Type = TextElement
 									PARENT = setlist_menu
-									Scale = (0.75, 0.75)
+									Scale = <percent_scale>
 									Text = <NotePctText>
 									Pos = <percent_pos>
 									rgba = [100 120 160 255]
