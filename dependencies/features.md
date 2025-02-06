@@ -4,6 +4,7 @@
 * Max note limit increased to 8,000 on PS3
 * Patch to enable the use of Rock Band Fender Stratocasters on Xbox 360
 * Faster boot time
+* Reduced saving/loading times
 * New "Deluxe Settings" menu for new modifications
 * Option to unlock all cheats/songs/characters
 * Option to enable the "Debug Menu" and other debugging features
