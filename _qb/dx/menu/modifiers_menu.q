@@ -611,7 +611,7 @@ script menu_dx_mods_select
 				if ($lock_saving = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
 					SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
-				elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
+				elseif ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
 					SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
 					Change reenable_saving = 1
