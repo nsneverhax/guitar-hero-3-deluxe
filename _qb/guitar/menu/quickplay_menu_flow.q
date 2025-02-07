@@ -1,3 +1,79 @@
+script check_song_for_parts 
+	load_songqpak song_name = ($current_song) async = 0
+	get_song_struct song = ($current_song)
+	if structurecontains structure = <song_struct> no_rhythm_track
+		change \{structurename = player1_status
+			part = guitar}
+		return \{flow_state = quickplay_setlist_fs}
+	endif
+	get_song_prefix song = ($current_song)
+	formattext checksumname = song_rhythm_array_id '%s_song_rhythm_easy' s = <song_prefix>
+	if globalexists name = <song_rhythm_array_id> type = array
+		getarraysize $<song_rhythm_array_id>
+		if (<array_size> > 0)
+			return \{flow_state = quickplay_select_part_fs}
+		endif
+	endif
+	if structurecontains structure = <song_struct> use_coop_notetracks
+		return \{flow_state = quickplay_select_part_fs}
+	endif
+	change \{structurename = player1_status
+		part = guitar}
+	return \{flow_state = quickplay_setlist_fs}
+endscript
+
+quickplay_select_part_fs = {
+	create = create_choose_practice_part_menu
+	destroy = destroy_choose_practice_part_menu
+	actions = [
+		{
+			action = continue
+			func = quickplay_start_song
+			transition_screen = default_loading_screen
+			flow_state = quickplay_play_song_fs
+		}
+		{
+			action = go_back
+			flow_state = quickplay_setlist_fs
+			transition_left
+		}
+	]
+}
+
+quickplay_select_difficulty_fs = {
+	create = create_select_difficulty_menu
+	destroy = destroy_select_difficulty_menu
+	actions = [
+		{
+			action = continue
+			flow_state = quickplay_setlist_fs
+			transition_right
+		}
+		{
+			action = go_back
+			flow_state = main_menu_fs
+			transition_left
+		}
+	]
+}
+
+quickplay_setlist_fs = {
+	create = create_setlist_menu
+	destroy = destroy_setlist_menu
+	actions = [
+		{
+			action = continue
+			flow_state_func = check_song_for_parts
+			transition_right
+		}
+		{
+			action = go_back
+			flow_state = quickplay_select_difficulty_fs
+			transition_left
+		}
+	]
+}
+
 script quickplay_start_song \{device_num = 0}
 	GetGlobalTags \{user_options}
 	get_progression_globals game_mode = ($game_mode)
