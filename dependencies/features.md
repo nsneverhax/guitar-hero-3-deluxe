@@ -18,6 +18,7 @@
 * Selectable venues and characters in quickplay, including a "Black Background" toggle
 * Song title always visible modifier
 * Notes hit percentage on setlist screen
+	* Songs also no longer grant gold stars/FC if overstrummed, and a overstrum FC'd song will have a blue percentage on the setlist screen.
 
 ## Additional Modifications
 * Option to disable note hit visual effects
