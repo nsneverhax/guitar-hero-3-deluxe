@@ -438,10 +438,10 @@ script 0x1e5afd34
 endscript
 script menu_dx_highlight_item
 	GetTags
-	set_focus_color rgba = [0 255 255 250] ; i would rather not do this but none of the other ways i tried worked
+	set_focus_color rgba = [0 255 255 250]
 endscript
 
 script menu_dx_remove_highlight 
 	GetTags
-	set_focus_color rgba = [210 210 210 250] ; same goes
+	set_focus_color rgba = [210 210 210 250]
 endscript
