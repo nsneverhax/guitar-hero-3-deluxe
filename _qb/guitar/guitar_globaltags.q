@@ -71,4 +71,6 @@ default_songtagswithdifficulty = {
 	failedtimes = 0
 	percent100 = 0
 	PercentHit = 0
+	NotesHit = 0
+	TotalNotes = 0
 }

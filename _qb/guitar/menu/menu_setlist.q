@@ -472,9 +472,15 @@ script create_sl_assets
 							percent_pos = (<star_pos> - (10.0, 0.0))
 							percent_pos = (<percent_pos> + (0.0, 5.0))
 							percent_scale = (0.55, 0.55)
+							streak_pos = (<score_pos> - (130.0, 0.0))
+							streak_pos = (<streak_pos> + (0.0, 5.0))
+							streak_scale = (0.55, 0.55)
 							GetGlobalTags <songname> Param = percent100
 							GetGlobalTags <songname> Param = PercentHit
+							GetGlobalTags <songname> Param = NotesHit
+							GetGlobalTags <songname> Param = TotalNotes
 							FormatText TextName = NotePctText "%i%p" I = <PercentHit> P = "%"
+							FormatText TextName = NoteStreakText "%h / %t" H = <NotesHit> T = <TotalNotes>
 							if (<percent100> = 1)
  								CreateScreenElement {
 									Type = TextElement
@@ -519,6 +525,18 @@ script create_sl_assets
 									noshadow
 								}
 							endif
+							CreateScreenElement {
+								Type = TextElement
+								PARENT = setlist_menu
+								Scale = <streak_scale>
+								Text = <NoteStreakText>
+								Pos = <streak_pos>
+								rgba = [100 120 160 255]
+								z_priority = $setlist_text_z
+								font = text_a5
+								just = [RIGHT Top]
+								noshadow
+							}
 						endif
 					endif
 					<text_pos> = (<text_pos> + (60.0, 40.0))
