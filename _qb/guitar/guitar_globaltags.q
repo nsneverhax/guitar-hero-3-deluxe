@@ -31,6 +31,7 @@ script setup_user_option_tags
 			unlock_Cheat_AirGuitar = 0
 			unlock_Cheat_PerformanceMode = 0
 			unlock_Cheat_Hyperspeed = 0
+			Cheat_HyperSpeed = 0
 			unlock_Cheat_NoFail = 0
 			unlock_Cheat_EasyExpert = 0
 			unlock_Cheat_PrecisionMode = 0

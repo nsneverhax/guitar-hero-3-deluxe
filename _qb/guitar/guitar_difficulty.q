@@ -8,6 +8,7 @@ script difficulty_setup
 		scroll_time_factor = ($p2_scroll_time_factor)
 		game_speed_factor = ($p2_game_speed_factor)
 	endif
+	GetGlobalTags \{user_options}
 	if ($Cheat_HyperSpeed > 0)
 		hyperspeed_scale = -1
 		switch $Cheat_HyperSpeed
