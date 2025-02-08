@@ -19,6 +19,7 @@
 * Song title always visible modifier
 * Notes hit percentage on setlist screen
 	* Songs also no longer grant gold stars/FC if overstrummed, and a overstrum FC'd song will have a blue percentage on the setlist screen.
+* Persistent Hyperspeed (saves between reboots like GHWT and newer games)
 
 ## Additional Modifications
 * Option to disable note hit visual effects
