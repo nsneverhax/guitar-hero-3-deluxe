@@ -23,17 +23,12 @@ script Progression_SongWon
 	if ($player1_status.total_notes > 0)
 		p1_percent_complete = (100 * $player1_status.NOTES_HIT / $player1_status.total_notes)
 		SetGlobalTags <songname> Params = {PercentHit = <p1_percent_complete>}
-		p1_best_rum = ($player1_status.best_run)
+		p1_best_run = ($player1_status.best_run)
 		p1_total_notes = ($player1_status.total_notes)
 		p1_notes_hit = ($player1_status.NOTES_HIT)
 		SetGlobalTags <songname> Params = {NotesHit = <p1_notes_hit>}
 		SetGlobalTags <songname> Params = {TotalNotes = <p1_total_notes>}
-		if (<p1_best_run> = <p1_total_notes>)
-			FC = 1
-		else
-			FC = 0
-		endif
-		if (<p1_percent_complete> = 100 && <FC> = 1)
+		if ((<p1_percent_complete> = 100) && (<p1_best_run> = <p1_total_notes>))
 			if ($game_mode = p1_quickplay)
 				SetGlobalTags <songname> Params = {percent100 = 1}
 			endif
