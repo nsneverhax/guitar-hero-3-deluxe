@@ -1,3 +1,7 @@
+deluxe_text_rgba = [240 191 116 255]
+deluxe_text_shadow_rgba = [204 153 102 191]
+version_text_rgba = [255 255 255 255]
+version_text_shadow_rgba = $deluxe_text_shadow_rgba
 script create_gh3dx_icon_toast 
 	CreateScreenElement {
 		Type = TextBlockElement
@@ -8,11 +12,11 @@ script create_gh3dx_icon_toast
 		Pos = (619.0, 350.0)
 		just = [LEFT Top]
 		internal_just = [Center Top]
-		rgba = [220 220 220 255]
+		rgba = $deluxe_text_rgba
 		Scale = 0.9
 		Shadow
         shadow_offs = (3.0, 3.0)
-        shadow_rgba = [110 20 80 250]
+        shadow_rgba = $deluxe_text_shadow_rgba
 	}
 endscript
 
@@ -32,11 +36,11 @@ script create_gh3dx_version_toast
 		Pos = <Pos>
 		just = [LEFT Top]
 		internal_just = [Center Top]
-		rgba = [220 220 220 255]
+		rgba = $version_text_rgba
 		Scale = 0.6
 		Shadow
         shadow_offs = (3.0, 3.0)
-        shadow_rgba = [110 20 80 250]
+        shadow_rgba = $version_text_shadow_rgba
 	}
 endscript
 
