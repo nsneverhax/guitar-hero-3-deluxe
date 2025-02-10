@@ -92,6 +92,11 @@ modifier_options = [
 		Description = "Disables miss sound effects"
 	}
 	{
+		Name = "Prototype Star Power"
+		Id = PROTO_SP
+		Description = "Star Power popup from GH3 Prototype. May have problems in Multiplayer."
+	}
+	{
 		Name = "Show Early Timing"
 		Id = EARLY_TIMING
 		Description = "Guitar Hero 3 only destroys gems as soon as they cross the strikeline. No more!"
@@ -560,6 +565,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_miss_sfx = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case PROTO_SP
+			if (<proto_sp> = 0)
+				SetGlobalTags user_options Params = {proto_sp = 1}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {proto_sp = 0}
+				SoundEvent \{Event = CheckBox_SFX}\
+			endif
 		case SELECT_RESTART
 			if (<select_restart> = 0)
 			 	SetGlobalTags user_options Params = {select_restart = 1}
@@ -809,6 +822,14 @@ script menu_dx_mods_setprop
 			endif
 		case NO_MISS_SFX
 			if (<no_miss_sfx> = 1)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case PROTO_SP
+			if (<proto_sp> = 1)
 			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
