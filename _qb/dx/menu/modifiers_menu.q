@@ -830,10 +830,10 @@ script menu_dx_mods_setprop
 			endif
 		case PROTO_SP
 			if (<proto_sp> = 1)
-			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
-				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case SELECT_RESTART

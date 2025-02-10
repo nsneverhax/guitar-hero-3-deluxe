@@ -152,13 +152,19 @@ script nx_show_star_power_ready
 	endif
 endscript
 script show_star_power_ready 
-	if ($Cheat_PerformanceMode = 1)
-		return
-	endif
-	GetGlobalTags \{user_options}
-	if (<proto_sp> = 1)
-		proto_show_star_power_ready
-	else
-		nx_show_star_power_ready
-	endif
+    if ($Cheat_PerformanceMode = 1)
+        return
+    endif
+    if ($game_mode = p2_career || $game_mode = p2_coop)
+        player_status = player1_status
+        player_status = player2_status
+    else
+        player_status = <player_status>
+    endif
+    GetGlobalTags \{user_options}
+    if (<proto_sp> = 1)
+        SpawnScriptNow proto_show_star_power_ready Params = {player_status = <player_status>}
+        return
+    endif
+    SpawnScriptNow nx_show_star_power_ready Params = {player_status = <player_status>}
 endscript
