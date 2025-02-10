@@ -86,6 +86,114 @@ main_menu_fs = {
 	]
 }
 
+main_menu_tip_pos_initial = (700.0, -670.0)
+main_menu_tip_pos_new = (700.0, -650.0)
+main_menu_tip_angle_initial = -10
+main_menu_tip_angle_new = -5
+main_menu_tip_scale_initial = 0.95
+main_menu_tip_scale_new = 0.85
+main_menu_tip_animate_time = 1
+
+menu_tips = [
+	"New and improved!"
+	"NeverHax welcomes you!"
+	"Also try Rock Band 3 Deluxe!"
+	"Now With Blast Processing!"
+	"Arby's, we have The Meats!"
+	"THIS IS GUITAR HERO 3!"
+	"Nobody cares about modding Guitar Hero Aerosmith!"
+	"Up Up Down Down Left Right Left Right B A Start!"
+	"I'm not even supposed to BE here!"
+	"DELXUE!"
+	"AM I A GUITAR? YOU ARE A GUITAR!"
+	"Not your momma's Rock Band!"
+	"PS3 has no games!"
+	"Brought to you by the NeverHax weirdos!"
+	"Don't eat the gems. Seriously."
+	"Trans rights are human rights!"
+	"0BOY0BOY"
+	"if u dont fuck with the gays dont play our game"
+	"No! I'm with the science team!"
+	"One of the games of all time!"
+	"Go Play A Real Instrument Already!"
+	"you're telling me a guitar hero 3'd this deluxe?"
+	"It's like GH2DX, plus one!"
+	"removing guitar..."
+	"neverhax bad!"
+	"Better PC Port Soon(TM)!"
+	"Nylon!"
+	"\\b4 \\b5 \\b6 \\b7 \\b8"
+	"Yet Another Deluxe Mod"
+	"If it ain't broke, don't fix it... this was kind of broke..."
+	"If you eat a gem he will find you..."
+	"Is the strikeline... speakers?! WHAT ARE THEY?!"
+	"I got 99 problems and GH3DX ain't one!"
+	"insert GH3PC is bad joke here"
+	"guitar hero"
+	"LESS GOOOOOOOO"
+	"Open source!"
+	"Fat free!"
+	"patches.q - Do Not Use!"
+	"lysix.q - Do Not Use!"
+	"Random splash!"
+	"PLACEHOLDER"
+	"Charlotte was here!"
+	"Lysix was here!"
+	"Luna was here!"
+	"Metric was here!"
+	"Evelyn was here!"
+]
+
+platform_specific_text = "None"
+
+script get_platform_specific_text 
+	GetPlatform
+	switch (<Platform>)
+		case NGC
+			Change platform_specific_text = "Invalid write to 0x00000004, PC = 0x80412538"
+		case XENON
+			Change platform_specific_text = "Fatal crash intercepted!"
+		case PS3 
+			Change platform_specific_text = "Access violation reading unmapped memory!"
+		case PS2 
+			Change platform_specific_text = "Access violation reading unmapped memory!"
+	endswitch
+	if IsWinPort
+		Change platform_specific_text = "Job 1, 'GH3.exe' terminated by signal SIGSEGV (Address boundary error)"
+	elseif IsMacPort
+		Change platform_specific_text = "Job 1, 'GH3.app' terminated by signal SIGSEGV (Address boundary error)"
+	endif
+	AddArrayElement Array = ($menu_tips) Element = ($platform_specific_text)
+endscript
+
+script menu_text_hover 
+	if NOT ScreenElementExists \{Id = main_menu_tip}
+		return
+	endif
+	begin
+	main_menu_tip :DoMorph \{Pos = $main_menu_tip_pos_initial
+		Time = $main_menu_tip_animate_time
+		Rot_Angle = $main_menu_tip_angle_initial
+		Scale = $menu_tip_scale_initial
+		Motion = ease_out}
+	main_menu_tip :DoMorph \{Pos = $main_menu_tip_pos_new
+		Time = $main_menu_tip_animate_time
+		Rot_Angle = $main_menu_tip_angle_new
+		Scale = $menu_tip_scale_new
+		Motion = ease_in}
+	main_menu_tip :DoMorph \{Pos = $main_menu_tip_pos_initial
+		Time = $main_menu_tip_animate_time
+		Rot_Angle = $main_menu_tip_angle_initial
+		Scale = $main_menu_tip_scale_initial
+		Motion = ease_out}
+	main_menu_tip :DoMorph \{Pos = $main_menu_tip_pos_new
+		Time = $main_menu_tip_animate_time
+		Rot_Angle = $main_menu_tip_angle_new
+		Scale = $main_menu_tip_scale_new
+		Motion = ease_in}
+	repeat
+endscript
+
 script load_dx_settings
 	GetGlobalTags \{user_options}
 	Change GlobalName = Cheat_HyperSpeed NewValue = <Cheat_HyperSpeed>
@@ -1959,5 +2067,29 @@ script create_main_menu_backdrop
 		shadow_offs = <version_shadow_offs>
 		shadow_rgba = [0 0 0 255]
 		z_priority = 60
+	}
+	GetArraySize ($menu_tips)
+	GetRandomValue Name = menu_rand_num A = 0 B = (<array_Size> - 1) Integer
+	rand_menu_tip = ($menu_tips [<menu_rand_num>])
+	CreateScreenElement {
+		Type = TextBlockElement
+		Id = main_menu_tip
+		PARENT = <Id>
+		Text = <rand_menu_tip>
+		font = text_a4
+		Pos = ($main_menu_tip_pos_initial)
+		Scale = ($main_menu_tip_scale_initial)
+		Dims = (600.0, 200.0)
+		rgba = ($menu_text_color)
+		just = [Center Top]
+		font_spacing = 0
+		Shadow
+		shadow_offs = (1.5, 1.5)
+		shadow_rgba = [0 0 0 255]
+		z_priority = 61
+		allow_expansion
+	}
+	RunScriptOnScreenElement \{Id = main_menu_tip
+		menu_text_hover
 	}
 endscript
