@@ -161,4 +161,4 @@ script show_star_power_ready
 	else
 		nx_show_star_power_ready
 	endif
-endif
+endscript

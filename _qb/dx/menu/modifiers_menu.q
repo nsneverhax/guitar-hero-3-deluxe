@@ -571,7 +571,7 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				SetGlobalTags user_options Params = {proto_sp = 0}
-				SoundEvent \{Event = CheckBox_SFX}\
+				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case SELECT_RESTART
 			if (<select_restart> = 0)
