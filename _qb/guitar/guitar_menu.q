@@ -86,8 +86,8 @@ main_menu_fs = {
 	]
 }
 
-main_menu_tip_pos_initial = (700.0, -670.0)
-main_menu_tip_pos_new = (700.0, -650.0)
+main_menu_tip_pos_initial = (650.0, -590.0)
+main_menu_tip_pos_new = (650.0, -570.0)
 main_menu_tip_angle_initial = -10
 main_menu_tip_angle_new = -5
 main_menu_tip_scale_initial = 0.95
@@ -95,6 +95,9 @@ main_menu_tip_scale_new = 0.85
 main_menu_tip_animate_time = 1
 main_menu_tip_rgba = [190 225 255 250]
 main_menu_text_update_speed = 10
+main_menu_deluxe_text_dims = (500.0, 200.0)
+main_menu_deluxe_text_pos = (440.0, 290.0)
+main_menu_deluxe_text_shadow_rgba = [0 0 0 255]
 
 menu_tips = [
 	"New and improved!"
@@ -2107,7 +2110,7 @@ script create_main_menu_backdrop
 		Shadow
 		shadow_offs = (1.5, 1.5)
 		shadow_rgba = [0 0 0 255]
-		z_priority = 61
+		z_priority = 62
 		allow_expansion
 	}
 
@@ -2116,5 +2119,22 @@ script create_main_menu_backdrop
 	}
 	RunScriptOnScreenElement \{Id = main_menu_tip
 		menu_text_get_string
+	}
+
+	CreateScreenElement {
+		Type = TextBlockElement
+		PARENT = main_menu_bg_container
+		font = text_a6
+		Text = "DELUXE"
+		Dims = $main_menu_deluxe_text_dims
+		Pos = $main_menu_deluxe_text_pos
+		just = [Center Top]
+		internal_just = [Center Top]
+		rgba = $deluxe_text_rgba
+		Scale = 0.9
+		Shadow
+        shadow_offs = (3.0, 3.0)
+        shadow_rgba = $main_menu_deluxe_text_shadow_rgba
+		z_priority = 61
 	}
 endscript

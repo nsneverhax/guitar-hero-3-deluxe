@@ -1,3 +1,5 @@
 _qb/dx/dx_version.q
+_qb/patches.q
+_qb/lysix.q
 out/
 .DS_Store
