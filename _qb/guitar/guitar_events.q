@@ -13,7 +13,26 @@ script GuitarEvent_HitNote_Spawned
 	Wait \{1
 		GameFrame}
 	if (<no_flames> = 0)
+		if ($hitnote_dx_next = 1)
+			Destroy2DParticleSystem Id = $hitnotepartid
+			DestroyScreenElement Id = $hitnotefxid
+			change hitnote_dx_next = 0
+		endif
 		SpawnScriptNow hit_note_fx Params = {Name = <fx_id> Pos = <Pos> player_Text = <player_Text> Star = ($<player_status>.star_power_used) Player = <Player>}
+	endif
+endscript
+
+hitnote_dx_next = 0
+
+script GuitarEvent_HitNotes 
+	if GuitarEvent_HitNotes_CFunc
+		UpdateGuitarVolume
+	endif
+	if ($hitnote_dx = 1)
+		Destroy2DParticleSystem Id = $hitnotepartid
+		DestroyScreenElement Id = $hitnotefxid
+		change hitnote_dx_next = 1
+		change hitnote_dx = 0
 	endif
 endscript
 
@@ -209,8 +228,15 @@ script GuitarEvent_SongFailed_Spawned
 	endif
 endscript
 
+hitnote_dx = 0
+hitnotefxid = 0
+hitnotepartid = 0
+
 script hit_note_fx 
 	NoteFX <...>
+	change hitnote_dx = 1
+	Change GlobalName = hitnotefxid NewValue = <fx_id>
+	Change GlobalName = hitnotepartid NewValue = <particle_id>
 	Wait \{100
 		milliseconds}
 	Destroy2DParticleSystem Id = <particle_id> Kill_when_empty
