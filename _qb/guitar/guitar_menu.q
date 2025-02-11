@@ -94,6 +94,7 @@ main_menu_tip_scale_initial = 0.95
 main_menu_tip_scale_new = 0.85
 main_menu_tip_animate_time = 1
 main_menu_tip_rgba = [190 225 255 250]
+main_menu_text_update_speed = 10
 
 menu_tips = [
 	"New and improved!"
@@ -130,6 +131,10 @@ menu_tips = [
 	"Is the strikeline... speakers?! WHAT ARE THEY?!"
 	"I got 99 problems and GH3DX ain't one!"
 	"insert GH3PC is bad joke here"
+	"New Bret Micheals Mode!"
+	"Hold down a fret, wait 3-5 business days, done!"
+	"Look, we made a guitar game from a skate game!"
+	"Powered by Tony Hawk!"
 	"guitar hero"
 	"LESS GOOOOOOOO"
 	"Open source!"
@@ -198,6 +203,17 @@ script menu_text_hover
 		Rot_Angle = $main_menu_tip_angle_new
 		Scale = $main_menu_tip_scale_new
 		Motion = ease_in}
+	repeat
+endscript
+
+script menu_text_get_string 
+	begin
+	GetArraySize ($menu_tips)
+	GetRandomValue Name = menu_rand_num A = 0 B = (<array_Size> - 1) Integer
+	rand_menu_tip = ($menu_tips [<menu_rand_num>])
+	main_menu_tip :SetProps Text = <rand_menu_tip>
+	Wait \{$main_menu_text_update_speed
+	seconds}
 	repeat
 endscript
 
@@ -2075,14 +2091,12 @@ script create_main_menu_backdrop
 		shadow_rgba = [0 0 0 255]
 		z_priority = 60
 	}
-	GetArraySize ($menu_tips)
-	GetRandomValue Name = menu_rand_num A = 0 B = (<array_Size> - 1) Integer
-	rand_menu_tip = ($menu_tips [<menu_rand_num>])
+
 	CreateScreenElement {
 		Type = TextBlockElement
 		Id = main_menu_tip
 		PARENT = <Id>
-		Text = <rand_menu_tip>
+		Text = ""
 		font = text_a4
 		Pos = ($main_menu_tip_pos_initial)
 		Scale = ($main_menu_tip_scale_initial)
@@ -2096,7 +2110,11 @@ script create_main_menu_backdrop
 		z_priority = 61
 		allow_expansion
 	}
+
 	RunScriptOnScreenElement \{Id = main_menu_tip
 		menu_text_hover
+	}
+	RunScriptOnScreenElement \{Id = main_menu_tip
+		menu_text_get_string
 	}
 endscript
