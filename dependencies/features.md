@@ -1,7 +1,7 @@
 # Features
 
 ## Quality of Life
-* Max note limit increased to 8,000 on PS3
+* Max note limit increased to 8,000 on PS3 and Xbox 360
 * Patch to enable the use of Rock Band Fender Stratocasters on Xbox 360
 * Faster boot time
 * Reduced saving/loading times
