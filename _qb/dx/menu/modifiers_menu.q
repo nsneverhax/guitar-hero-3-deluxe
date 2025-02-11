@@ -87,6 +87,11 @@ modifier_options = [
 		Description = "Whammy no longer changes the pitch of the song."
 	}
 	{
+		Name = "Track Muting"
+		Id = TRACK_MUTING
+		Description = "Disables track muting on miss"
+	}
+	{
 		Name = "Miss SFX"
 		Id = NO_MISS_SFX
 		Description = "Disables miss sound effects"
@@ -557,6 +562,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_whammy_pitch_shift = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case TRACK_MUTING
+			if (<track_muting> = 0)
+			 	SetGlobalTags user_options Params = {track_muting = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {track_muting = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case NO_MISS_SFX
 			if (<no_miss_sfx> = 0)
 			 	SetGlobalTags user_options Params = {no_miss_sfx = 1}
@@ -814,6 +827,14 @@ script menu_dx_mods_setprop
 			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 1)
+			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case TRACK_MUTING
+			if (<track_muting> = 1)
 			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif

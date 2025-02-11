@@ -46,6 +46,7 @@ script setup_user_option_tags
 			no_flames = 0
 			no_whammy_particles = 0
 			no_whammy_pitch_shift = 0
+			track_muting = 0
 			no_miss_sfx = 0
 			select_restart = 0
 			awesomeness = 0
