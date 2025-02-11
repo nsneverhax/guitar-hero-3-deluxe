@@ -93,6 +93,7 @@ main_menu_tip_angle_new = -5
 main_menu_tip_scale_initial = 0.95
 main_menu_tip_scale_new = 0.85
 main_menu_tip_animate_time = 1
+main_menu_tip_rgba = [190 225 255 250]
 
 menu_tips = [
 	"New and improved!"
@@ -133,6 +134,11 @@ menu_tips = [
 	"LESS GOOOOOOOO"
 	"Open source!"
 	"Fat free!"
+	"We love SecuROM!"
+	"Now With Denuvo Anti-Cheat!"
+	"We had infinite frontend before it was cool!"
+	"Hatsune Miku Isn't In This One."
+	"Oops, all Kool Thing"
 	"patches.q - Do Not Use!"
 	"lysix.q - Do Not Use!"
 	"Random splash!"
@@ -164,6 +170,7 @@ script get_platform_specific_text
 		Change platform_specific_text = "Job 1, 'GH3.app' terminated by signal SIGSEGV (Address boundary error)"
 	endif
 	AddArrayElement Array = ($menu_tips) Element = ($platform_specific_text)
+	Change menu_tips = <array>
 endscript
 
 script menu_text_hover 
@@ -2080,7 +2087,7 @@ script create_main_menu_backdrop
 		Pos = ($main_menu_tip_pos_initial)
 		Scale = ($main_menu_tip_scale_initial)
 		Dims = (600.0, 200.0)
-		rgba = ($menu_text_color)
+		rgba = ($main_menu_tip_rgba)
 		just = [Center Top]
 		font_spacing = 0
 		Shadow
