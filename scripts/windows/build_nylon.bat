@@ -2,8 +2,8 @@
 
 cd "%~dp0..\.."
 python dependencies\python\gen_version.py _qb/dx/dx_version.q
-python dependencies\python\configure_build.py gh3ml
+python dependencies\python\configure_build.py nylon
 
 if %errorlevel% neq 0 (pause /b %errorlevel% && exit /b %errorlevel%)
 
-start "" "%~dp0..\..\out\gh3ml"
+start "" "%~dp0..\..\out\nylon"

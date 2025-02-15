@@ -22,10 +22,18 @@ if not exist "IntelLaptopGaming.dll" (
 	exit /b
 )
 
-:: Check if gh3ml is installed
-if not exist "gh3ml.dll" (
-	echo ERROR: gh3ml is not installed. Please install gh3ml before continuing.
-	echo https://github.com/nsneverhax/gh3ml/releases
+:: Check if gh3ml is still installed
+if exist "gh3ml.dll" (
+	echo ERROR: You still have gh3ml installed, please remove it and install nylon instead.
+	echo https://github.com/nsneverhax/nylon/releases
+	pause
+	exit /b
+)
+
+:: Check if nylon is installed
+if not exist "nylon.dll" (
+	echo ERROR: nylon is not installed. Please install nylon before continuing.
+	echo https://github.com/nsneverhax/nylon/releases
 	pause
 	exit /b
 )
@@ -76,12 +84,12 @@ powershell -Command ^
 
 :: Update GH3DX to nightly if an update is found
 echo Updating Guitar Hero III Deluxe...
-powershell -Command "Invoke-WebRequest -Uri https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-gh3ml.zip -OutFile GH3DX-gh3ml.zip"
+powershell -Command "Invoke-WebRequest -Uri https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-nylon.zip -OutFile GH3DX-nylon.zip"
 echo Installing...
-powershell -Command "Expand-Archive -Path GH3DX-gh3ml.zip -DestinationPath '.' -Force"
+powershell -Command "Expand-Archive -Path GH3DX-nylon.zip -DestinationPath '.' -Force"
 
 :: cleanup cleanup everybody everywhere
-del /f /q GH3DX-gh3ml.zip
+del /f /q GH3DX-nylon.zip
 
 :: Save new commit to the cache file
 echo %latest_commit%>gh3dx_last_commit.txt
