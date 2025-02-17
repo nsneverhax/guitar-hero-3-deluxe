@@ -549,6 +549,8 @@ script GuitarEvent_SongWon \{battle_win = 0}
 	if ($enable_saving = 0)
 		Change lock_saving = 1
 	endif
+	dx_create_fc_hud
+	dx_fc_hud_watchdog
 	if NotCD
 		if ($output_gpu_log = 1)
 			if ISPS3

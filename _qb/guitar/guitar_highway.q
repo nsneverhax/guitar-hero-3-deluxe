@@ -145,3 +145,40 @@ endscript
 
 script create_highway_prepass 
 endscript
+
+script dx_create_fc_hud 
+	CreateScreenElement {
+		Type = TextElement
+		Id = dx_fc_hud
+		PARENT = root_window
+		Text = "FC"
+		font = text_a6
+		rgba = $deluxe_text_rgba
+		Pos = (635.0, 245.0)
+		Scale = 0.1
+		Alpha = 0.0
+		Shadow
+		shadow_rgba = $deluxe_text_shadow_rgba
+		shadow_offs = (2.0, 2.0)
+	}
+endscript
+
+script dx_destroy_fc_hud 
+	if ScreenElementExists Id = dx_fc_hud
+		DestroyScreenElement Id = dx_fc_hud
+	endif
+endscript
+
+script dx_fc_hud_watchdog 
+	p1_percent_complete = (100 * $player1_status.NOTES_HIT / $player1_status.total_notes)
+	p1_best_run = ($player1_status.best_run)
+	p1_total_notes = ($player1_status.total_notes)
+	if ((<p1_percent_complete> = 100) && (<p1_best_run> = <p1_total_notes>))
+		dx_fc_hud :DoMorph Alpha = 1.0
+		dx_fc_hud :DoMorph \{Scale = 1.0
+			Time = 0.2}
+	endif
+	Wait \{2
+		Seconds}
+	dx_destroy_fc_hud
+endscript
