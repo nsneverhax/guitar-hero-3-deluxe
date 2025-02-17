@@ -61,17 +61,19 @@ script dx_fc_hud_watchdog
 		return
 	endif
 	if ($fc_hud_moved = 0)
-		dx_fc_hud :SetProps Alpha = 1.0
+		;dx_fc_hud :SetProps Alpha = 1.0
 		dx_fc_hud :DoMorph {Pos = $fc_hud_new_pos
+            Alpha = 1.0
 			Time = 0.2
 			Motion = linear}
 		Change fc_hud_moved = 1
 	endif
 	if ($fc_hud_go_away = 1)
 		dx_fc_hud :DoMorph {Pos = $fc_hud_initial_pos
+            Alpha = 0.0
 			Time = 0.2
 			Motion = linear}
-		dx_fc_hud :SetProps Alpha = 0.0
+		;dx_fc_hud :SetProps Alpha = 0.0
 		Change fc_hud_go_away = 0
 	endif
 endscript
