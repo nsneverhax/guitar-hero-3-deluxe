@@ -21,6 +21,10 @@ script GuitarEvent_HitNote_Spawned
 	if ($fc_hud_moved = 0)
 		dx_fc_hud_watchdog
 	endif
+	if ($fc_glowburst_anim_started = 0)
+		RunScriptOnScreenElement \{Id = dx_fc_hud_glowburst animate_dx_fc_glowburst}
+		Change fc_glowburst_anim_started = 1
+	endif
 endscript
 
 script GuitarEvent_MissedNote 
@@ -61,6 +65,9 @@ script GuitarEvent_MissedNote
 	GetGlobalTags \{user_options}
 	if (<insta_fail> = 1)
 		GuitarEvent_SongFailed
+	endif
+	if ($fc_glowburst_anim_start = 1)
+		Change fc_glowburst_anim_start = 2
 	endif
 endscript
 
@@ -104,6 +111,9 @@ script GuitarEvent_UnnecessaryNote
 	GetGlobalTags \{user_options}
 	if (<insta_fail> = 1)
 		GuitarEvent_SongFailed
+	endif
+	if ($fc_glowburst_anim_start = 1)
+		Change fc_glowburst_anim_start = 2
 	endif
 endscript
 
