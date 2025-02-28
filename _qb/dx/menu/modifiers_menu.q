@@ -73,6 +73,11 @@ modifier_options = [
 		Description = "Disables miss sound effects"
 	}
 	{
+		Name = "Overlapping Star Power"
+		Id = SP_OVERLAP
+		Description = "You can now gain star power while having it activated!"
+	}
+	{
 		Name = "Prototype Star Power"
 		Id = PROTO_SP
 		Description = "Star Power popup from GH3 Prototype. May have problems in Multiplayer."
@@ -548,6 +553,23 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_miss_sfx = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case SP_OVERLAP
+			if ($overlapping_sp = 0)
+			 	change overlapping_sp = 1
+			 	Change enable_saving = 0
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				change overlapping_sp = 0
+				if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+		        	SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+				elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+					SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+					Change reenable_saving = 1
+				endif
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case PROTO_SP
 			if (<proto_sp> = 0)
 				SetGlobalTags user_options Params = {proto_sp = 1}
@@ -586,10 +608,10 @@ script menu_dx_mods_select
 		    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
 		        Change StructureName = player1_status bot_play = 0
 		        Change StructureName = player2_status bot_play = 0
-		        if ($lock_saving = 0 && $enable_button_cheats = 0)
+		        if ($lock_saving = 0 && $enable_button_cheats = 0 && $overlapping_sp = 0)
 		        	SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
-				elseif ($enable_button_cheats = 0)
+				elseif ($enable_button_cheats = 0 && $overlapping_sp = 0)
 					SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
 					Change reenable_saving = 1
@@ -604,10 +626,10 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_Check_SFX}
 			elseif
 				Change enable_button_cheats = 0
-				if ($lock_saving = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+				if ($lock_saving = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0)
 					SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
-				elseif ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+				elseif ($player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0)
 					SetGlobalTags user_options Params = {autosave = 1}
 					Change enable_saving = 1
 					Change reenable_saving = 1
@@ -827,6 +849,14 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
 				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case SP_OVERLAP
+			if ($overlapping_sp = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case PROTO_SP
