@@ -28,9 +28,9 @@ modifier_options = [
 		Description = "Your highway will be all black. This is very useful for note readability."
 	}
 	{
-		Name = "Transparent Highway"
+		Name = "Highway Translucence"
 		Id = TRANSPARENT_HIGHWAY
-		Description = "Your highway will be Transparent. See the Backgrounds with less of a distracting highway!"
+		Description = "Adjustable highway translucency. See the backgrounds with less of a distracting highway!"
 	}
 	{
 		Name = "Large Gems"
@@ -103,9 +103,14 @@ modifier_options = [
 		Description = "Removes all post-processing effects."
 	}
 	{
+		Name = "Frontrow Camera"
+		Id = FRONTROWCAMERA
+		Description = "Get up close and personal with the guitarist!"
+	}
+	{
 		Name = "Song Title Always"
 		Id = SONG_TITLE
-		Description = "Now you won't have to answer to \'Hey what song is this?\'"
+		Description = "Now you won't have to answer to \'Hey, what song is this?\'"
 	}
 	{
 		Name = "Select In Practice"
@@ -669,6 +674,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {nopostproc = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case FRONTROWCAMERA
+			if (<dx_frontrowcamera> = 0)
+				SetGlobalTags user_options Params = {dx_frontrowcamera = 1}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {dx_frontrowcamera = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case LARGEGEMS
 			if ((IsPS3) || (IsXenon))
 				if (<dx_large_gems> = 0)
@@ -709,6 +722,9 @@ endscript
 
 script set_transparent_highway
 	GetGlobalTags \{user_options}
+	if (<black_highway> = 1)
+		SetGlobalTags user_options Params = {black_highway = 0}
+	endif
 	transparent_level = ((-255 * <transparent_highway>) + 255)
 	CastToInteger transparent_level
 	SetArrayElement ArrayName = highway_normal GlobalArray Index = (3) NewValue = <transparent_level>
@@ -909,6 +925,14 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
 				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case FRONTROWCAMERA
+			if (<dx_frontrowcamera> = 1)
+				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case LARGEGEMS
