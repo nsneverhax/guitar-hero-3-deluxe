@@ -224,12 +224,11 @@ script load_dx_settings
 	GetGlobalTags \{user_options}
 	Change GlobalName = Cheat_HyperSpeed NewValue = <Cheat_HyperSpeed>
 	if (<black_highway> = 1)
-		Change highway_normal = $highway_black
-		Change highway_starpower = $highway_black
+		Change highway_normal = [0 0 0 255]
+		Change highway_starpower = [0 0 0 255]
 	endif
-	if (<transparent_highway> = 1)
-		Change highway_normal = $highway_transparent
-		Change highway_starpower = $highway_transparent
+	if NOT (<transparent_highway> = 0)
+		set_transparent_highway
 	endif
 	if (<song_title> = 1)
 		Change intro_sequence_props = $dx_intro_sequence_props

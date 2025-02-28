@@ -1,28 +1,3 @@
-highway_normal_original = [
-	255
-	255
-	255
-	255
-]
-highway_starpower_original = [
-	64
-	255
-	255
-	255
-]
-highway_black = [
-	0
-	0
-	0
-	255
-]
-highway_transparent = [
-	0
-	0
-	0
-	0
-]
-
 ; some stuff for newgen
 dx_large_gem_scale = 1.5
 gem_start_scale1_normal = 0.25
@@ -455,41 +430,35 @@ endscript
 script menu_dx_mods_select
 	Change dx_settings_changed = 1
 	GetGlobalTags \{user_options}
+	transparent_highway_int = <transparent_highway>
+	CastToInteger transparent_highway_int
 	switch (($modifier_options [$selected_modifier_index].Id))
 		case BLACK_HIGHWAY
 			if (<black_highway> = 0)
-				if (<transparent_highway> = 1)
-					SetGlobalTags user_options Params = {transparent_highway = 0}
-					FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (1)
-					menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (1)
-				endif
 			 	SetGlobalTags user_options Params = {black_highway = 1}
-			 	Change highway_normal = $highway_black
-				Change highway_starpower = $highway_black
+			 	Change highway_normal = [0 0 0 255]
+				Change highway_starpower = [0 0 0 255]
+				if NOT (<transparent_highway> = 0)
+					set_transparent_highway
+				endif
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				SetGlobalTags user_options Params = {black_highway = 0}
-				Change highway_normal = $highway_normal_original
-				Change highway_starpower = $highway_starpower_original
+				Change highway_normal = [255 255 255 255]
+				Change highway_starpower = [64 255 255 255]
+				if NOT (<transparent_highway> = 0)
+					set_transparent_highway
+				endif
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case TRANSPARENT_HIGHWAY
-			if (<transparent_highway> = 0)
-				if (<black_highway> = 1)
-					SetGlobalTags user_options Params = {black_highway = 0}
-					FormatText ChecksumName = mods_text_id 'mods_text_%d' D = (0)
-					menu_dx_mods_setprop Element_Id = <mods_text_id> Index = (0)
-				endif
-			 	SetGlobalTags user_options Params = {transparent_highway = 1}
-			 	Change highway_normal = $highway_transparent
-				Change highway_starpower = $highway_transparent
-			 	SoundEvent \{Event = CheckBox_Check_SFX}
-			else
+			if (<transparent_highway_int> = 1)
 				SetGlobalTags user_options Params = {transparent_highway = 0}
-				Change highway_normal = $highway_normal_original
-				Change highway_starpower = $highway_starpower_original
 				SoundEvent \{Event = CheckBox_SFX}
+			else
+				SetGlobalTags user_options Params = {transparent_highway = (<transparent_highway> + 0.05)}
 			endif
+			set_transparent_highway
 		case BLACK_BACKGROUND
 			if (<black_background> = 0)
 			 	SetGlobalTags user_options Params = {black_background = 1}
@@ -715,6 +684,14 @@ script menu_dx_mods_select
 	menu_dx_mods_setprop Element_Id = <mods_text_id> Index = ($selected_modifier_index)
 endscript
 
+script set_transparent_highway
+	GetGlobalTags \{user_options}
+	transparent_level = ((-255 * <transparent_highway>) + 255)
+	CastToInteger transparent_level
+	SetArrayElement ArrayName = highway_normal GlobalArray Index = (3) NewValue = <transparent_level>
+	SetArrayElement ArrayName = highway_starpower GlobalArray Index = (3) NewValue = <transparent_level>
+endscript
+
 script dx_set_postproc {Action = NONE}
 	; this looks bad i know, but if it aint broke dont fix it - Charlotte/kernaltrap8
 	switch <Action>
@@ -752,6 +729,8 @@ endscript
 script menu_dx_mods_setprop
 	GetGlobalTags \{user_options}
 	mod_id = ($modifier_options [<Index>].Id)
+	transparent_highway_int = (<transparent_highway> * 100)
+	CastToInteger transparent_highway_int
 	switch (<mod_id>)
 		case BLACK_HIGHWAY
 			if (<black_highway> = 1)
@@ -762,11 +741,11 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case TRANSPARENT_HIGHWAY
-			if (<transparent_highway> = 1)
-			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
-				<Element_Id> :SetProps text = <mod_text>
-			elseif
+			if (<transparent_highway> = 0)
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			else
+				FormatText TextName = mod_text '%n: %p\%' n = ($modifier_options [<Index>].Name) p = <transparent_highway_int>
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case BLACK_BACKGROUND
