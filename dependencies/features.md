@@ -6,6 +6,7 @@
 * Faster boot time
 * Reduced saving/loading times
 * New "Deluxe Settings" menu for new modifications
+* Option to enable gaining star power while activated
 * Option to unlock all cheats/songs/characters
 * Option to enable the "Debug Menu" and other debugging features
 * Option to destroy notes when they are hit instead of waiting to get to the strikeline
