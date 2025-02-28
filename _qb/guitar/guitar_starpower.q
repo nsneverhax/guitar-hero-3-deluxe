@@ -22,6 +22,14 @@ script Do_StarPower_StageFX
 		SpawnScriptLater Do_StarPower_TeslaFX Id = <scriptID> Params = {<...>}
 	endswitch
 endscript
+script star_power_reset 
+	Change StructureName = <player_status> star_power_amount = 0.0
+	Change StructureName = <player_status> star_power_sequence = 0
+	Change StructureName = <player_status> star_power_note_count = 0
+	Change StructureName = <player_status> star_power_used = 0
+	Change StructureName = <player_status> star_power_overlap = 0
+	Change StructureName = <player_status> current_star_array_entry = 0
+endscript
 script proto_show_star_power_ready 
 	if ($<player_status>.star_power_used = 1 ||
 			$is_attract_mode = 1)
@@ -155,6 +163,9 @@ script show_star_power_ready
     if ($Cheat_PerformanceMode = 1)
         return
     endif
+	if ($<player_status>.star_power_overlap = 1)
+		return
+	endif
     if ($game_mode = p2_career || $game_mode = p2_coop)
         player_status = player1_status
         player_status = player2_status
