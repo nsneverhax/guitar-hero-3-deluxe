@@ -40,6 +40,19 @@ script song_ended_menu_select_new_song
 	endif
 endscript
 
+script practice_warning_menu_select_practice 
+	dx_reset_fc_counters
+	get_song_struct Song = ($current_song)
+	if StructureContains Structure = <song_struct> boss
+		player_device = ($primary_controller)
+		if IsGuitarController controller = <player_device>
+			ui_flow_manager_respond_to_action \{action = continue_tutorial}
+		endif
+	else
+		ui_flow_manager_respond_to_action \{action = Continue}
+	endif
+endscript
+
 script dx_reset_fc_counters 
 	Change dont_create_fc_hud = 0
 	Change fc_hud_spawned = 0
