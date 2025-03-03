@@ -560,7 +560,7 @@ endscript
 
 script highway_pulse_black 
 	GetGlobalTags \{user_options}
-	if ((<black_highway> = 1) || (<transparent_highway> = 1))
+	if ((<black_highway> = 1) || (<transparent_highway> > 0))
 		return
 	endif
 	<half_time> = ($highway_pulse_time / 2.0)

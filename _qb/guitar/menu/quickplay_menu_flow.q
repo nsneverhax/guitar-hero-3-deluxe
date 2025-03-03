@@ -46,6 +46,8 @@ script quickplay_start_song \{device_num = 0}
 	else
 		Change current_level = z_viewer
 	endif
+
+	dx_reset_fc_counters
 	
 	start_song device_num = <device_num>
 endscript
