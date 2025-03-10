@@ -227,7 +227,7 @@ script load_dx_settings
 		Change highway_normal = [0 0 0 255]
 		Change highway_starpower = [0 0 0 255]
 	endif
-	if NOT (<transparent_highway> = 0)
+	if (<transparent_highway> > 0)
 		set_transparent_highway
 	endif
 	if (<song_title> = 1)

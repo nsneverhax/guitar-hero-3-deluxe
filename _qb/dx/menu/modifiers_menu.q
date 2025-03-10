@@ -449,7 +449,7 @@ script menu_dx_mods_select
 			 	SetGlobalTags user_options Params = {black_highway = 1}
 			 	Change highway_normal = [0 0 0 255]
 				Change highway_starpower = [0 0 0 255]
-				if NOT (<transparent_highway> = 0)
+				if (<transparent_highway> > 0)
 					set_transparent_highway
 				endif
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
@@ -457,7 +457,7 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {black_highway = 0}
 				Change highway_normal = [255 255 255 255]
 				Change highway_starpower = [64 255 255 255]
-				if NOT (<transparent_highway> = 0)
+				if (<transparent_highway> > 0)
 					set_transparent_highway
 				endif
 				SoundEvent \{Event = CheckBox_SFX}
@@ -722,9 +722,6 @@ endscript
 
 script set_transparent_highway
 	GetGlobalTags \{user_options}
-	if (<black_highway> = 1)
-		SetGlobalTags user_options Params = {black_highway = 0}
-	endif
 	transparent_level = ((-255 * <transparent_highway>) + 255)
 	CastToInteger transparent_level
 	SetArrayElement ArrayName = highway_normal GlobalArray Index = (3) NewValue = <transparent_level>
