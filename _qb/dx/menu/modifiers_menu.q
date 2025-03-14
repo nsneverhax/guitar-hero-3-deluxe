@@ -655,6 +655,9 @@ script menu_dx_mods_select
 			SetGlobalTags user_options Params = {unlock_Cheat_EasyExpert = 1}
 			SetGlobalTags user_options Params = {unlock_Cheat_PrecisionMode = 1}
 			SetGlobalTags user_options Params = {unlock_Cheat_BretMichaels = 1}
+			SetGlobalTags user_options Params = {Cheat_AirGuitar = 2}
+			SetGlobalTags user_options Params = {Cheat_NoFail = 2}
+			SetGlobalTags user_options Params = {Cheat_BretMichaels = 2}
 		case AWESOMENESS
 			if (<awesomeness> = 0)
 			 	SetGlobalTags user_options Params = {awesomeness = 1}

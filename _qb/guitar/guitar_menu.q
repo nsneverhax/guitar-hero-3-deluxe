@@ -223,6 +223,9 @@ endscript
 script load_dx_settings
 	GetGlobalTags \{user_options}
 	Change GlobalName = Cheat_HyperSpeed NewValue = <Cheat_HyperSpeed>
+	Change GlobalName = Cheat_AirGuitar NewValue = <Cheat_AirGuitar>
+	Change GlobalName = Cheat_NoFail NewValue = <Cheat_NoFail>
+	Change GlobalName = Cheat_BretMichaels NewValue = <Cheat_BretMichaels>
 	if (<black_highway> = 1)
 		Change highway_normal = [0 0 0 255]
 		Change highway_starpower = [0 0 0 255]

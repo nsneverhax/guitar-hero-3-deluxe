@@ -29,13 +29,16 @@ script setup_user_option_tags
 			online_tie_breaker = 0
 			online_highway = 0
 			unlock_Cheat_AirGuitar = 0
+			Cheat_AirGuitar = 0
 			unlock_Cheat_PerformanceMode = 0
 			unlock_Cheat_Hyperspeed = 0
 			Cheat_HyperSpeed = 0
 			unlock_Cheat_NoFail = 0
+			Cheat_NoFail = 0
 			unlock_Cheat_EasyExpert = 0
 			unlock_Cheat_PrecisionMode = 0
 			unlock_Cheat_BretMichaels = 0
+			Cheat_BretMichaels = 0
 			unlock_Cheat_LargeGems = 0
 			black_highway = 0
 			black_background = 0
