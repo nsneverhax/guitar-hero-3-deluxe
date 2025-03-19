@@ -1,3 +1,55 @@
+setlist_event_handlers = [
+	{
+		pad_up
+		setlist_scroll
+		Params = {
+			Dir = UP
+		}
+	}
+	{
+		pad_down
+		setlist_scroll
+		Params = {
+			Dir = DOWN
+		}
+	}
+	{
+		pad_back
+		setlist_go_back
+	}
+	{
+		pad_option2
+		change_tab
+		Params = {
+			tab = tab_setlist
+			button = 1
+		}
+	}
+	{
+		pad_option
+		change_tab
+		Params = {
+			tab = tab_bonus
+			button = 1
+		}
+	}
+	{
+		pad_L1
+		change_tab
+		Params = {
+			tab = tab_downloads
+			button = 1
+		}
+	}
+	{
+		pad_start
+		menu_show_gamercard
+	}
+	{
+		pad_select
+		dx_get_random_song
+	}
+]
 script display_as_made_famous_by \{rot_angle = -7
 		time = 0.25}
 	destroy_menu \{menu_id = setlist_original_artist}

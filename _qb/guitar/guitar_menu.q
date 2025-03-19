@@ -2140,3 +2140,200 @@ script create_main_menu_backdrop
 		z_priority = 61
 	}
 endscript
+script add_user_control_helper \{Z = 10
+		pill = 1
+		fit_to_rectangle = 1}
+	Scale = ($user_control_pill_scale)
+	Pos = ((0.0, 1.0) * ($user_control_pill_y_position))
+	buttonoff = (0.0, 0.0)
+	if NOT ScreenElementExists \{Id = user_control_container}
+		CreateScreenElement \{Id = user_control_container
+			Type = ContainerElement
+			PARENT = root_window
+			Pos = (0.0, 0.0)}
+	endif
+	if GotParam \{button}
+		switch (<button>)
+			case Green
+			buttonchar = "\\m0"
+			case RED
+			buttonchar = "\\m1"
+			case Yellow
+			buttonchar = "\\b6"
+			case BLUE
+			buttonchar = "\\b7"
+			case Orange
+			buttonchar = "\\b8"
+			case Strumbar
+			buttonchar = "\\bb"
+			offset_for_strumbar = 1
+			case Start
+			buttonchar = "\\ba"
+			offset_for_strumbar = 1
+			case Select
+			buttonchar = "\\b9"
+		endswitch
+	else
+		buttonchar = ""
+	endif
+	if (<pill> = 0)
+		CreateScreenElement {
+			Type = TextElement
+			PARENT = user_control_container
+			Text = <buttonchar>
+			Pos = (<Pos> + (-10.0, 8.0) * <Scale> + <buttonoff>)
+			Scale = (1 * <Scale>)
+			rgba = [255 255 255 255]
+			font = ($gh3_button_font)
+			just = [LEFT Top]
+			z_priority = (<Z> + 0.1)
+		}
+		CreateScreenElement {
+			Type = TextElement
+			PARENT = user_control_container
+			Text = <Text>
+			rgba = $user_control_pill_text_color
+			Scale = (1.0 * <Scale>)
+			Pos = (<Pos> + (50.0, 0.0) * <Scale> + (0.0, 20.0) * <Scale>)
+			font = ($user_control_text_font)
+			z_priority = (<Z> + 0.1)
+			just = [LEFT Top]
+		}
+		if (<fit_to_rectangle> = 1)
+			SetScreenElementProps Id = <Id> Scale = (1.1 * <Scale>)
+			GetScreenElementDims Id = <Id>
+			if (<width> > $pill_helper_max_width)
+				fit_text_in_rectangle Id = <Id> Dims = ($pill_helper_max_width * (0.5, 0.0) + <Height> * (0.0, 1.0) * $user_control_pill_scale)
+			endif
+		endif
+	else
+		if (($user_control_super_pill = 0) && ($user_control_auto_center = 0))
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = user_control_container
+				Text = <Text>
+				Id = <textid>
+				rgba = $user_control_pill_text_color
+				Scale = (1.1 * <Scale>)
+				Pos = (<Pos> + (50.0, 0.0) * <Scale> + (0.0, 20.0) * <Scale>)
+				font = ($user_control_text_font)
+				z_priority = (<Z> + 0.1)
+				just = [LEFT Top]
+			}
+			textid = <Id>
+			if (<fit_to_rectangle> = 1)
+				SetScreenElementProps Id = <Id> Scale = (1.1 * <Scale>)
+				GetScreenElementDims Id = <Id>
+				if (<width> > $pill_helper_max_width)
+					fit_text_in_rectangle Id = <Id> Dims = ($pill_helper_max_width * (0.5, 0.0) + <Height> * (0.0, 1.0) * $user_control_pill_scale)
+				endif
+			endif
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = user_control_container
+				Id = <buttonid>
+				Text = <buttonchar>
+				Pos = (<Pos> + (-10.0, 8.0) * <Scale> + <buttonoff>)
+				Scale = (1 * <Scale>)
+				rgba = [255 255 255 255]
+				font = ($gh3_button_font)
+				just = [LEFT Top]
+				z_priority = (<Z> + 0.1)
+			}
+			buttonid = <Id>
+			if GotParam \{offset_for_strumbar}
+				<textid> :SetTags is_strumbar = 1
+				fastscreenelementpos Id = <textid> absolute
+				SetScreenElementProps Id = <textid> Pos = (<ScreenELementPos> + (50.0, 0.0) * <Scale>)
+			else
+			endif
+			fastscreenelementpos Id = <buttonid> absolute
+			top_left = <ScreenELementPos>
+			fastscreenelementpos Id = <textid> absolute
+			bottom_right = <ScreenELementPos>
+			GetScreenElementDims Id = <textid>
+			bottom_right = (<bottom_right> + (1.0, 0.0) * <width> + (0.0, 1.0) * <Height>)
+			pill_width = ((1.0, 0.0).<bottom_right> - (1.0, 0.0).<top_left>)
+			pill_height = ((0.0, 1.0).<bottom_right> - (0.0, 1.0).<top_left>)
+			pill_y_offset = (<pill_height> * 0.2)
+			pill_height = (<pill_height> + <pill_y_offset>)
+			<Pos> = (<Pos> + (0.0, 1.0) * (<Scale> * 3))
+			CreateScreenElement {
+				Type = SpriteElement
+				PARENT = user_control_container
+				texture = Control_pill_body
+				Dims = ((1.0, 0.0) * <pill_width> + (0.0, 1.0) * <pill_height>)
+				Pos = (<Pos> + (0.0, -0.5) * <pill_y_offset>)
+				rgba = ($user_control_pill_color)
+				just = [LEFT Top]
+				z_priority = <Z>
+			}
+			CreateScreenElement {
+				Type = SpriteElement
+				PARENT = user_control_container
+				texture = Control_pill_end
+				Dims = ((1.0, 0.0) * (<Scale> * $user_control_pill_end_width) + (0.0, 1.0) * <pill_height>)
+				Pos = (<Pos> + (0.0, -0.5) * <pill_y_offset>)
+				rgba = ($user_control_pill_color)
+				just = [RIGHT Top]
+				z_priority = <Z>
+				flip_v
+			}
+			CreateScreenElement {
+				Type = SpriteElement
+				PARENT = user_control_container
+				texture = Control_pill_end
+				Dims = ((1.0, 0.0) * (<Scale> * $user_control_pill_end_width) + (0.0, 1.0) * <pill_height>)
+				Pos = (<Pos> + (0.0, -0.5) * <pill_y_offset> + (1.0, 0.0) * <pill_width>)
+				rgba = ($user_control_pill_color)
+				just = [LEFT Top]
+				z_priority = <Z>
+			}
+		else
+			FormatText ChecksumName = textid 'uc_text_%d' D = ($num_user_control_helpers)
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = user_control_container
+				Text = <Text>
+				Id = <textid>
+				rgba = $user_control_pill_text_color
+				Scale = (1.1 * <Scale>)
+				Pos = (<Pos> + (50.0, 0.0) * <Scale> + (0.0, 20.0) * <Scale>)
+				font = ($user_control_text_font)
+				z_priority = (<Z> + 0.1)
+				just = [LEFT Top]
+			}
+			if (<fit_to_rectangle> = 1)
+				SetScreenElementProps Id = <Id> Scale = (1.1 * <Scale>)
+				GetScreenElementDims Id = <Id>
+				if (<width> > $pill_helper_max_width)
+					fit_text_in_rectangle Id = <Id> Dims = ($pill_helper_max_width * (0.5, 0.0) + <Height> * (0.0, 1.0) * $user_control_pill_scale)
+				endif
+			endif
+			FormatText ChecksumName = buttonid 'uc_button_%d' D = ($num_user_control_helpers)
+			CreateScreenElement {
+				Type = TextElement
+				PARENT = user_control_container
+				Id = <buttonid>
+				Text = <buttonchar>
+				Pos = (<Pos> + (-10.0, 8.0) * <Scale> + <buttonoff>)
+				Scale = (1.2 * <Scale>)
+				rgba = [255 255 255 255]
+				font = ($gh3_button_font)
+				just = [LEFT Top]
+				z_priority = (<Z> + 0.1)
+			}
+			if GotParam \{offset_for_strumbar}
+				<textid> :SetTags is_strumbar = 1
+				fastscreenelementpos Id = <textid> absolute
+				SetScreenElementProps Id = <textid> Pos = (<ScreenELementPos> + (50.0, 0.0) * <Scale>)
+			endif
+			Change num_user_control_helpers = ($num_user_control_helpers + 1)
+		endif
+	endif
+	if ($user_control_super_pill = 1)
+		user_control_build_super_pill Z = <Z>
+	elseif ($user_control_auto_center = 1)
+		user_control_build_pills Z = <Z>
+	endif
+endscript
