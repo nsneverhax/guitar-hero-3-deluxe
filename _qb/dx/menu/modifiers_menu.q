@@ -18,6 +18,7 @@ mods_menu_index = 0
 ;dont save these options
 firework_gems = 0
 overlapping_sp = 0
+hugehitwindow = 0
 
 scroller_rgba = [210 130 0 250]
 
@@ -41,6 +42,11 @@ modifier_options = [
 		Name = "Firework Gems"
 		Id = FIREWORK_GEMS
 		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
+	}
+	{
+		Name = "Huge Hit Window"
+		Id = HUGE_HIT_WINDOW
+		Description = "Massive hit window. Just like Clone Hero!"
 	}
 	{
 		Name = "Flames"
@@ -534,6 +540,27 @@ script menu_dx_mods_select
 				change firework_gems = 0
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case HUGE_HIT_WINDOW
+			if ($hugehitwindow = 0)
+				Change hugehitwindow = 1
+				Change check_time_early = ($original_check_time_early * 4)
+				Change check_time_late = ($original_check_time_late * 4)
+			 	Change enable_saving = 0
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				Change hugehitwindow = 0
+				Change check_time_early = ($original_check_time_early)
+				Change check_time_late = ($original_check_time_late)
+				if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+		        	SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+				elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
+					SetGlobalTags user_options Params = {autosave = 1}
+					Change enable_saving = 1
+					Change reenable_saving = 1
+				endif
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 0)
 			 	SetGlobalTags user_options Params = {no_whammy_pitch_shift = 1}
@@ -837,6 +864,14 @@ script menu_dx_mods_setprop
 			endif
 		case FIREWORK_GEMS
 			if ($firework_gems = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case HUGE_HIT_WINDOW
+			if ($hugehitwindow = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
