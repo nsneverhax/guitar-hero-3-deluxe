@@ -25,15 +25,11 @@
 
 ![last updated:](https://img.shields.io/github/last-commit/nsneverhax/guitar-hero-3-deluxe?label=last%20updated%3A)
 
-### 📥 [PC (with nylon)](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/platform/nylon/gh3dx.bat) (recommended)
-#### 📥 [PC (w/o nylon)](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
+#### 📥 [PC](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip)
 
 
 > Continue to: 
-    - [Installing on PC (with nylon)](#-installing-on-pc-with-nylon)
-    - [Installing on PC (w/o nylon)](#-installing-on-pc-w-o-nylon)
-
-> Installing [**with** nylon](https://github.com/nsneverhax/nylon/releases) is recommended, as no vanilla files need to be touched and the mod will update automatically.
+    - [Installing on PC](#-installing-on-pc)
 
 ### 📥 [Xbox 360](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-Xbox.zip)
 
@@ -58,35 +54,18 @@
 
 ### Select your Platform of Choice
 
-  - [PC (with nylon)](#-installing-on-pc-with-nylon)
-  - [PC (w/o nylon)](#-installing-on-pc-w-o-nylon)
+  - [PC](#-installing-on-pc)
   - [RPCS3](#-installing-on-rpcs3)
   - [PlayStation 3](#-installing-on-ps3)
   - [Xbox 360](#-installing-on-xbox-360)
 
 <br/>
 
-## 📩 Installing on PC (with [nylon](https://github.com/nsneverhax/nylon/releases))
-
-* Install Guitar Hero III on your PC, then install [**nylon**](https://github.com/nsneverhax/nylon/releases).
-
-* Download the [**Guitar Hero III Deluxe Initializer**](https://github.com/nsneverhax/guitar-hero-3-deluxe/blob/main/platform/nylon/gh3dx.bat) (gh3dx.bat)
-
-  * Place it in the folder where you have Guitar Hero III installed, then run it.
-
-### ✅ ***Guitar Hero III Deluxe is now installed!***
-
-> When you run *Guitar Hero III Deluxe* from the desktop or start menu shortcuts, it will update automatically!
-
-<br/>
-
-## 📩 Installing on PC (w/o nylon)
-
-> Using GH3DX without nylon is not recommended as vanilla files need to be overwritten. Only use this if you are unable to use nylon.
+## 📩 Installing on PC
 
 * Install Guitar Hero III on your PC.
 
-* Download [**Guitar Hero III Deluxe for PC (w/o nylon)**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip).
+* Download [**Guitar Hero III Deluxe for PC**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip).
 
   * Extract the zip and copy the contents to where you have Guitar Hero III installed.
 
@@ -155,4 +134,4 @@
 
 [Python](https://www.python.org/downloads/) - For user script functionality (requires 3.10 or newer!)
 
-[Honeycomb](https://github.com/AddyMills/Honeycomb-CLI/releases/latest) - For Compiling Deluxe q script files
+[Honeycomb](https://github.com/AddyMills/Honeycomb-CLI/releases/latest) - For compiling Deluxe Q Script files
