@@ -2171,7 +2171,7 @@ script add_user_control_helper \{Z = 10
 			buttonchar = "\\ba"
 			offset_for_strumbar = 1
 			case Select
-			buttonchar = "\\b9"
+            buttonchar = "\\b9"
 		endswitch
 	else
 		buttonchar = ""
@@ -2193,7 +2193,7 @@ script add_user_control_helper \{Z = 10
 			PARENT = user_control_container
 			Text = <Text>
 			rgba = $user_control_pill_text_color
-			Scale = (1.0 * <Scale>)
+			Scale = (1.1 * <Scale>)
 			Pos = (<Pos> + (50.0, 0.0) * <Scale> + (0.0, 20.0) * <Scale>)
 			font = ($user_control_text_font)
 			z_priority = (<Z> + 0.1)

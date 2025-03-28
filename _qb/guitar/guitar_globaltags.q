@@ -57,7 +57,8 @@ script setup_user_option_tags
 			dx_large_gems = 0
 			insta_fail = 0
 			proto_sp = 0
-			dx_frontrowcamera = 1
+			dx_frontrowcamera = 0
+			dx_brutal_mode = 0
 		}}
 endscript
 default_songtagswithdifficulty = {

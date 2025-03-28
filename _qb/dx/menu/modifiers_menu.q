@@ -49,6 +49,11 @@ modifier_options = [
 		Description = "Massive hit window. Just like Clone Hero!"
 	}
 	{
+		Name = "Brutal Mode"
+		Id = BRUTAL_MODE
+		Description = "Punish yourself!"
+	}
+	{
 		Name = "Flames"
 		Id = NO_FLAMES
 		Description = "Flames no longer appear when hitting notes."
@@ -561,6 +566,18 @@ script menu_dx_mods_select
 				endif
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case BRUTAL_MODE
+			if (<dx_brutal_mode> = 0)
+				Change check_time_early = ($original_check_time_early / 3)
+				Change check_time_late = ($original_check_time_late / 3)
+				SetGlobalTags user_options Params = {dx_brutal_mode = 1}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				Change check_time_early = ($original_check_time_early)
+				Change check_time_late = ($original_check_time_late)
+				SetGlobalTags user_options Params = {dx_brutal_mode = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case NO_WHAMMY_PITCH_SHIFT
 			if (<no_whammy_pitch_shift> = 0)
 			 	SetGlobalTags user_options Params = {no_whammy_pitch_shift = 1}
@@ -872,6 +889,14 @@ script menu_dx_mods_setprop
 			endif
 		case HUGE_HIT_WINDOW
 			if ($hugehitwindow = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case BRUTAL_MODE
+			if (<dx_brutal_mode> = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
