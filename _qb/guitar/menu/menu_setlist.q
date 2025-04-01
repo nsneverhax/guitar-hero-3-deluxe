@@ -106,6 +106,12 @@ script display_as_made_famous_by \{rot_angle = -7
 endscript
 
 script create_as_made_famous_by 
+
+	if ((IsNGC) || (IsPS2))
+		create_as_made_famous_by_PSWii <...>
+		return
+	endif
+
 	CreateScreenElement \{Type = ContainerElement
 		parent = root_window
 		id = setlist_original_artist
@@ -136,6 +142,85 @@ script create_as_made_famous_by
 		]
 		dims = (130.0, 25.0)
 		Pos = (50.0, 0.0)
+		rgba = [
+			223
+			223
+			223
+			255
+		]
+		z = 501}
+	displayText \{parent = setlist_original_artist
+		id = sl_oa_asmade
+		text = "AS MADE"
+		font = text_a3
+		just = [
+			center
+			top
+		]
+		Pos = (50.0, -25.0)
+		z = 502
+		Scale = (0.8, 0.5)
+		rgba = [
+			223
+			223
+			223
+			255
+		]
+		noshadow}
+	fit_text_in_rectangle id = <id> dims = (75.0, 15.0)
+	displayText \{parent = setlist_original_artist
+		id = sl_oa_famousby
+		text = "FAMOUS BY"
+		just = [
+			center
+			top
+		]
+		font = text_a3
+		Pos = (50.0, 0.0)
+		z = 502
+		Scale = (0.72499996, 0.5)
+		rgba = [
+			0
+			0
+			0
+			255
+		]
+		noshadow}
+	fit_text_in_rectangle id = <id> dims = (90.0, 15.0)
+endscript
+
+script create_as_made_famous_by_PSWii 
+	; all this changes is the rectangle positions i couldnt just make a position variable and change it accordingly for whatever reason - evie
+	CreateScreenElement \{Type = ContainerElement
+		parent = root_window
+		id = setlist_original_artist
+		rot_angle = -7
+		alpha = 0}
+	displaySprite \{parent = setlist_original_artist
+		id = sl_oa_back
+		tex = white
+		dims = (130.0, 50.0)
+		just = [
+			center
+			top
+		]
+		Pos = (50.0, -12.5)
+		rgba = [
+			0
+			0
+			0
+			255
+		]
+		z = 500}
+	displaySprite \{parent = setlist_original_artist
+		id = sl_oa_fore
+		tex = white
+		just = [
+			center
+			top
+		]
+		dims = (130.0, 25.0)
+		Pos = (50.0, 12.5)
 		rgba = [
 			223
 			223

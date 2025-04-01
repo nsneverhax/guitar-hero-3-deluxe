@@ -1004,6 +1004,9 @@ script menu_dx_mods_setprop
 					FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 					<Element_Id> :SetProps text = <mod_text>
 				endif
+			else 
+				FormatText TextName = mod_text '%n: Unavailable' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case INSTA_FAIL
 			if (<insta_fail> = 1)

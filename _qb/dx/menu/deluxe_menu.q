@@ -351,14 +351,6 @@ script select_dispfps
 	toggle_dispfps_setprop
 endscript
 
-script 0x4511087e 
-	begin
-	FormatText TextName = 0x0b076348 "%a FPS" A = ($framerate_value)
-	SetScreenElementProps Id = 0xeb440d42 Text = <0x0b076348>
-	Wait 0.4 Second
-	repeat
-endscript
-
 script change_dispfps_text 
 	ondisp_dispfps_text = 0
 	GetGlobalTags $0xaebf2394 noassert = 1
@@ -370,67 +362,114 @@ script 0x34e762be
 endscript
 0xaebf2394 = 0x838c0d91
 
+framerate_warning = 57.5
+
 script enable_dispfps 
-	if ((IsNGC) || (IsPS2))
-		<OSFPSPos> = (160.0, 35.0)
-	else
-		<OSFPSPos> = (80.0, 35.0)
-	endif
-
 	change_dispfps_text
-
-	if (<ondisp_dispfps_text> = 1)
-		if NOT ObjectExists Id = 0x419bc9e7
-			SetScreenElementLock Id = root_window OFF
-			CreateScreenElement {
-				Type = ContainerElement
-				PARENT = root_window
-				Id = 0x419bc9e7
-				Pos = <OSFPSPos>
-				just = [LEFT Center]
-			}
-			if ((IsPS2) || (IsNGC))
-				fps_pos = (102.0, 6.0)
-				black_pos = (100.0, 0.0)
-			else
-				fps_pos = (4.0, 6.0)
-				black_pos = (0.0, 0.0)
-			endif
-			CreateScreenElement {
-				Type = TextElement
-				PARENT = 0x419bc9e7
-				Id = 0xeb440d42
-				Pos = <fps_pos>
-				Text = "??? FPS"
-				font = fontgrid_title_gh3
-				rgba = [255 255 255 255]
-				just = [LEFT Center]
-				Scale = 0.65
-				z_priority = 100
-			}
-			CreateScreenElement {
-				Type = SpriteElement
-				PARENT = 0x419bc9e7
-				Pos = <black_pos>
-				texture = white2
-				rgba = [0 0 0 255]
-				just = [LEFT Center]
-				Scale = (2.5, 0.5)
-				z_priority = 99
-			}
-			SetScreenElementLock Id = root_window ON
-		endif
-		if NOT ScriptIsRunning 0x4511087e
-			SpawnScriptLater 0x4511087e
+	if (<ondisp_dispfps_text> = 0)
+		killspawnedscript \{name = refreshfpsdisplay}
+		wait \{0.2
+			seconds}
+		if objectexists \{id = fps_anchor}
+			destroyscreenelement \{id = fps_anchor}
 		endif
 	else
-		if ScriptIsRunning 0x4511087e
-			KillSpawnedScript Name = 0x4511087e
+		setscreenelementlock \{id = root_window
+			off}
+		if objectexists \{id = fps_anchor}
+			destroyscreenelement \{id = fps_anchor}
 		endif
-		if ObjectExists Id = 0x419bc9e7
-			DestroyScreenElement Id = 0x419bc9e7
-		endif
+		createscreenelement \{type = containerelement
+			parent = root_window
+			id = fps_anchor
+			pos = (30.0, 140.0)
+			just = [
+				center
+				center
+			]
+			internal_just = [
+				left
+				center
+			]}
+		createscreenelement \{type = textelement
+			parent = fps_anchor
+			id = fps_text
+			pos = (20.0, -15.0)
+			text = "FPS: "
+			font = text_a1
+			rgba = [
+				120
+				120
+				200
+				200
+			]
+			just = [
+				left
+				center
+			]
+			scale = 0.75
+			z_priority = 100}
+		createscreenelement \{type = spriteelement
+			parent = fps_anchor
+			pos = (16.0, -34.0)
+			texture = white2
+			rgba = [
+				10
+				10
+				10
+				180
+			]
+			just = [
+				left
+				top
+			]
+			scale = (2.55, 0.6)
+			z_priority = 99}
+		setscreenelementlock \{id = root_window
+			on}
+		spawnscriptlater \{refreshfpsdisplay}
 	endif
+endscript
+fps_display_hold_red = 0
+
+script refreshfpsdisplay \{interval = 0.1}
+	begin
+	if objectexists \{id = fps_anchor}
+		formattext textname = fps "FPS: %d" d = ($framerate_value)
+		setscreenelementprops id = fps_text text = <fps>
+		if (($framerate_value) < $framerate_warning)
+			change \{fps_display_hold_red = 60}
+			setscreenelementprops \{id = fps_text
+				rgba = [
+					160
+					20
+					20
+					255
+				]}
+		elseif ($fps_display_hold_red > 0)
+			setscreenelementprops \{id = fps_text
+				rgba = [
+					160
+					20
+					20
+					255
+				]}
+			change fps_display_hold_red = ($fps_display_hold_red - 1)
+		else
+			setscreenelementprops \{id = fps_text
+				rgba = [
+					200
+					200
+					200
+					255
+				]}
+		endif
+	else
+		killspawnedscript \{id = refreshfpsdisplay}
+	endif
+	wait \{0.1
+		seconds}
+	repeat
 endscript
 
 script 0x1e5afd34 

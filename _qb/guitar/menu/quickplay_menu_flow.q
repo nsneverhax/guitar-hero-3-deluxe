@@ -99,6 +99,12 @@ script setlist_show_helperbar \{text_option1 = "BONUS"
 		button_option1 = "\\b7"
 		button_option2 = "\\b8"
 		Spacing = 16}
+
+	if ((IsPS2) || (IsNGC))
+		setlist_show_helperbar_PSWii <...>
+		return
+	endif
+
 	if NOT English
 		Change \{pill_helper_max_width = 75}
 	endif
@@ -198,5 +204,75 @@ script setlist_show_helperbar \{text_option1 = "BONUS"
 	displayText PARENT = setlist_menu Scale = 1 Text = (<tabs_text> [<I>]) rgba = [0 0 0 255] Pos = <tab_text_pos> Z = 50 noshadow
 	<I> = (<I> + 1)
 	repeat 3
+	add_user_control_helper Text = " RANDOM" button = Select Z = 100
+endscript
+
+script setlist_show_helperbar_PSWii \{text_option1 = 'BONUS'
+		text_option2 = 'DOWNLOADS'
+		button_option1 = '\\b7'
+		button_option2 = '\\b8'
+		spacing = 16}
+	clean_up_user_control_helpers
+	text_options = [
+		'UP/DOWN'
+		'SELECT'
+		'BACK'
+	]
+	button_options = [
+		'\\bb'
+		'\\m0'
+		'\\m1'
+	]
+	i = 0
+	begin
+	if (<i> > 2)
+		if (<i> = 3)
+			<text1> = <button_option1>
+		else
+			<text1> = <button_option2>
+		endif
+	else
+		<text1> = (<button_options> [<i>])
+	endif
+	if (<i> > 2)
+		if (<i> = 3)
+			<text2> = <text_option1>
+		else
+			<text2> = <text_option2>
+		endif
+	else
+		<text2> = (<text_options> [<i>])
+	endif
+	switch <text1>
+		case '\\bb'
+		<button> = strumbar
+		case '\\m0'
+		<button> = green
+		case '\\m1'
+		<button> = red
+		case '\\b6'
+		<button> = yellow
+		case '\\b7'
+		<button> = blue
+		case '\\b8'
+		<button> = orange
+	endswitch
+	add_user_control_helper text = <text2> button = <button> z = 100
+	<i> = (<i> + 1)
+	repeat 4
+	tabs_text = ['setlist' 'bonus' 'downloads']
+	setlist_text_positions = [(300.0, 70.0) (624.0, 102.0) (870.0, 120.0)]
+	download_text_positions = [(300.0, 70.0) (624.0, 102.0) (870.0, 160.0)]
+	buttons_text = ['\\b7' '\\b6' '\\b8']
+	setlist_button_positions = [(580.0, 90.0) (260.0, 65.0) (830.0, 110.0)]
+	download_button_positions = [(580.0, 90.0) (260.0, 65.0) (830.0, 150.0)]
+	i = 0
+	begin
+	button_text_pos = (<setlist_button_positions> [<i>])
+	displaytext parent = setlist_menu scale = 1 text = (<buttons_text> [<i>]) rgba = [128 128 128 255] pos = <button_text_pos> z = 50 font = buttonsxenon
+	tab_text_pos = (<setlist_text_positions> [<i>])
+	displaytext parent = setlist_menu scale = 1 text = (<tabs_text> [<i>]) rgba = [0 0 0 255] pos = <tab_text_pos> z = 50 noshadow
+	<i> = (<i> + 1)
+	repeat 2
 	add_user_control_helper Text = " RANDOM" button = Select Z = 100
 endscript
