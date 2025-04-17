@@ -551,19 +551,13 @@ script menu_dx_mods_select
 				Change check_time_early = ($original_check_time_early * 4)
 				Change check_time_late = ($original_check_time_late * 4)
 			 	Change enable_saving = 0
+      			SetGlobalTags user_options Params = {autosave = 0}
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				Change hugehitwindow = 0
 				Change check_time_early = ($original_check_time_early)
 				Change check_time_late = ($original_check_time_late)
-				if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-		        	SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-				elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-					SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-					Change reenable_saving = 1
-				endif
+				saving_reenable_check
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case BRUTAL_MODE
@@ -606,17 +600,11 @@ script menu_dx_mods_select
 			if ($overlapping_sp = 0)
 			 	change overlapping_sp = 1
 			 	Change enable_saving = 0
+      			SetGlobalTags user_options Params = {autosave = 0}
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				change overlapping_sp = 0
-				if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-		        	SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-				elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0)
-					SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-					Change reenable_saving = 1
-				endif
+				saving_reenable_check
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case PROTO_SP
@@ -657,14 +645,7 @@ script menu_dx_mods_select
 		    elseif ($player1_status.bot_play != 0 && $player2_status.bot_play != 0)
 		        Change StructureName = player1_status bot_play = 0
 		        Change StructureName = player2_status bot_play = 0
-		        if ($lock_saving = 0 && $enable_button_cheats = 0 && $overlapping_sp = 0)
-		        	SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-				elseif ($enable_button_cheats = 0 && $overlapping_sp = 0)
-					SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-					Change reenable_saving = 1
-				endif
+		        saving_reenable_check
 		        SoundEvent \{Event = CheckBox_SFX}
 		    endif
     	case DEBUG_MODE
@@ -675,14 +656,7 @@ script menu_dx_mods_select
 				SoundEvent \{Event = CheckBox_Check_SFX}
 			elseif
 				Change enable_button_cheats = 0
-				if ($lock_saving = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0)
-					SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-				elseif ($player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0)
-					SetGlobalTags user_options Params = {autosave = 1}
-					Change enable_saving = 1
-					Change reenable_saving = 1
-				endif
+				saving_reenable_check
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case ENABLE_VIEWER
@@ -807,6 +781,17 @@ script dx_set_postproc {Action = NONE}
 		case NONE
 			ScriptAssert "hey, you forgot to pass an Action to dx_set_postproc!"
 	endswitch
+endscript
+
+script saving_reenable_check
+	if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0 && $hugehitwindow = 0)
+    	SetGlobalTags user_options Params = {autosave = 1}
+		Change enable_saving = 1
+	elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0 && $hugehitwindow = 0)
+		SetGlobalTags user_options Params = {autosave = 1}
+		Change enable_saving = 1
+		Change reenable_saving = 1
+	endif
 endscript
 
 script menu_dx_mods_setprop
