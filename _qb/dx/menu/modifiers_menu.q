@@ -19,6 +19,7 @@ mods_menu_index = 0
 firework_gems = 0
 overlapping_sp = 0
 hugehitwindow = 0
+calibrationmode = 0
 
 scroller_rgba = [210 130 0 250]
 
@@ -49,9 +50,9 @@ modifier_options = [
 		Description = "Massive hit window. Just like Clone Hero!"
 	}
 	{
-		Name = "Brutal Mode"
-		Id = BRUTAL_MODE
-		Description = "Punish yourself!"
+		Name = "Calibration Mode"
+		Id = CALIBRATION_MODE
+		Description = "Extremely small hit-window to assist with calibration"
 	}
 	{
 		Name = "Flames"
@@ -560,16 +561,16 @@ script menu_dx_mods_select
 				saving_reenable_check
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
-		case BRUTAL_MODE
-			if (<dx_brutal_mode> = 0)
+		case CALIBRATION_MODE
+			if ($calibrationmode = 0)
+				Change calibrationmode = 1
 				Change check_time_early = ($original_check_time_early / 3)
 				Change check_time_late = ($original_check_time_late / 3)
-				SetGlobalTags user_options Params = {dx_brutal_mode = 1}
 				SoundEvent \{Event = CheckBox_Check_SFX}
 			else
+				Change calibrationmode = 0
 				Change check_time_early = ($original_check_time_early)
 				Change check_time_late = ($original_check_time_late)
-				SetGlobalTags user_options Params = {dx_brutal_mode = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case NO_WHAMMY_PITCH_SHIFT
@@ -880,8 +881,8 @@ script menu_dx_mods_setprop
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
-		case BRUTAL_MODE
-			if (<dx_brutal_mode> = 1)
+		case CALIBRATION_MODE
+			if ($calibrationmode = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
