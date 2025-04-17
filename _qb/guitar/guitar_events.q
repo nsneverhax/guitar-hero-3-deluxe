@@ -569,3 +569,104 @@ script highway_pulse_black
 	Wait <half_time> Seconds
 	DoScreenElementMorph Id = <Highway> rgba = ($highway_normal) Time = <half_time>
 endscript
+
+script GuitarEvent_SongWon \{battle_win = 0}
+	Change \{check_for_unplugged_controllers = 0}
+	if ($enable_saving = 0)
+		Change lock_saving = 1
+	endif
+	if NotCD
+		if ($output_gpu_log = 1)
+			if ISPS3
+				FormatText \{TextName = FileName
+					"%s_gpu_ps3"
+					S = $current_level
+					DontAssertForChecksums}
+			else
+				FormatText \{TextName = FileName
+					"%s_gpu"
+					S = $current_level
+					DontAssertForChecksums}
+			endif
+			TextOutputEnd output_text FileName = <FileName>
+		endif
+		if ($output_song_stats = 1)
+			FormatText \{TextName = FileName
+				"%s_stats"
+				S = $current_song
+				DontAssertForChecksums}
+			TextOutputStart
+			TextOutput \{Text = "Player 1"}
+			FormatText TextName = Text "Score: %s" S = ($player1_status.Score) DontAssertForChecksums
+			TextOutput Text = <Text>
+			FormatText TextName = Text "Notes Hit: %n of %t" N = ($player1_status.NOTES_HIT) T = ($player1_status.total_notes) DontAssertForChecksums
+			TextOutput Text = <Text>
+			FormatText TextName = Text "Best Run: %r" R = ($player1_status.best_run) DontAssertForChecksums
+			TextOutput Text = <Text>
+			FormatText TextName = Text "Max Notes: %m" M = ($player1_status.max_notes) DontAssertForChecksums
+			TextOutput Text = <Text>
+			FormatText TextName = Text "Base score: %b" B = ($player1_status.base_score) DontAssertForChecksums
+			TextOutput Text = <Text>
+			if (($player1_status.base_score) = 0)
+				FormatText \{TextName = Text
+					"Score Scale: n/a"}
+			else
+				FormatText TextName = Text "Score Scale: %s" S = (($player1_status.Score) / ($player1_status.base_score)) DontAssertForChecksums
+			endif
+			TextOutput Text = <Text>
+			if (($player1_status.total_notes) = 0)
+				FormatText \{TextName = Text
+					"Notes Hit Percentage: n/a"}
+			else
+				FormatText TextName = Text "Notes Hit Percentage: %s" S = ((($player1_status.NOTES_HIT) / ($player1_status.total_notes)) * 100.0) DontAssertForChecksums
+			endif
+			TextOutput Text = <Text>
+			TextOutputEnd output_text FileName = <FileName>
+		endif
+	endif
+	if ($current_num_players = 2)
+		GetSongTimeMS
+		if ($last_time_in_lead_player = 0)
+			Change StructureName = player1_status time_in_lead = ($player1_status.time_in_lead + <Time> - $last_time_in_lead)
+		elseif ($last_time_in_lead_player = 1)
+			Change StructureName = player2_status time_in_lead = ($player2_status.time_in_lead + <Time> - $last_time_in_lead)
+		endif
+		Change \{last_time_in_lead_player = -1}
+	endif
+	if ($game_mode = p2_battle)
+		if NOT (<battle_win> = 1)
+			Change \{save_current_powerups_p1 = $current_powerups_p1}
+			Change \{save_current_powerups_p2 = $current_powerups_p2}
+			Change \{current_powerups_p1 = [
+					0
+					0
+					0
+				]}
+			Change \{current_powerups_p2 = [
+					0
+					0
+					0
+				]}
+			Change StructureName = player1_status save_num_powerups = ($player1_status.current_num_powerups)
+			Change StructureName = player2_status save_num_powerups = ($player2_status.current_num_powerups)
+			Change \{StructureName = player1_status
+				current_num_powerups = 0}
+			Change \{StructureName = player2_status
+				current_num_powerups = 0}
+			p1_health = ($player1_status.current_health)
+			p2_health = ($player2_status.current_health)
+			Change StructureName = player1_status save_health = <p1_health>
+			Change StructureName = player2_status save_health = <p2_health>
+			battlemode_killspawnedscripts
+			if ScreenElementExists \{Id = battlemode_container}
+				DestroyScreenElement \{Id = battlemode_container}
+			endif
+			Change \{battle_sudden_death = 1}
+		else
+			battlemode_killspawnedscripts
+			Change \{battle_sudden_death = 0}
+		endif
+	endif
+	KillSpawnedScript \{Name = GuitarEvent_SongFailed_Spawned}
+	SpawnScriptNow \{GuitarEvent_SongWon_Spawned}
+endscript

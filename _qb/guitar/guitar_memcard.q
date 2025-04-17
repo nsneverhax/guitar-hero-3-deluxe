@@ -26,7 +26,7 @@ script create_signin_changed_menu
 				Scale = 1.0
 			}
 			textblock = {
-				Text = "A deluxe setting that was disabling saving has been disabled. The game has restarted to re-enable saving."
+				Text = "A deluxe setting that stopped saving is no longer active, so the game has restarted to allow saving."
 				Pos = (640.0, 380.0)
 			}
 			Menu_pos = (640.0, 510.0)
