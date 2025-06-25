@@ -126,7 +126,6 @@ menu_tips = [
 	"removing guitar..."
 	"neverhax bad!"
 	"Better PC Port Soon(TM)!"
-	"Nylon!"
 	"\\b4 \\b5 \\b6 \\b7 \\b8"
 	"Yet Another Deluxe Mod"
 	"If it ain't broke, don't fix it... this was kind of broke..."
@@ -155,7 +154,7 @@ menu_tips = [
 	"Lysix was here!"
 	"Luna was here!"
 	"Metric was here!"
-	"Evelyn was here!"
+	"Evie was here!"
 ]
 
 platform_specific_text = "None"

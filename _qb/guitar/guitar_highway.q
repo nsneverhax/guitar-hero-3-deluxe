@@ -1,7 +1,7 @@
 script move_highway_2d 
 	; yeah im putting that there fight me about it bitch
-    Change StructureName = player1_status double_notes = $double_notes_p1
-   	Change StructureName = player2_status double_notes = $double_notes_p2
+    Change StructureName = player1_status double_notes = ($double_notes_p1 - 1)
+   	Change StructureName = player2_status double_notes = ($double_notes_p2 - 1)
 
 	if ((IsNGC) || (IsPS2)) ; breaks on old hardware, not needed anyway
 		Change \{start_2d_move = 0}
