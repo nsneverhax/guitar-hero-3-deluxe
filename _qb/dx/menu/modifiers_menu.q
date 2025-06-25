@@ -20,6 +20,8 @@ firework_gems = 0
 overlapping_sp = 0
 hugehitwindow = 0
 calibrationmode = 0
+double_notes_p1 = 0
+double_notes_p2 = 0
 
 scroller_rgba = [210 130 0 250]
 
@@ -128,6 +130,11 @@ modifier_options = [
 		Name = "Select In Practice"
 		Id = SELECT_RESTART
 		Description = "You can now press select to restart in Practice mode."
+	}
+	{
+		Name = "Double Notes"
+		Id = DOUBLE_NOTES
+		Description = "Double notes powerup, in quickplay!"
 	}
 	{
 		Name = "Awesomeness Detection"
@@ -624,6 +631,31 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {select_restart = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case DOUBLE_NOTES
+			if ($double_notes_p1 = 0 && $double_notes_p2 = 0)
+     		    Change double_notes_p1 = 1
+      			Change double_notes_p2 = 0
+      			SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
+      			SoundEvent \{Event = CheckBox_Check_SFX}
+    		elseif ($double_notes_p1 != 0 && $double_notes_p2 = 0)
+   		    	Change double_notes_p1 = 0
+  		    	Change double_notes_p2 = 1
+  		    	SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
+  		    	SoundEvent \{Event = CheckBox_Check_SFX}
+ 		    elseif ($double_notes_p1 = 0 && $double_notes_p2 != 0)
+		        Change double_notes_p1 = 1
+		        Change double_notes_p2 = 1
+		        SetGlobalTags user_options Params = {autosave = 0}
+				Change enable_saving = 0
+		        SoundEvent \{Event = CheckBox_Check_SFX}
+		    elseif ($double_notes_p1 != 0 && $double_notes_p2 != 0)
+		        Change double_notes_p1 = 0
+		        Change double_notes_p2 = 0
+		        saving_reenable_check
+		        SoundEvent \{Event = CheckBox_SFX}
+		    endif
 		case AUTOPLAY
 			if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
      		    Change StructureName = player1_status bot_play = 1
@@ -937,6 +969,16 @@ script menu_dx_mods_setprop
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
+		case DOUBLE_NOTES
+			if ($double_notes_p1 = 0 && $double_notes_p2 = 0)
+				<Element_Id> :SetProps text = "Double Notes: Off"
+		    elseif ($double_notes_p1 != 0 && $double_notes_p2 = 0)
+ 		        <Element_Id> :SetProps text = "Double Notes: P1"
+		    elseif ($double_notes_p1 = 0 && $double_notes_p2 != 0)
+ 		        <Element_Id> :SetProps text = "Double Notes: P2"
+ 		    elseif ($double_notes_p1 != 0 && $double_notes_p2 != 0)
+ 		    	<Element_Id> :SetProps text = "Double Notes: P1 + P2"
+    		endif
 		case AUTOPLAY
 			if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
 				<Element_Id> :SetProps text = "Autoplay: Off"
