@@ -29,5 +29,6 @@
 * Insta-fail modifier - miss a note, fail the song!
 * Large gems cheat ported from wii/ps2 to PS3/360
 * "Fireworks" gems modifier :tim:
+* The "Double Notes" powerup can be enabled outside of battle mode for the masochists out there!
 
 # 👉 [Download Here!](https://github.com/nsneverhax/guitar-hero-3-deluxe#%EF%B8%8F-what-youll-need)
