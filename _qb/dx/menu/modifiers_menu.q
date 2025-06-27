@@ -698,7 +698,7 @@ script menu_dx_mods_select
 			Change \{select_shift = 1}
 		case UNLOCK_ALL
 			ui_menu_select_sfx
-			playday_unlockall
+			playday_unlockall_safe
 			SetGlobalTags user_options Params = {unlock_Cheat_AirGuitar = 1}
 			SetGlobalTags user_options Params = {unlock_Cheat_PerformanceMode = 1}
 			SetGlobalTags user_options Params = {unlock_Cheat_Hyperspeed = 1}
@@ -814,6 +814,92 @@ script dx_set_postproc {Action = NONE}
 		case NONE
 			ScriptAssert "hey, you forgot to pass an Action to dx_set_postproc!"
 	endswitch
+endscript
+
+script playday_unlockall_safe 
+	; taken from the unlock all cheat(s)
+	GlobalTags_UnlockAll \{SongList = GH3_General_Songs
+		songs_only = 1}
+	GlobalTags_UnlockAll \{SongList = GH3_GeneralP2_Songs
+		songs_only = 1}
+	GlobalTags_UnlockAll \{SongList = GH3_Bonus_Songs
+		songs_only = 1}
+	GetArraySize ($GH3_Bonus_Songs.tier1.songs)
+	I = 0
+	begin
+	SetGlobalTags ($GH3_Bonus_Songs.tier1.songs [<I>]) Params = {unlocked = 1}
+	<I> = (<I> + 1)
+	repeat <array_Size>
+	GlobalTags_UnlockAll \{SongList = GH3_General_Songs}
+	GlobalTags_UnlockAll \{SongList = GH3_GeneralP2_Songs}
+	GlobalTags_UnlockAll \{SongList = GH3_Bonus_Songs}
+	GetArraySize ($GH3_Bonus_Songs.tier1.songs)
+	I = 0
+	begin
+	SetGlobalTags ($GH3_Bonus_Songs.tier1.songs [<I>]) Params = {unlocked = 1}
+	<I> = (<I> + 1)
+	repeat <array_Size>
+	; taken from GlobalTags_UnlockAll, had to place it here because otherwise it would probably break career scores
+	array_count = 0
+	GetArraySize \{$Bonus_Guitars}
+	begin
+	SetGlobalTags ($Bonus_Guitars [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Guitar_Finishes}
+	begin
+	SetGlobalTags ($Bonus_Guitar_Finishes [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Secret_Guitars}
+	begin
+	SetGlobalTags ($Secret_Guitars [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Basses}
+	begin
+	SetGlobalTags ($Bonus_Basses [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Bass_Finishes}
+	begin
+	SetGlobalTags ($Bonus_Bass_Finishes [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Secret_Basses}
+	begin
+	SetGlobalTags ($Secret_Basses [<array_count>].Id) Params = {unlocked = 1 unlocked_for_purchase = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Secret_Characters}
+	begin
+	SetGlobalTags ($Secret_Characters [<array_count>].Id) Params = {unlocked = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Outfits}
+	begin
+	SetGlobalTags ($Bonus_Outfits [<array_count>].Id) Params = {unlocked = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Styles}
+	begin
+	SetGlobalTags ($Bonus_Styles [<array_count>].Id) Params = {unlocked = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
+	array_count = 0
+	GetArraySize \{$Bonus_Videos}
+	begin
+	SetGlobalTags ($Bonus_Videos [<array_count>].Id) Params = {unlocked = 1}
+	array_count = (<array_count> + 1)
+	repeat <array_Size>
 endscript
 
 script saving_reenable_check
