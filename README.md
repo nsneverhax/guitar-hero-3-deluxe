@@ -15,7 +15,7 @@
 ### Playing *Guitar Hero III Deluxe* requires these things:
 
 - **A copy of Guitar Hero III** for whichever platform that you can extract onto your PC, or the PC version itself installed on your PC
-- For Console: A **modded/hacked** console, and a way to transfer files to it.
+- For Console: A **modded/hacked** console, and a way to transfer files to it. The console **MUST** be set to use English, otherwise GH3DX will not load!
 
 <br/>
 
