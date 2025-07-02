@@ -42,7 +42,6 @@ script practice_start_song \{device_num = 0}
 	if (<select_restart> = 1)
 		enable_select_to_restart
 	endif
-	; fix crash with fc hud 
 	dx_reset_fc_counters
 endscript
 
@@ -64,7 +63,6 @@ script practice_restart_song
 	if (<select_restart> = 1)
 		enable_select_to_restart
 	endif
-	; fix crash with fc hud 
 	dx_reset_fc_counters
 endscript
 

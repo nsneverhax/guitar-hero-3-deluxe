@@ -59,6 +59,9 @@ script dx_reset_fc_counters
 	Change fc_hud_moved = 0
 	Change fc_hud_go_away = 0
 	Change fc_glowburst_anim_started = 0
+	if ScreenElementExists Id = dx_fc_hud
+		DestroyScreenElement Id = dx_fc_hud
+	endif
 endscript
 
 script dx_create_fc_hud 
