@@ -22,8 +22,8 @@ endscript
 
 script create_gh3dx_version_toast 
 	FormatText TextName = Text "%v" V = ($gh3dx_version)
-	if ((IsPS2) || (IsNGC))
-		Pos = (730.0, 680.0)
+	if (current_screen_mode = standard_screen_mode)
+		Pos = (790.0, 680.0)
 	else
 		Pos = (870.0, 680.0)
 	endif

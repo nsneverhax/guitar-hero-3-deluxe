@@ -21,7 +21,7 @@ script create_custom_menu \{Popup = 0}
 	Rot_Angle = 2
 	pause_z = 10000
 
-	if ((IsNGC) || (IsPS2))
+	if ((IsNGC || IsPS2))
 		Spacing = -65
 		<Menu_pos> = (640.0, 220.0)
 	else
@@ -365,6 +365,17 @@ endscript
 framerate_warning = 57.5
 
 script enable_dispfps 
+
+	if (current_screen_mode = widescreen_screen_mode)
+		FPSanchor_pos = (30.0, 140.0)
+		FPStext_pos = (20.0, -15.0)
+		FPStexture_pos = (16.0, -34.0)
+	elseif (current_screen_mode = standard_screen_mode)
+		FPSanchor_pos = (55.0, 140.0)
+		FPStext_pos = (45.0, -15.0)
+		FPStexture_pos = (41.0, -34.0)
+	endif
+
 	change_dispfps_text
 	if (<ondisp_dispfps_text> = 0)
 		killspawnedscript \{name = refreshfpsdisplay}
@@ -379,56 +390,57 @@ script enable_dispfps
 		if objectexists \{id = fps_anchor}
 			destroyscreenelement \{id = fps_anchor}
 		endif
-		createscreenelement \{type = containerelement
-			parent = root_window
-			id = fps_anchor
-			pos = (30.0, 140.0)
-			just = [
-				center
-				center
-			]
-			internal_just = [
-				left
-				center
-			]}
-		createscreenelement \{type = textelement
-			parent = fps_anchor
-			id = fps_text
-			pos = (20.0, -15.0)
-			text = "FPS: "
-			font = text_a1
-			rgba = [
-				120
-				120
-				200
-				200
-			]
-			just = [
-				left
-				center
-			]
-			scale = 0.75
-			z_priority = 100}
-		createscreenelement \{type = spriteelement
-			parent = fps_anchor
-			pos = (16.0, -34.0)
-			texture = white2
-			rgba = [
-				10
-				10
-				10
-				180
-			]
-			just = [
-				left
-				top
-			]
-			scale = (2.55, 0.6)
-			z_priority = 99}
-		setscreenelementlock \{id = root_window
-			on}
-		spawnscriptlater \{refreshfpsdisplay}
 	endif
+
+	createscreenelement {type = containerelement
+		parent = root_window
+		id = fps_anchor
+		pos = <FPSanchor_pos>
+		just = [
+			center
+			center
+		]
+		internal_just = [
+			left
+			center
+		]}
+	createscreenelement {type = textelement
+		parent = fps_anchor
+		id = fps_text
+		pos = <FPStext_pos>
+		text = "FPS: "
+		font = text_a1
+		rgba = [
+			120
+			120
+			200
+			200
+		]
+		just = [
+			left
+			center
+		]
+		scale = 0.75
+		z_priority = 100}
+	createscreenelement {type = spriteelement
+		parent = fps_anchor
+		pos = <FPStexture_pos>
+		texture = white2
+		rgba = [
+			10
+			10
+			10
+			180
+		]
+		just = [
+			left
+			top
+		]
+		scale = (2.55, 0.6)
+		z_priority = 99}
+	setscreenelementlock \{id = root_window
+		on}
+	spawnscriptlater \{refreshfpsdisplay}
 endscript
 fps_display_hold_red = 0
 
