@@ -204,7 +204,7 @@ script setlist_show_helperbar \{text_option1 = "BONUS"
 	displayText PARENT = setlist_menu Scale = 1 Text = (<tabs_text> [<I>]) rgba = [0 0 0 255] Pos = <tab_text_pos> Z = 50 noshadow
 	<I> = (<I> + 1)
 	repeat 3
-	add_user_control_helper Text = " RANDOM" button = Select Z = 100
+	add_user_control_helper Text = " RANDOM" button = Start Z = 100
 endscript
 
 script setlist_show_helperbar_PSWii \{text_option1 = 'BONUS'
@@ -274,5 +274,5 @@ script setlist_show_helperbar_PSWii \{text_option1 = 'BONUS'
 	displaytext parent = setlist_menu scale = 1 text = (<tabs_text> [<i>]) rgba = [0 0 0 255] pos = <tab_text_pos> z = 50 noshadow
 	<i> = (<i> + 1)
 	repeat 2
-	add_user_control_helper Text = " RANDOM" button = Select Z = 100
+	add_user_control_helper Text = " RANDOM" button = Start Z = 100
 endscript

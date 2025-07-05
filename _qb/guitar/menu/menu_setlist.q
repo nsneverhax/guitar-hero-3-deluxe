@@ -43,13 +43,10 @@ setlist_event_handlers = [
 	}
 	{
 		pad_start
-		menu_show_gamercard
-	}
-	{
-		pad_select
 		dx_get_random_song
 	}
 ]
+; pad_start was originally menu_show_gamercard, changed due to mapping issues on X360
 script display_as_made_famous_by \{rot_angle = -7
 		time = 0.25}
 	destroy_menu \{menu_id = setlist_original_artist}
