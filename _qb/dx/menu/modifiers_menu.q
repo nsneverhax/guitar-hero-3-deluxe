@@ -178,7 +178,7 @@ script create_dx_mods_menu \{Popup = 0}
 	Rot_Angle = 2
 	pause_z = 10000
 
-	if ((IsNGC) || (IsPS2))
+	if (current_screen_mode = standard_screen_mode)
 		Spacing = -65
 		<Menu_pos> = (640.0, 220.0)
 	else

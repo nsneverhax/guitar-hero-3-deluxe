@@ -21,7 +21,7 @@ script create_custom_menu \{Popup = 0}
 	Rot_Angle = 2
 	pause_z = 10000
 
-	if ((IsNGC) || (IsPS2))
+	if (current_screen_mode = standard_screen_mode)
 		Spacing = -65
 		<Menu_pos> = (640.0, 220.0)
 	else
@@ -379,6 +379,7 @@ script enable_dispfps
 		if objectexists \{id = fps_anchor}
 			destroyscreenelement \{id = fps_anchor}
 		endif
+	if (current_screen_mode = widescreen_screen_mode)
 		createscreenelement \{type = containerelement
 			parent = root_window
 			id = fps_anchor
@@ -425,6 +426,54 @@ script enable_dispfps
 			]
 			scale = (2.55, 0.6)
 			z_priority = 99}
+	elseif (current_screen_mode = standard_screen_mode)
+		createscreenelement \{type = containerelement
+			parent = root_window
+			id = fps_anchor
+			pos = (55.0, 140.0)
+			just = [
+				center
+				center
+			]
+			internal_just = [
+				left
+				center
+			]}
+		createscreenelement \{type = textelement
+			parent = fps_anchor
+			id = fps_text
+			pos = (45.0, -15.0)
+			text = "FPS: "
+			font = text_a1
+			rgba = [
+				120
+				120
+				200
+				200
+			]
+			just = [
+				left
+				center
+			]
+			scale = 0.75
+			z_priority = 100}
+		createscreenelement \{type = spriteelement
+			parent = fps_anchor
+			pos = (41.0, -34.0)
+			texture = white2
+			rgba = [
+				10
+				10
+				10
+				180
+			]
+			just = [
+				left
+				top
+			]
+			scale = (2.55, 0.6)
+			z_priority = 99}
+		endif
 		setscreenelementlock \{id = root_window
 			on}
 		spawnscriptlater \{refreshfpsdisplay}
