@@ -16,7 +16,7 @@ script create_dx_manage_gig_menu \{Popup = 0}
 	Rot_Angle = 2
 	pause_z = 10000
 
-	if ((IsNGC || IsPS2))
+	if ((IsNGC) || (IsPS2))
 		Spacing = -65
 		<Menu_pos> = (640.0, 280.0)
 	else
