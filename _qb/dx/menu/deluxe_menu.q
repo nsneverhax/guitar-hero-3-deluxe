@@ -367,13 +367,13 @@ framerate_warning = 57.5
 script enable_dispfps 
 
 	if (current_screen_mode = widescreen_screen_mode)
-		FPSanchor_pos = (30.0, 140.0)
-		FPStext_pos = (20.0, -15.0)
-		FPStexture_pos = (16.0, -34.0)
+		FPSanchor_pos = (30.0, 100.0)
+		FPStext_pos = (20.0, -55.0)
+		FPStexture_pos = (16.0, -79.0)
 	elseif (current_screen_mode = standard_screen_mode)
-		FPSanchor_pos = (55.0, 140.0)
-		FPStext_pos = (45.0, -15.0)
-		FPStexture_pos = (41.0, -34.0)
+		FPSanchor_pos = (55.0, 100.0)
+		FPStext_pos = (45.0, -55.0)
+		FPStexture_pos = (41.0, -79.0)
 	endif
 
 	change_dispfps_text
