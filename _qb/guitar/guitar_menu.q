@@ -2174,7 +2174,7 @@ script add_user_control_helper \{Z = 10
 			offset_for_strumbar = 1
 			case Start
 			buttonchar = "\\ba"
-			offset_for_strumbar = 1
+			;offset_for_strumbar = 1
 			case Select
             buttonchar = "\\b9"
 		endswitch
