@@ -390,8 +390,6 @@ script enable_dispfps
 		if objectexists \{id = fps_anchor}
 			destroyscreenelement \{id = fps_anchor}
 		endif
-	endif
-
 	createscreenelement {type = containerelement
 		parent = root_window
 		id = fps_anchor
@@ -441,6 +439,7 @@ script enable_dispfps
 	setscreenelementlock \{id = root_window
 		on}
 	spawnscriptlater \{refreshfpsdisplay}
+	endif
 endscript
 fps_display_hold_red = 0
 
