@@ -9,19 +9,19 @@ script start_checking_for_signin_change
 endscript
 
 script bootup_sequence
-	if IsPS2
-		bootup_sequence_ps2
+	if (is_ps2)
+		bootup_sequence_playstation_2
+	else
+		startrendering
+		spawnscriptnow \{ui_flow_manager_respond_to_action
+			params = {
+				action = skip_bootup_sequence
+				play_sound = 1
+			}}		
 	endif
-
-	startrendering
-	spawnscriptnow \{ui_flow_manager_respond_to_action
-		params = {
-			action = skip_bootup_sequence
-			play_sound = 1
-		}}
 endscript
 
-script bootup_sequence_ps2
+script bootup_sequence_playstation_2
 	pre_movie_cleanup
 	wait_for_legal_timer
 	startrendering
