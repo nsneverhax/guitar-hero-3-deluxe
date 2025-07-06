@@ -9,7 +9,7 @@ script start_checking_for_signin_change
 endscript
 
 script bootup_sequence
-	if NOT ((IsWinPort) || (IsMacPort) || (IsPS3) || (IsNGC) || (IsXENON))
+	if (is_ps2)
 		bootup_sequence_playstation_2
 	else
 		startrendering
