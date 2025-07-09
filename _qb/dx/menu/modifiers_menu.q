@@ -25,6 +25,8 @@ double_notes_p2 = 0
 
 scroller_rgba = [210 130 0 250]
 
+use_new_dx_menu_scrollers = 1
+
 modifier_options = [
 	{
 		Name = "Black Highway"
@@ -243,36 +245,61 @@ script create_dx_mods_menu \{Popup = 0}
 		shadow_rgba [0 0 0 255]
 		z_priority = (<pause_z> + 101)
 	}
-	CreateScreenElement {
-		Type = TextElement
-		Id = dx_settings_scroller_up
-		PARENT = <Id>
-		font = text_a1
-		Pos = (83.0, 105.0)
-		Text = '^'
-		rgba = $scroller_rgba
-		just = [Center Top]
-		Scale = (0.9, 1.4)
-		Shadow
-		shadow_offs = (3.0, 3.0)
-		shadow_rgba [0 0 0 255]
-		z_priority = (<pause_z> + 103)
-	}
-	CreateScreenElement {
-		Type = TextElement
-		Id = dx_settings_scroller_down
-		PARENT = pause_menu_frame_container
-		font = text_a3
-		Pos = (640.0, 510.0)
-		Text = 'v'
-		rgba = $scroller_rgba
-		just = [Center Top]
-		Scale = (1.6, 0.9)
-		Shadow
-		shadow_offs = (3.0, 3.0)
-		shadow_rgba [0 0 0 255]
-		z_priority = (<pause_z> + 103)
-	}
+	if ($use_new_dx_menu_scrollers = 0)
+		CreateScreenElement {
+			Type = TextElement
+			Id = dx_settings_scroller_up
+			PARENT = <Id>
+			font = text_a1
+			Pos = (83.0, 105.0)
+			Text = '^'
+			rgba = $scroller_rgba
+			just = [Center Top]
+			Scale = (0.9, 1.4)
+			Shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba [0 0 0 255]
+			z_priority = (<pause_z> + 103)
+		}
+		CreateScreenElement {
+			Type = TextElement
+			Id = dx_settings_scroller_down
+			PARENT = pause_menu_frame_container
+			font = text_a3
+			Pos = (640.0, 510.0)
+			Text = 'v'
+			rgba = $scroller_rgba
+			just = [Center Top]
+			Scale = (1.6, 0.9)
+			Shadow
+			shadow_offs = (3.0, 3.0)
+			shadow_rgba [0 0 0 255]
+			z_priority = (<pause_z> + 103)
+		}
+	elseif ($use_new_dx_menu_scrollers = 1)
+		CreateScreenElement {
+			Type = SpriteElement
+			Id = dx_settings_scroller_up
+			PARENT = <Id>
+			texture = char_select_menu_arrow
+			Pos = (83.0, 89.0)
+			Scale = (0.35, 0.467)
+			just = [Center Top]
+			flip_h
+			z_priority = (<pause_z> + 103)
+		}
+		CreateScreenElement {
+			Type SpriteElement 
+			Id = dx_settings_scroller_down
+			PARENT = pause_menu_frame_container
+			texture = char_select_menu_arrow
+			Pos = (640.0, 510.0)
+			Scale = (0.5, 0.5)
+			just = [Center Top]
+			z_priority = (<pause_z> + 103)
+		}
+	endif
+
 	CreateScreenElement {
 		Type = TextBlockElement
 		Id = dx_desc_text
@@ -412,12 +439,21 @@ script menu_dx_mods_scroll_up
 	dx_desc_text :SetProps Text = ($modifier_options [$selected_modifier_index].Description)
 	if (<make_sound> = 1)
 		generic_menu_up_or_down_sound \{UP}
-		dx_settings_scroller_up :SetProps rgba = [255 255 255 240]
-		dx_settings_scroller_up :SetProps Pos = (83.0, 100.0)
-		Wait \{200
-			milliseconds}
-		dx_settings_scroller_up :SetProps rgba = $scroller_rgba
-		dx_settings_scroller_up :SetProps Pos = (83.0, 105.0)
+		if ($use_new_dx_menu_scrollers = 1)
+			dx_settings_scroller_up :SetProps rgba = [255 255 255 240]
+			dx_settings_scroller_up :SetProps Pos = (83.0, 84.0) flip_h
+			Wait \{200
+				milliseconds}
+			dx_settings_scroller_up :SetProps rgba = $scroller_rgba
+			dx_settings_scroller_up :SetProps Pos = (83.0, 89.0) flip_h
+		elseif ($use_new_dx_menu_scrollers = 0)
+			dx_settings_scroller_up :SetProps rgba = [255 255 255 240]
+			dx_settings_scroller_up :SetProps Pos = (83.0, 100.0)
+			Wait \{200
+				milliseconds}
+			dx_settings_scroller_up :SetProps rgba = $scroller_rgba
+			dx_settings_scroller_up :SetProps Pos = (83.0, 105.0)
+		endif
 	endif
 endscript
 
