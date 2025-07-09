@@ -285,6 +285,7 @@ script create_dx_mods_menu \{Popup = 0}
 			Pos = (83.0, 89.0)
 			Scale = (0.35, 0.467)
 			just = [Center Top]
+			Rot_Angle = 2
 			flip_h
 			z_priority = (<pause_z> + 103)
 		}
@@ -296,6 +297,7 @@ script create_dx_mods_menu \{Popup = 0}
 			Pos = (640.0, 510.0)
 			Scale = (0.5, 0.5)
 			just = [Center Top]
+			Rot_Angle = 2
 			z_priority = (<pause_z> + 103)
 		}
 	endif
