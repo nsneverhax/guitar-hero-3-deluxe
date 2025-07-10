@@ -1,4 +1,9 @@
-script load_dx_settings
+dx_initialized = 0
+
+script load_dx_settings 
+    if ($dx_initialized = 1)
+        return
+    endif
 	GetGlobalTags \{user_options}
 	Change GlobalName = Cheat_HyperSpeed NewValue = <Cheat_HyperSpeed>
 	Change GlobalName = Cheat_AirGuitar NewValue = <Cheat_AirGuitar>
@@ -35,4 +40,5 @@ script load_dx_settings
 	if (<ondisp_dispfps_text> = 1)
 		enable_dispfps
 	endif
+    Change dx_initialized = 1
 endscript
