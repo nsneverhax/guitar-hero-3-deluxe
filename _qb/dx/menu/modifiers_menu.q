@@ -144,6 +144,11 @@ modifier_options = [
 		Description = "Double notes powerup, in quickplay!"
 	}
 	{
+		Name = "Multiplayer Vocalist"
+		Id = MULT_VOCALIST
+		Description = "Full band in Multiplayer!"
+	}
+	{
 		Name = "Awesomeness Detection"
 		Id = AWESOMENESS
 		Description = "Let NeverHax know that you are awesome!"
@@ -705,6 +710,14 @@ script menu_dx_mods_select
 		        saving_reenable_check
 		        SoundEvent \{Event = CheckBox_SFX}
 		    endif
+		case MULT_VOCALIST
+			if (<mult_vocalist> = 0)
+			 	SetGlobalTags user_options Params = {mult_vocalist = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {mult_vocalist = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case AUTOPLAY
 			if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
      		    Change StructureName = player1_status bot_play = 1
@@ -1145,6 +1158,14 @@ script menu_dx_mods_setprop
  		    elseif ($double_notes_p1 != 0 && $double_notes_p2 != 0)
  		    	<Element_Id> :SetProps text = "Double Notes: P1 + P2"
     		endif
+		case MULT_VOCALIST
+			if (<mult_vocalist> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
 		case AUTOPLAY
 			if ($player1_status.bot_play = 0 && $player2_status.bot_play = 0)
 				<Element_Id> :SetProps text = "Autoplay: Off"
