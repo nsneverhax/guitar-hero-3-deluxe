@@ -31,5 +31,6 @@
 * "Fireworks" gems modifier :tim:
 * The "Double Notes" powerup can be enabled outside of battle mode for the masochists out there!
 * Random song select in Quickplay by pressing START
+* Multiplayer Vocalist modifier that enables the vocalist in multiplayer! (The different singers currently do not work. I.E. Bret Michaels, and the Female singer)
 
 # 👉 [Download Here!](https://github.com/nsneverhax/guitar-hero-3-deluxe#%EF%B8%8F-what-youll-need)
