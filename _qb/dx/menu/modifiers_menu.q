@@ -84,6 +84,11 @@ modifier_options = [
 		Description = "Disables track muting on miss"
 	}
 	{
+		Name = "Fast Highway Transition"
+		Id = FAST_HIGHWAY
+		Description = "Decreases the delay for the highway to animate at the beginning of a song."
+	}
+	{
 		Name = "Miss SFX"
 		Id = NO_MISS_SFX
 		Description = "Disables miss sound effects"
@@ -630,6 +635,16 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {track_muting = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case FAST_HIGHWAY
+			if (<fast_highway> = 0)
+				SetGlobalTags user_options Params = {fast_highway = 1}
+				dx_set_intro_trans \{Action = ON}
+				SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {fast_highway = 0}
+				dx_set_intro_trans \{Action = OFF}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 		case NO_MISS_SFX
 			if (<no_miss_sfx> = 0)
 			 	SetGlobalTags user_options Params = {no_miss_sfx = 1}
@@ -947,6 +962,29 @@ script saving_reenable_check
 	endif
 endscript
 
+Default_Intro_Transition_NX = {
+	Time = 8000
+	ScriptTable = [
+	]
+}
+Default_Intro_Transition_DX = {
+	Time = 3000
+	ScriptTable = [
+	]
+}
+
+script dx_set_intro_trans \{Action = NONE}
+	if (<Action> = ON)
+		Change Default_Intro_Transition = ($Default_Intro_Transition_DX)
+		dx_printf Text = "dx_set_intro_trans - set intro params to dx"
+	elseif (<Action> = OFF)
+		Change Default_Intro_Transition = ($Default_Intro_Transition_NX)
+		dx_printf Text = "dx_set_intro_trans - set intro params to vanilla"
+	elseif NOT GotParam \{Action}
+		dx_printf "dx_set_intro_trans - No action was provided!"
+	endif
+endscript
+
 script menu_dx_mods_setprop
 	GetGlobalTags \{user_options}
 	mod_id = ($modifier_options [<Index>].Id)
@@ -1055,6 +1093,14 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
 				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case FAST_HIGHWAY
+			if (<fast_highway> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case NO_MISS_SFX

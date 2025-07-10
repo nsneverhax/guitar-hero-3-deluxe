@@ -59,6 +59,7 @@ script setup_user_option_tags
 			proto_sp = 0
 			dx_frontrowcamera = 0
 			dx_brutal_mode = 0
+			fast_highway = 0
 		}}
 endscript
 default_songtagswithdifficulty = {
