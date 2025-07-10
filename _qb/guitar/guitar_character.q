@@ -95,101 +95,177 @@ drummer_info = {
 current_bass_model = none
 
 script create_band \{async = 0}
-	if ($disable_band = 1)
-		return
-	endif
-	getpakmancurrent \{map = zones}
-	if (<pak> = z_credits)
-		if NOT create_guitarist async = <async>
-			return \{false}
+	GetGlobalTags \{user_options}
+	if (<mult_vocalist> = 1)
+		if ($disable_band = 1)
+			return
 		endif
-		unload_character \{name = bassist}
-		unload_character \{name = vocalist}
-		unload_character \{name = drummer}
-		set_bandvisible
-		return \{true}
-	endif
-	if ($current_num_players = 1)
+		GetPakManCurrent \{map = Zones}
+		if (<pak> = Z_Credits)
+			if NOT create_guitarist async = <async>
+				return \{FALSE}
+			endif
+			unload_character \{Name = BASSIST}
+			unload_character \{Name = VOCALIST}
+			unload_character \{Name = DRUMMER}
+			set_bandvisible
+			return \{TRUE}
+		endif
 		if NOT create_guitarist async = <async>
-			return \{false}
+			return \{FALSE}
 		endif
 		if NOT create_drummer async = <async>
-			return \{false}
+			return \{FALSE}
 		endif
-		get_song_struct song = ($current_song)
-		if structurecontains structure = <song_struct> name = bassist
-			bassist_profile = (<song_struct>.bassist)
-			if NOT create_bassist profile_name = <bassist_profile> async = <async>
-				return \{false}
+		get_song_struct Song = ($current_song)
+		if ($current_num_players > 1)
+			if NOT create_guitarist Name = BASSIST async = <async>
+				return \{FALSE}
 			endif
 		else
-			if NOT create_bassist async = <async>
-				return \{false}
-			endif
-		endif
-		if structurecontains structure = <song_struct> name = singer
-			if (<song_struct>.singer = none)
-				if compositeobjectexists \{name = vocalist}
-					unload_character \{name = vocalist}
+			if StructureContains Structure = <song_struct> Name = BASSIST
+				bassist_profile = (<song_struct>.BASSIST)
+				if NOT create_bassist profile_name = <bassist_profile> async = <async>
+					return \{FALSE}
 				endif
 			else
-				if (<pak> = z_wikker || <pak> = z_budokan || <pak> = z_hell)
-					if (<song_struct>.singer = female)
+				if NOT create_bassist async = <async>
+					return \{FALSE}
+				endif
+			endif
+		endif
+		if StructureContains Structure = <song_struct> Name = Singer
+			if (<song_struct>.Singer = NONE)
+				printf "blah"
+			else
+				if (<pak> = Z_Wikker || <pak> = Z_Budokan || <pak> = Z_Hell)
+					if (<song_struct>.Singer = Female)
 						singer_profile = 'singer_female_alt'
-					elseif (<song_struct>.singer = bret)
+					elseif (<song_struct>.Singer = bRet)
 						singer_profile = 'singer_bret_alt'
 					else
 						singer_profile = 'singer_alt'
 					endif
 				else
-					if (<song_struct>.singer = female)
+					if (<song_struct>.Singer = Female)
 						singer_profile = 'singer_female'
-					elseif (<song_struct>.singer = bret)
+					elseif (<song_struct>.Singer = bRet)
 						singer_profile = 'singer_bret'
 					else
 						singer_profile = 'singer'
 					endif
 				endif
-				if ($cheat_bretmichaels = 1)
-					if NOT (<song_struct>.singer = female)
+				if ($Cheat_BretMichaels = 1)
+					if NOT (<song_struct>.Singer = Female)
 						singer_profile = 'singer_bret'
 					endif
 				endif
 				if NOT create_vocalist profile_name = <singer_profile> async = <async>
-					return \{false}
+					return \{FALSE}
 				endif
 			endif
 		else
-			if ($cheat_bretmichaels = 1)
+			if ($Cheat_BretMichaels = 1)
 				singer_profile = 'singer_bret'
 			else
 				singer_profile = 'singer'
 			endif
 			if NOT create_vocalist profile_name = <singer_profile> async = <async>
-				return \{false}
+				return \{FALSE}
 			endif
 		endif
+		set_bandvisible
+		return \{TRUE}
 	else
-		GetGlobalTags \{user_options}
-		if (<mult_vocalist> = 1)
-			if NOT create_vocalist profile_name = <singer_profile> async = <async>
-				return \{false}
+		if ($disable_band = 1)
+			return
+		endif
+		GetPakManCurrent \{map = Zones}
+		if (<pak> = Z_Credits)
+			if NOT create_guitarist async = <async>
+				return \{FALSE}
+			endif
+			unload_character \{Name = BASSIST}
+			unload_character \{Name = VOCALIST}
+			unload_character \{Name = DRUMMER}
+			set_bandvisible
+			return \{TRUE}
+		endif
+		if ($current_num_players = 1)
+			if NOT create_guitarist async = <async>
+				return \{FALSE}
+			endif
+			if NOT create_drummer async = <async>
+				return \{FALSE}
+			endif
+			get_song_struct Song = ($current_song)
+			if StructureContains Structure = <song_struct> Name = BASSIST
+				bassist_profile = (<song_struct>.BASSIST)
+				if NOT create_bassist profile_name = <bassist_profile> async = <async>
+					return \{FALSE}
+				endif
+			else
+				if NOT create_bassist async = <async>
+					return \{FALSE}
+				endif
+			endif
+			if StructureContains Structure = <song_struct> Name = Singer
+				if (<song_struct>.Singer = NONE)
+					if CompositeObjectExists \{Name = VOCALIST}
+						unload_character \{Name = VOCALIST}
+					endif
+				else
+					if (<pak> = Z_Wikker || <pak> = Z_Budokan || <pak> = Z_Hell)
+						if (<song_struct>.Singer = Female)
+							singer_profile = 'singer_female_alt'
+						elseif (<song_struct>.Singer = bRet)
+							singer_profile = 'singer_bret_alt'
+						else
+							singer_profile = 'singer_alt'
+						endif
+					else
+						if (<song_struct>.Singer = Female)
+							singer_profile = 'singer_female'
+						elseif (<song_struct>.Singer = bRet)
+							singer_profile = 'singer_bret'
+						else
+							singer_profile = 'singer'
+						endif
+					endif
+					if ($Cheat_BretMichaels = 1)
+						if NOT (<song_struct>.Singer = Female)
+							singer_profile = 'singer_bret'
+						endif
+					endif
+					if NOT create_vocalist profile_name = <singer_profile> async = <async>
+						return \{FALSE}
+					endif
+				endif
+			else
+				if ($Cheat_BretMichaels = 1)
+					singer_profile = 'singer_bret'
+				else
+					singer_profile = 'singer'
+				endif
+				if NOT create_vocalist profile_name = <singer_profile> async = <async>
+					return \{FALSE}
+				endif
 			endif
 		else
-			unload_character \{name = vocalist}
+			unload_character \{Name = VOCALIST}
+			if NOT create_guitarist Name = GUITARIST async = <async>
+				return \{FALSE}
+			endif
+			if NOT create_guitarist Name = BASSIST async = <async>
+				return \{FALSE}
+			endif
+			if NOT create_drummer async = <async>
+				return \{FALSE}
+			endif
 		endif
-		if NOT create_guitarist name = guitarist async = <async>
-			return \{false}
-		endif
-		if NOT create_guitarist name = bassist async = <async>
-			return \{false}
-		endif
-		if NOT create_drummer async = <async>
-			return \{false}
-		endif
+		set_bandvisible
+		return \{TRUE}
 	endif
-	set_bandvisible
-	return \{true}
 endscript
 
 script create_guitarist_profile 
