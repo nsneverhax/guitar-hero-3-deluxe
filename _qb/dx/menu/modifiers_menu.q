@@ -25,7 +25,7 @@ double_notes_p2 = 0
 
 scroller_rgba = [210 130 0 250]
 
-use_new_dx_menu_scrollers = 1
+use_new_dx_menu_scrollers = 0
 
 modifier_options = [
 	{
@@ -177,7 +177,6 @@ script create_dx_mods_menu \{Popup = 0}
 
 	Change mods_menu_index = 0
 
-	Rot_Angle = 2
 	pause_z = 10000
 
 	if ((IsNGC) || (IsPS2))
@@ -202,7 +201,6 @@ script create_dx_mods_menu \{Popup = 0}
 		scrollid = mods_scrolling_menu
 		vmenuid = mods_vmenu
 		Menu_pos = <Menu_pos>
-		Rot_Angle = <Rot_Angle>
 		event_handlers = <event_handlers>
 		Spacing = <Spacing>
 		use_backdrop = (1)
@@ -285,7 +283,6 @@ script create_dx_mods_menu \{Popup = 0}
 			Pos = (83.0, 89.0)
 			Scale = (0.35, 0.467)
 			just = [Center Top]
-			Rot_Angle = 2
 			flip_h
 			z_priority = (<pause_z> + 103)
 		}
@@ -297,7 +294,6 @@ script create_dx_mods_menu \{Popup = 0}
 			Pos = (640.0, 510.0)
 			Scale = (0.5, 0.5)
 			just = [Center Top]
-			Rot_Angle = 2
 			z_priority = (<pause_z> + 103)
 		}
 	endif

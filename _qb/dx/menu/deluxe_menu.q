@@ -18,7 +18,6 @@ custom_menu_fs = {
 script create_custom_menu \{Popup = 0}
 	disable_pause
 
-	Rot_Angle = 2
 	pause_z = 10000
 
 	if ((IsNGC) || (IsPS2))
@@ -43,7 +42,6 @@ script create_custom_menu \{Popup = 0}
 		scrollid = custom_scrolling_menu
 		vmenuid = custom_vmenu
 		Menu_pos = <Menu_pos>
-		Rot_Angle = <Rot_Angle>
 		event_handlers = <flame_handlers>
 		Spacing = <Spacing>
 		use_backdrop = (1)

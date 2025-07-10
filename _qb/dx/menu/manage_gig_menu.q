@@ -13,7 +13,6 @@ script create_dx_manage_gig_menu \{Popup = 0}
 	disable_pause
 
 	set_musician_profile_pool
-	Rot_Angle = 2
 	pause_z = 10000
 
 	if ((IsNGC) || (IsPS2))
@@ -38,7 +37,6 @@ script create_dx_manage_gig_menu \{Popup = 0}
 		scrollid = mangig_scrolling_menu
 		vmenuid = mangig_vmenu
 		Menu_pos = <Menu_pos>
-		Rot_Angle = <Rot_Angle>
 		event_handlers = <flame_handlers>
 		Spacing = <Spacing>
 		use_backdrop = (1)
