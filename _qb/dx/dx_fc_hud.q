@@ -123,6 +123,9 @@ script dx_fc_hud_watchdog
 endscript
 
 script animate_dx_fc_glowburst 
+	if NOT ScreenElementExists Id = dx_fc_hud_glowburst
+		return
+	endif
     begin
     dx_fc_hud_glowburst :DoMorph Alpha = 0.2 Time = 0.2 Motion = linear rgba = $fc_hud_glowburst_rgba1
     dx_fc_hud_glowburst :DoMorph Alpha = 0.4 Time = 0.2 Motion = linear rgba = $fc_hud_glowburst_rgba2

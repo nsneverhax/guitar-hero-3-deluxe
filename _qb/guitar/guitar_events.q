@@ -66,8 +66,8 @@ script GuitarEvent_MissedNote
 	if (<insta_fail> = 1)
 		GuitarEvent_SongFailed
 	endif
-	if ($fc_glowburst_anim_start = 1)
-		Change fc_glowburst_anim_start = 2
+	if ($fc_glowburst_anim_started = 1)
+		Change fc_glowburst_anim_started = 2
 	endif
 endscript
 
@@ -112,8 +112,8 @@ script GuitarEvent_UnnecessaryNote
 	if (<insta_fail> = 1)
 		GuitarEvent_SongFailed
 	endif
-	if ($fc_glowburst_anim_start = 1)
-		Change fc_glowburst_anim_start = 2
+	if ($fc_glowburst_anim_started = 1)
+		Change fc_glowburst_anim_started = 2
 	endif
 endscript
 
