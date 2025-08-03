@@ -155,6 +155,8 @@ menu_tips = [
 	"Luna was here!"
 	"Metric was here!"
 	"Evie was here!"
+	"Hello. My name is Aspyr."
+	"fc_glowburst_anim_start - CATASTROPHIC FAILURE!!!"
 ]
 
 platform_specific_text = "None"
