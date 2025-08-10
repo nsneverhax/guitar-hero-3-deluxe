@@ -2007,11 +2007,12 @@ script create_main_menu_backdrop
 		z_priority = 3}
 	RunScriptOnScreenElement Id = eyes_TR glow_menu_element Params = {Time = 1.0 Id = <Id>}
 	main_menu_font = fontgrid_title_gh3
+	version = "VERSION TAG GOES HERE"
 	GetPlatform
 	; set version based on return value from GetPlatform
 	switch (<Platform>)
 		case PS3
-			FormatText TextName = version "%v%p%l" V = $gh3dx_version P = "-ps3"
+			FormatText TextName = version "%v%p" V = $gh3dx_version P = "-ps3"
 			version_pos = (160.0, 600.0)
 			version_shadow_offs = (3.0, 3.0)
 			version_scale = (0.5, 0.5)
