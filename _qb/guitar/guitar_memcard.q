@@ -57,6 +57,84 @@ script create_signin_changed_menu
 	endif
 endscript
 
+script memcard_choose_storage_device \{StorageSelectorForce = 0}
+	PrintScriptInfo \{"==> memcard_choose_storage_device"}
+	if ($memcard_using_new_save_system = 0)
+		if NOT IsXENON
+			return
+		endif
+	endif
+	if ($paused_for_hardware = 1)
+		return
+	endif
+	create_checking_memory_card_screen
+	Wait \{50.01
+		milliseconds} ; 16.67*3
+	if ($memcard_using_new_save_system = 0)
+		ShowStorageSelector Force = <Force> FileType = Progress
+		begin
+		if StorageSelectorFinished
+			break
+		else
+			Wait \{16.67
+				milliseconds}
+		endif
+		repeat
+	else
+		NewShowStorageSelector Force = <StorageSelectorForce> FileType = Progress
+	endif
+endscript
+
+script memcard_wait_for_timer \{Time = 3.0}
+	begin
+	if TimeGreaterThan <Time>
+		break
+	endif
+	Wait \{16.67
+		milliseconds}
+	repeat
+endscript
+
+script memcard_delete_file 
+	Printf \{"==> memcard_delete_file"}
+	if ($memcard_using_new_save_system = 0)
+		if NOT DeleteMemCardFile \{FileType = Progress}
+			destroy_popup_warning_menu
+			create_delete_failed_menu
+		else
+			destroy_popup_warning_menu
+			create_delete_success_menu
+		endif
+	else
+		create_delete_file_menu
+		MC_WaitAsyncOpsFinished
+		if ISPS3
+			fade_overlay_on
+			MC_StartPS3ForceDelete
+			begin
+			if MC_IsPS3ForceDeleteFinished
+				break
+			endif
+			Wait \{16.67
+				milliseconds}
+			repeat
+			fade_overlay_off
+		else
+			ResetTimer
+			MC_DeleteFolder \{FolderName = $memcard_content_name}
+			if (<Result> = FALSE)
+				memcard_error \{Error = create_delete_failed_menu}
+			endif
+			memcard_wait_for_timer
+			create_delete_success_menu
+			Wait \{1
+				Seconds}
+		endif
+	endif
+	memcard_check_for_card
+	memcard_sequence_retry
+endscript
+
 script signing_change_confirm_reboot 
 	Printf \{"signing_change_confirm_reboot"}
 	if ($reenable_saving = 1)
@@ -64,8 +142,8 @@ script signing_change_confirm_reboot
 	endif
 	destroy_signin_changed_menu
 	enable_pause
-	Wait \{5
-		GameFrames}
+	Wait \{83.35
+		milliseconds} ; 16.67*5
 	start_flow_manager \{flow_state = bootup_press_any_button_fs}
 	Printf \{"signing_change_confirm_reboot end"}
 endscript
