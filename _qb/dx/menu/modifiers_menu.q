@@ -61,27 +61,27 @@ modifier_options = [
 	{
 		Name = "Flames"
 		Id = NO_FLAMES
-		Description = "Flames no longer appear when hitting notes."
+		Description = "Toggle flame effect when hitting notes."
 	}
 	{
 		Name = "Whammy Particles"
 		Id = NO_WHAMMY_PARTICLES
-		Description = "Whammy Particles no longer appear when hitting sustains."
+		Description = "Toggle whammy particles during sustains."
 	}
 	{
 		Name = "Highway Shake"
 		Id = HIGHWAY_SHAKE
-		Description = "Your highway no longer shakes when breaking combo."
+		Description = "Toggle highway shake effect when dropping combo."
 	}
 	{
 		Name = "Whammy Pitch Shifting"
 		Id = NO_WHAMMY_PITCH_SHIFT
-		Description = "Whammy no longer changes the pitch of the song."
+		Description = "Toggle whammy pitch shifting."
 	}
 	{
 		Name = "Track Muting"
 		Id = TRACK_MUTING
-		Description = "Disables track muting on miss"
+		Description = "Toggle track muting on miss."
 	}
 	{
 		Name = "Fast Highway Transition"
@@ -91,12 +91,12 @@ modifier_options = [
 	{
 		Name = "Miss SFX"
 		Id = NO_MISS_SFX
-		Description = "Disables miss sound effects"
+		Description = "Toggle miss SFX. Scrrtch! Ka-chunk!"
 	}
 	{
 		Name = "Overlapping Star Power"
 		Id = SP_OVERLAP
-		Description = "You can now gain star power while having it activated!"
+		Description = "You can now gain star power while having it activated! (DISABLES SAVING)"
 	}
 	{
 		Name = "Prototype Star Power"
@@ -151,7 +151,7 @@ modifier_options = [
 	{
 		Name = "Encore Dancers Always"
 		Id = ENCORE_DANCERS
-		Description = "Always use Encore transition & dancers in Moose's Lounge."
+		Description = "Forces encore state for Moose's Lounge."
 	}
 	{
 		Name = "Awesomeness Detection"
@@ -171,7 +171,7 @@ modifier_options = [
 	{
 		Name = "Enable Viewer"
 		Id = ENABLE_VIEWER
-		Description = "This enables the menu that appears when pressing select. It's a thing that exists. This cannot be disabled until the game is closed."
+		Description = "Enables the debug Model Viewer."
 	}
 	{
 		Name = "Unlock All"
