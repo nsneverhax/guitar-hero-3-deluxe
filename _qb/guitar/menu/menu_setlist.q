@@ -741,7 +741,9 @@ script create_sl_assets
 	<clip_pos> = (160.0, 390.0)
 	displaySprite Id = sl_clipart PARENT = sl_fixed Pos = <clip_pos> Dims = (160.0, 160.0) Z = ($setlist_text_z + 0.1) rgba = [200 200 200 255]
 	displaySprite Id = sl_clipart_shadow PARENT = sl_fixed Pos = (<clip_pos> + (3.0, 3.0)) Dims = (160.0, 160.0) Z = ($setlist_text_z) rgba = [0 0 0 128]
-	create_as_made_famous_by
+	if NOT ($current_tab = tab_downloads)
+		create_as_made_famous_by
+	endif
 	<clip_pos> = (<clip_pos> + (15.0, 50.0))
 	displaySprite Id = sl_clip PARENT = sl_fixed tex = Setlist_Clip just = [-0.5 -0.9] Pos = <clip_pos> Dims = (141.0, 102.0) Z = ($setlist_text_z + 0.2)
 	if ($current_tab = tab_setlist)
