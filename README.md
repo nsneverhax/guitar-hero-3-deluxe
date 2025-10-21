@@ -65,6 +65,8 @@
 
 * Install Guitar Hero III on your PC.
 
+* ***DO NOT install GH3DX on top of BetterGH3! You will break things!***
+
 * Download [**Guitar Hero III Deluxe for PC**](https://nightly.link/nsneverhax/guitar-hero-3-deluxe/workflows/build/main/GH3DX-PC.zip).
 
   * Extract the zip and copy the contents to where you have Guitar Hero III installed.
