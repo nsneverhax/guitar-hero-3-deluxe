@@ -68,6 +68,11 @@ modifier_options = [
 		Id = NO_FLAMES
 		Description = "Toggle flame effect when hitting notes."
 	}
+    {
+        Name = "Hand Flames"
+        Id = HAND_FLAMES
+        Description = "Toggle hand flames during 4x Multiplier."
+    }
 	{
 		Name = "Whammy Particles"
 		Id = NO_WHAMMY_PARTICLES
@@ -591,6 +596,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {no_flames = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+        case HAND_FLAMES
+            if (<disable_hand_flames> = 0)
+                SetGlobalTags user_options Params = {disable_hand_flames = 1}
+                SoundEvent \{Event = CheckBox_Check_SFX}
+            else
+                SetGlobalTags user_options Params = {disable_hand_flames = 0}
+                SoundEvent \{Event = CheckBox_SFX}
+            endif
 		case NO_WHAMMY_PARTICLES
 			if (<no_whammy_particles> = 0)
 			 	SetGlobalTags user_options Params = {no_whammy_particles = 1}
@@ -1086,6 +1099,14 @@ script menu_dx_mods_setprop
 				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
+        case HAND_FLAMES
+            if (<disable_hand_flames> = 1)
+                FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+            elseif
+            	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+            endif
 		case NO_WHAMMY_PARTICLES
 			if (<no_whammy_particles> = 1)
 			 	FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)

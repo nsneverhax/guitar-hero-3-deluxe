@@ -63,6 +63,7 @@ script setup_user_option_tags
 			mult_vocalist = 0
 			dx_force_encore = 0
             sync_diff_speeds = 1
+            disable_hand_flames = 0
 		}}
 endscript
 default_songtagswithdifficulty = {

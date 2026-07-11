@@ -519,6 +519,10 @@ script GuitarEvent_Multiplier4xOn_Spawned
 	if (<black_background> = 1)
 		return
 	endif
+    if (<disable_hand_flames> = 1)
+        kill_4x_fx
+        return
+    endif
 	if ($disable_band = 0)
 		ObjID = (<player_status>.band_Member)
 		GetPakManCurrent \{map = Zones}
