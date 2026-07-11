@@ -58,6 +58,11 @@ modifier_options = [
 		Id = CALIBRATION_MODE
 		Description = "Extremely small hit-window to assist with calibration"
 	}
+    {
+        Name = "Sync Difficulty Speeds"
+        Id = SYNC_DIFF
+        Description = "Syncronize the highway speed between difficulties."
+    }
 	{
 		Name = "Flames"
 		Id = NO_FLAMES
@@ -602,6 +607,14 @@ script menu_dx_mods_select
 				change firework_gems = 0
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+        case SYNC_DIFF
+            if (<sync_diff_speeds> = 0)
+                SetGlobalTags user_options Params = {sync_diff_speeds = 1}
+                SoundEvent \{Event = CheckBox_Check_SFX}
+            else
+                SetGlobalTags user_options Params = {sync_diff_speeds = 0}
+                SoundEvent \{Event = CheckBox_SFX}
+            endif    
 		case HUGE_HIT_WINDOW
 			if ($hugehitwindow = 0)
 				Change hugehitwindow = 1
@@ -1089,6 +1102,14 @@ script menu_dx_mods_setprop
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
+        case SYNC_DIFF
+            if (<sync_diff_speeds> = 1)
+                FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+                <Element_Id> :SetProps text = <mod_text>
+            elseif
+                FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+                <Element_Id> :SetProps text = <mod_text>
+            endif
 		case HUGE_HIT_WINDOW
 			if ($hugehitwindow = 1)
 			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)

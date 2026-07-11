@@ -5,12 +5,10 @@ version_text_rgba = [255 255 255 255]
 version_text_shadow_rgba = $deluxe_text_shadow_rgba
 
 script create_gh3dx_dx_text 
-    ; not doing textures for PS2/Wii (NGC), so keep the
-    ; existing deluxe text for those platforms.
     GetPlatform
-    if (<Platform> == PS2 || <Platform> == NGC)
+    if (<Platform> = PS2 || <Platform> = NGC)
         Change deluxe_text = "DELUXE"
-    elseif (<Platform> == PS3 || <Platform> == XENON)
+    elseif (<Platform> = PS3 || <Platform> = XENON)
         Change deluxe_text = ""
     endif
 endscript

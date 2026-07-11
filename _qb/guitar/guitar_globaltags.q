@@ -62,6 +62,7 @@ script setup_user_option_tags
 			fast_highway = 0
 			mult_vocalist = 0
 			dx_force_encore = 0
+            sync_diff_speeds = 1
 		}}
 endscript
 default_songtagswithdifficulty = {
