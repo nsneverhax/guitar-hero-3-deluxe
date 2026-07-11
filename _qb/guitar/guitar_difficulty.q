@@ -36,7 +36,7 @@ script difficulty_setup
 			game_speed_factor = (<game_speed_factor> * <hyperspeed_scale>)
 		endif
 	endif
-	AddParams ($difficulty_list_props.<DIFFICULTY>)
+	AddParams ($difficulty_list_props.EXPERT)
 	if ($current_speedfactor < 1.0)
 		Change StructureName = <player_status> scroll_time = (<scroll_time> * <scroll_time_factor>)
 		Change StructureName = <player_status> game_speed = (<game_speed> * <game_speed_factor>)

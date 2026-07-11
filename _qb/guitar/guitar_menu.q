@@ -2094,7 +2094,7 @@ script create_main_menu_backdrop
 		Type = TextBlockElement
 		PARENT = main_menu_bg_container
 		font = text_a6
-		Text = "DELUXE"
+		Text = $deluxe_text
 		Dims = $main_menu_deluxe_text_dims
 		Pos = $main_menu_deluxe_text_pos
 		just = [Center Top]

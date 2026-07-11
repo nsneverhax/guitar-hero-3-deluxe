@@ -1,13 +1,27 @@
+deluxe_text = ""
 deluxe_text_rgba = [240 191 116 255]
 deluxe_text_shadow_rgba = [204 153 102 191]
 version_text_rgba = [255 255 255 255]
 version_text_shadow_rgba = $deluxe_text_shadow_rgba
+
+script create_gh3dx_dx_text 
+    ; not doing textures for PS2/Wii (NGC), so keep the
+    ; existing deluxe text for those platforms.
+    GetPlatform
+    if (<Platform> == PS2 || <Platform> == NGC)
+        Change deluxe_text = "DELUXE"
+    elseif (<Platform> == PS3 || <Platform> == XENON)
+        Change deluxe_text = ""
+    endif
+endscript
+
 script create_gh3dx_icon_toast 
-	CreateScreenElement {
+    create_gh3dx_dx_text	
+    CreateScreenElement {
 		Type = TextBlockElement
 		PARENT = pab_container
 		font = text_a6
-		Text = "DELUXE"
+		Text = $deluxe_text
 		Dims = (500.0, 200.0)
 		Pos = (619.0, 350.0)
 		just = [LEFT Top]
@@ -19,6 +33,7 @@ script create_gh3dx_icon_toast
         shadow_rgba = $deluxe_text_shadow_rgba
 	}
 endscript
+
 
 script create_gh3dx_version_toast 
 	FormatText TextName = Text "%v" V = ($gh3dx_version)
