@@ -581,14 +581,12 @@ script create_sl_assets
 						if (<Score> > 0)
 							if Progression_IsBossSong tier_global = $g_gh3_setlist Tier = <Tier> Song = ($g_gh3_setlist.<tier_checksum>.songs [<song_count>])
 								if (<Score> = 1)
-									FormatText \{TextName = score_text
-										"WUSSED OUT"}
+									FormatText TextName = score_text "%h / %t   WUSSED OUT" H = <NotesHit> T = <TotalNotes>
 								else
-									FormatText \{TextName = score_text
-										"BATTLE WON"}
+									FormatText TextName = score_text "%h / %t   BATTLE WON" H = <NotesHit> T = <TotalNotes>
 								endif
 							else
-								FormatText TextName = score_text "%d" D = <Score> UseCommas
+								FormatText TextName = score_text "%h / %t   %d" D = <Score> UseCommas H = <NotesHit> T = <TotalNotes>
 							endif
 							<score_pos> = (<text_pos> + (660.0, 40.0))
 							CreateScreenElement {
@@ -606,15 +604,11 @@ script create_sl_assets
 							percent_pos = (<star_pos> - (10.0, 0.0))
 							percent_pos = (<percent_pos> + (0.0, 5.0))
 							percent_scale = (0.55, 0.55)
-							streak_pos = (<score_pos> - (130.0, 0.0))
-							streak_pos = (<streak_pos> + (0.0, 5.0))
-							streak_scale = (0.55, 0.55)
 							GetGlobalTags <songname> Param = percent100
 							GetGlobalTags <songname> Param = PercentHit
 							GetGlobalTags <songname> Param = NotesHit
 							GetGlobalTags <songname> Param = TotalNotes
 							FormatText TextName = NotePctText "%i%p" I = <PercentHit> P = "%"
-							FormatText TextName = NoteStreakText "%h / %t" H = <NotesHit> T = <TotalNotes>
 							if (<percent100> = 1)
  								CreateScreenElement {
 									Type = TextElement
@@ -659,18 +653,6 @@ script create_sl_assets
 									noshadow
 								}
 							endif
-							CreateScreenElement {
-								Type = TextElement
-								PARENT = setlist_menu
-								Scale = <streak_scale>
-								Text = <NoteStreakText>
-								Pos = <streak_pos>
-								rgba = [100 120 160 255]
-								z_priority = $setlist_text_z
-								font = text_a5
-								just = [RIGHT Top]
-								noshadow
-							}
 						endif
 					endif
 					<text_pos> = (<text_pos> + (60.0, 40.0))
