@@ -164,6 +164,11 @@ modifier_options = [
 		Description = "Forces encore state for Moose's Lounge."
 	}
 	{
+		Name = "Hide Score On Song Select"
+		Id = SONGSEL_STATS
+		Description = "Allows for more customs to be played at once without crashing."
+	}
+	{
 		Name = "Awesomeness Detection"
 		Id = AWESOMENESS
 		Description = "Let NeverHax know that you are awesome!"
@@ -692,12 +697,10 @@ script menu_dx_mods_select
 		case SP_OVERLAP
 			if ($overlapping_sp = 0)
 			 	change overlapping_sp = 1
-			 	Change enable_saving = 0
       			SetGlobalTags user_options Params = {autosave = 0}
 			 	SoundEvent \{Event = CheckBox_Check_SFX}
 			else
 				change overlapping_sp = 0
-				saving_reenable_check
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
 		case PROTO_SP
@@ -867,6 +870,14 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {insta_fail = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+		case SONGSEL_STATS
+			if (<song_select_stats> = 0)
+			 	SetGlobalTags user_options Params = {song_select_stats = 1}
+			 	SoundEvent \{Event = CheckBox_Check_SFX}
+			else
+				SetGlobalTags user_options Params = {song_select_stats = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			endif
 	endswitch
 
 	show_modifiers_warning
@@ -1004,10 +1015,10 @@ script playday_unlockall_safe
 endscript
 
 script saving_reenable_check
-	if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0 && $hugehitwindow = 0)
+	if ($lock_saving = 0 && $enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $hugehitwindow = 0)
     	SetGlobalTags user_options Params = {autosave = 1}
 		Change enable_saving = 1
-	elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $overlapping_sp = 0 && $hugehitwindow = 0)
+	elseif ($enable_button_cheats = 0 && $player1_status.bot_play = 0 && $player2_status.bot_play = 0 && $hugehitwindow = 0)
 		SetGlobalTags user_options Params = {autosave = 1}
 		Change enable_saving = 1
 		Change reenable_saving = 1
@@ -1289,6 +1300,14 @@ script menu_dx_mods_setprop
 		case INSTA_FAIL
 			if (<insta_fail> = 1)
 				FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case SONGSEL_STATS
+			if (<song_select_stats> = 1)
+			 	FormatText TextName = mod_text '%n: On' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)

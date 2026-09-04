@@ -578,7 +578,8 @@ script create_sl_assets
 						if ($game_mode = p1_quickplay)
 							get_quickplay_song_score Song = <song_prefix>
 						endif
-						if (<Score> > 0)
+						GetGlobalTags \{user_options}
+						if (<Score> > 0 && <song_select_stats> = 0)
 							if Progression_IsBossSong tier_global = $g_gh3_setlist Tier = <Tier> Song = ($g_gh3_setlist.<tier_checksum>.songs [<song_count>])
 								if (<Score> = 1)
 									FormatText TextName = score_text "%h / %t   WUSSED OUT" H = <NotesHit> T = <TotalNotes>
