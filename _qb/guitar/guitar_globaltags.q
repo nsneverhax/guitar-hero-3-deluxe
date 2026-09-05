@@ -65,6 +65,7 @@ script setup_user_option_tags
             sync_diff_speeds = 1
             disable_hand_flames = 0
             song_select_stats = 0
+            hw_angle = 0
 		}}
 endscript
 default_songtagswithdifficulty = {

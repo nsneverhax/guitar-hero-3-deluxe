@@ -49,6 +49,11 @@ modifier_options = [
 		Description = "Ooooooooooooh. Ahhhhhhhhhhhh."
 	}
 	{
+		Name = "Highway Angle"
+		Id = HIGHWAY_ANGLE
+		Description = "Makes the perspective of the highway look like Different Games!"
+	}
+	{
 		Name = "Huge Hit Window"
 		Id = HUGE_HIT_WINDOW
 		Description = "Massive hit window. Just like Clone Hero!"
@@ -878,6 +883,69 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {song_select_stats = 0}
 				SoundEvent \{Event = CheckBox_SFX}
 			endif
+        case HIGHWAY_ANGLE
+        	if (<hw_angle> = 0)
+                SetGlobalTags user_options Params = {hw_angle = "GH2"}
+                Change highway_playline1 = 676
+				Change highway_height1 = 325
+				Change highway_top_width1 = 191.0
+				Change widthOffsetFactor1 = 1.83
+				Change highway_fade1 = 75.0
+				Change gem_start_scale1 = 0.3
+				Change fretbar_start_scale1 = 0.19
+				Change sidebar_y_scale1 = 0.92
+                SoundEvent \{Event = CheckBox_Check_SFX}
+            elseif (<hw_angle> = "GH2")
+                SetGlobalTags user_options Params = {hw_angle = "RB1"}
+                Change highway_playline1 = 637
+				Change highway_height1 = 340
+				Change highway_top_width1 = 222.0
+				Change widthoffsetfactor1 = 1.17
+				Change highway_fade1 = 70.0
+				Change gem_start_scale1 = 0.34
+				Change fretbar_start_scale1 = 0.21
+				Change sidebar_x_offset1 = 5.0
+				Change sidebar_x_scale1 = 0.35
+				Change sidebar_y_scale1 = 0.94
+				Change nowbar_scale_x1 = 0.75
+				Change nowbar_scale_y1 = 0.795
+				Change string_scale_x1 = 0.0
+				Change string_scale_y1 = 0.0
+				Change highway_height2 = 300.0
+				Change highway_fade2 = 80.0
+				Change sidebar_y_scale2 = 0.85
+				Change nowbar_scale_x2 = 0.6
+				Change nowbar_scale_y2 = 0.6
+				Change string_scale_x2 = 2.6
+				Change string_scale_y2 = 0.7
+				Change whammy_cutoff = 1120.0
+                SoundEvent \{Event = CheckBox_Check_SFX}
+            elseif (<hw_angle> = "RB1")
+                SetGlobalTags user_options Params = {hw_angle = 0}
+                Change highway_playline1 = 655
+				Change highway_height1 = 350
+				Change highway_top_width1 = 160.0
+				Change widthoffsetfactor1 = 2.2
+				Change highway_fade1 = 30.0
+				Change gem_start_scale1 = 0.25
+				Change fretbar_start_scale1 = 0.15
+				Change sidebar_x_offset1 = 4.0
+				Change sidebar_x_scale1 = 0.3
+				Change sidebar_y_scale1 = 1.0
+				Change nowbar_scale_x1 = 0.8
+				Change nowbar_scale_y1 = 0.8
+				Change string_scale_x1 = 0.65000004
+				Change string_scale_y1 = 0.8
+				Change highway_height2 = 270.0
+				Change highway_fade2 = 25.0
+				Change sidebar_y_scale2 = 0.75
+				Change nowbar_scale_x2 = 0.66
+				Change nowbar_scale_y2 = 0.8
+				Change string_scale_x2 = 0.65000004
+				Change string_scale_y2 = 0.5
+				Change whammy_cutoff = 1100.0
+                SoundEvent \{Event = CheckBox_SFX}
+            endif 
 	endswitch
 
 	show_modifiers_warning
@@ -1311,6 +1379,17 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			elseif
 				FormatText TextName = mod_text '%n: Off' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case HIGHWAY_ANGLE
+        	if (<hw_angle> = "GH2")
+			 	FormatText TextName = mod_text '%n: GH2' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif (<hw_angle> = "RB1")
+			 	FormatText TextName = mod_text '%n: RB1/2' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			elseif
+				FormatText TextName = mod_text '%n: GH3' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 	endswitch
