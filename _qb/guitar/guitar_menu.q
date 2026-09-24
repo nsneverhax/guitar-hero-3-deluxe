@@ -158,6 +158,7 @@ menu_tips = [
 	"EnterGH was here!"
     "Hello. My name is Aspyr."
 	"fc_glowburst_anim_start - CATASTROPHIC FAILURE!!!"
+	"Not AI Generated!"
 ]
 
 platform_specific_text = "None"
