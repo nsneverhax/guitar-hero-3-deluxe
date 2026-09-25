@@ -1,7 +1,7 @@
 destroy_time = 1.0
 ghighwaytiling1 = 2.1
 highway_playline1 = 655
-highway_height1 = 455
+highway_height1 = 455 // 1.3x
 highway_top_width1 = 52
 //highway_bottom_width1 = 512
 widthoffsetfactor1 = 8.85
