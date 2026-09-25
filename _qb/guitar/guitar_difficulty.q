@@ -30,6 +30,16 @@ script difficulty_setup
 			<hyperspeed_scale> = 0.53
 			case 9
 			<hyperspeed_scale> = 0.48
+			case 10
+			<hyperspeed_scale> = 1.25
+			case 11
+			<hyperspeed_scale> = 1.50
+			case 12
+			<hyperspeed_scale> = 1.75
+			case 13
+			<hyperspeed_scale> = 2
+			case 14
+			<hyperspeed_scale> = 2.25
 		endswitch
 		if (<hyperspeed_scale> > 0)
 			scroll_time_factor = (<scroll_time_factor> * <hyperspeed_scale>)
