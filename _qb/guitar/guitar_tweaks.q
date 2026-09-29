@@ -22,8 +22,8 @@ sidebar_y_scale1 = 1.27 // 0.0054 * length + 0.46
 starpower_fx_scale1 = 1.0
 nowbar_scale_x1 = 0.8
 nowbar_scale_y1 = 0.8
-string_scale_x1 = 0.65000004
-string_scale_y1 = 0.8 // TODO: fix these to hw length
+string_scale_x1 = 0.599 // -0.00102 * length + 0.752
+string_scale_y1 = 1.02 // 0.0044 * length + 0.36
 //TODO: 2P
 ghighwaytiling2 = 1.4
 highway_playline2 = 655
