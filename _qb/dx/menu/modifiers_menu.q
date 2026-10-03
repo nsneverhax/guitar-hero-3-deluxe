@@ -1003,27 +1003,7 @@ script set_highway_angle
 		Change sidebar_y_scale1 = 1.6
 		Change string_scale_y1 = 1.4
 	else
-		Change highway_playline1 = 655
-		Change highway_height1 = 350
-		Change highway_top_width1 = 160.0
-		Change widthoffsetfactor1 = 2.2
-		Change highway_fade1 = 30.0
-		Change gem_start_scale1 = 0.25
-		Change fretbar_start_scale1 = 0.15
-		Change sidebar_x_offset1 = 4.0
-		Change sidebar_x_scale1 = 0.3
-		Change sidebar_y_scale1 = 1.0
-		Change nowbar_scale_x1 = 0.8
-		Change nowbar_scale_y1 = 0.8
-		Change string_scale_x1 = 0.65000004
-		Change string_scale_y1 = 0.8
-		Change highway_height2 = 270.0
-		Change highway_fade2 = 25.0
-		Change sidebar_y_scale2 = 0.75
-		Change nowbar_scale_x2 = 0.66
-		Change nowbar_scale_y2 = 0.8
-		Change string_scale_x2 = 0.65000004
-		Change string_scale_y2 = 0.5
+		reset_highway_params
 	endif
 endscript
 
