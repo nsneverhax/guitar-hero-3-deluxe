@@ -66,6 +66,7 @@ script setup_user_option_tags
             disable_hand_flames = 0
             song_select_stats = 0
             hw_angle = 0
+            highway_length = 0
 		}}
 endscript
 default_songtagswithdifficulty = {
