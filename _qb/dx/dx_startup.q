@@ -40,7 +40,10 @@ script load_dx_settings
 	if (<ondisp_dispfps_text> = 1)
 		enable_dispfps
 	endif
-	set_highway_angle \{Action = <hw_angle>}
-	set_highway_length
+	reset_highway_params
+	set_highway_angle
+	if (<hw_angle> = 0 || <hw_angle> = "GH3_2P")
+		set_highway_length
+	endif
     Change dx_initialized = 1
 endscript
