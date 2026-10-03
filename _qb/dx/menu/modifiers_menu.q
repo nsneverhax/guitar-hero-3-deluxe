@@ -568,7 +568,7 @@ script menu_dx_mods_select
 			elseif (<highway_length> = 0)
 				if NOT ((<hw_angle> = 0) || (<hw_angle> = "GH3_2P"))
 					SetGlobalTags user_options Params = {hw_angle = 0}
-					set_highway_angle \{Action = <hw_angle>}
+					reset_highway_params
 				endif
 				SetGlobalTags user_options Params = {highway_length = 105}
 			elseif (<highway_length> = 175)
