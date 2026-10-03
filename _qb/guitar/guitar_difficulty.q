@@ -46,6 +46,11 @@ script difficulty_setup
 			game_speed_factor = (<game_speed_factor> * <hyperspeed_scale>)
 		endif
 	endif
+	if (<highway_length> > 100)
+		highway_length_factor = ((0.6 * <highway_length> + 40) / 100)
+		scroll_time_factor = (<scroll_time_factor> * <highway_length_factor>)
+		game_speed_factor = (<game_speed_factor> * <highway_length_factor>)
+	endif
     if (<sync_diff_speeds> = 1)
 	    AddParams ($difficulty_list_props.EXPERT)
     else
