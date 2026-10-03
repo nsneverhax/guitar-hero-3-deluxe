@@ -1,9 +1,7 @@
 ; some stuff for newgen
 dx_large_gem_scale = 1.5
 gem_start_scale1_normal = 0.25
-gem_end_scale1_normal = 0.8
 gem_start_scale2_normal = 0.27
-gem_end_scale2_normal = 0.8
 whammy_top_width1_normal = 10.0
 whammy_top_width2_normal = 9.2
 
@@ -52,6 +50,11 @@ modifier_options = [
 		Name = "Highway Angle"
 		Id = HIGHWAY_ANGLE
 		Description = "Makes the perspective of the highway look like Different Games!"
+	}
+	{
+		Name = "Highway Length"
+		Id = HIGHWAY_LENGTH
+		Description = "Expand the highway!"
 	}
 	{
 		Name = "Huge Hit Window"
@@ -558,6 +561,22 @@ script menu_dx_mods_select
 				SetGlobalTags user_options Params = {transparent_highway = (<transparent_highway> + 0.05)}
 			endif
 			set_transparent_highway
+		case HIGHWAY_LENGTH
+			if (<highway_length> = 95)
+				SetGlobalTags user_options Params = {highway_length = 0}
+				SoundEvent \{Event = CheckBox_SFX}
+			elseif (<highway_length> = 0)
+				if NOT ((<hw_angle> = 0) || (<hw_angle> = "GH3_2P"))
+					SetGlobalTags user_options Params = {hw_angle = 0}
+					set_highway_angle \{Action = <hw_angle>}
+				endif
+				SetGlobalTags user_options Params = {highway_length = 105}
+			elseif (<highway_length> = 175)
+				SetGlobalTags user_options Params = {highway_length = 50}
+			else
+				SetGlobalTags user_options Params = {highway_length = (<highway_length> + 5)}
+			endif
+			set_highway_length
 		case BLACK_BACKGROUND
 			if (<black_background> = 0)
 			 	SetGlobalTags user_options Params = {black_background = 1}
@@ -851,18 +870,14 @@ script menu_dx_mods_select
 					SetGlobalTags user_options Params = {dx_large_gems = 1}
 					SoundEvent \{Event = CheckBox_Check_SFX}
 					Change gem_start_scale1 = ($gem_start_scale1_normal * $dx_large_gem_scale)
-					Change gem_end_scale1 = ($gem_end_scale1_normal * $dx_large_gem_scale)
 					Change gem_start_scale2 = ($gem_start_scale2_normal * $dx_large_gem_scale)
-					Change gem_end_scale2 = ($gem_end_scale2_normal * $dx_large_gem_scale)
 					Change whammy_top_width1 = ($whammy_top_width1_normal * $dx_large_gem_scale)
 					Change whammy_top_width2 = ($whammy_top_width2_normal * $dx_large_gem_scale)
 				else
 					SetGlobalTags user_options Params = {dx_large_gems = 0}
 					SoundEvent \{Event = CheckBox_SFX}
 					Change {gem_start_scale1 = $gem_start_scale1_normal}
-					Change {gem_end_scale1 = $gem_end_scale1_normal}
 					Change {gem_start_scale2 = $gem_start_scale2_normal}
-					Change {gem_end_scale2 = $gem_end_scale2_normal}
 					Change {whammy_top_width1 = $whammy_top_width1_normal}
 					Change {whammy_top_width2 = $whammy_top_width2_normal}
 				endif
@@ -885,67 +900,19 @@ script menu_dx_mods_select
 			endif
         case HIGHWAY_ANGLE
         	if (<hw_angle> = 0)
+                SetGlobalTags user_options Params = {hw_angle = "GH3_2P"}
+                SoundEvent \{Event = CheckBox_Check_SFX}
+            elseif (<hw_angle> = "GH3_2P")
                 SetGlobalTags user_options Params = {hw_angle = "GH2"}
-                Change highway_playline1 = 676
-				Change highway_height1 = 325
-				Change highway_top_width1 = 191.0
-				Change widthOffsetFactor1 = 1.83
-				Change highway_fade1 = 75.0
-				Change gem_start_scale1 = 0.3
-				Change fretbar_start_scale1 = 0.19
-				Change sidebar_y_scale1 = 0.92
                 SoundEvent \{Event = CheckBox_Check_SFX}
             elseif (<hw_angle> = "GH2")
                 SetGlobalTags user_options Params = {hw_angle = "RB1"}
-                Change highway_playline1 = 637
-				Change highway_height1 = 340
-				Change highway_top_width1 = 222.0
-				Change widthoffsetfactor1 = 1.17
-				Change highway_fade1 = 70.0
-				Change gem_start_scale1 = 0.34
-				Change fretbar_start_scale1 = 0.21
-				Change sidebar_x_offset1 = 5.0
-				Change sidebar_x_scale1 = 0.35
-				Change sidebar_y_scale1 = 0.94
-				Change nowbar_scale_x1 = 0.75
-				Change nowbar_scale_y1 = 0.795
-				Change string_scale_x1 = 0.0
-				Change string_scale_y1 = 0.0
-				Change highway_height2 = 300.0
-				Change highway_fade2 = 80.0
-				Change sidebar_y_scale2 = 0.85
-				Change nowbar_scale_x2 = 0.6
-				Change nowbar_scale_y2 = 0.6
-				Change string_scale_x2 = 2.6
-				Change string_scale_y2 = 0.7
-				Change whammy_cutoff = 1120.0
                 SoundEvent \{Event = CheckBox_Check_SFX}
             elseif (<hw_angle> = "RB1")
                 SetGlobalTags user_options Params = {hw_angle = 0}
-                Change highway_playline1 = 655
-				Change highway_height1 = 350
-				Change highway_top_width1 = 160.0
-				Change widthoffsetfactor1 = 2.2
-				Change highway_fade1 = 30.0
-				Change gem_start_scale1 = 0.25
-				Change fretbar_start_scale1 = 0.15
-				Change sidebar_x_offset1 = 4.0
-				Change sidebar_x_scale1 = 0.3
-				Change sidebar_y_scale1 = 1.0
-				Change nowbar_scale_x1 = 0.8
-				Change nowbar_scale_y1 = 0.8
-				Change string_scale_x1 = 0.65000004
-				Change string_scale_y1 = 0.8
-				Change highway_height2 = 270.0
-				Change highway_fade2 = 25.0
-				Change sidebar_y_scale2 = 0.75
-				Change nowbar_scale_x2 = 0.66
-				Change nowbar_scale_y2 = 0.8
-				Change string_scale_x2 = 0.65000004
-				Change string_scale_y2 = 0.5
-				Change whammy_cutoff = 1100.0
                 SoundEvent \{Event = CheckBox_SFX}
-            endif 
+            endif
+            set_highway_angle \{Action = <hw_angle>}
 	endswitch
 
 	show_modifiers_warning
@@ -960,6 +927,138 @@ script set_transparent_highway
 	CastToInteger transparent_level
 	SetArrayElement ArrayName = highway_normal GlobalArray Index = (3) NewValue = <transparent_level>
 	SetArrayElement ArrayName = highway_starpower GlobalArray Index = (3) NewValue = <transparent_level>
+endscript
+
+script set_highway_angle {Action = NONE}
+	; this looks bad i know, but if it aint broke dont fix it - Charlotte/kernaltrap8
+	switch <Action>
+		case 0
+			Change highway_playline1 = 655
+			Change highway_height1 = 350
+			Change highway_top_width1 = 160.0
+			Change widthoffsetfactor1 = 2.2
+			Change highway_fade1 = 30.0
+			Change gem_start_scale1 = 0.25
+			Change fretbar_start_scale1 = 0.15
+			Change sidebar_x_offset1 = 4.0
+			Change sidebar_x_scale1 = 0.3
+			Change sidebar_y_scale1 = 1.0
+			Change nowbar_scale_x1 = 0.8
+			Change nowbar_scale_y1 = 0.8
+			Change string_scale_x1 = 0.65000004
+			Change string_scale_y1 = 0.8
+			Change highway_height2 = 270.0
+			Change highway_fade2 = 25.0
+			Change sidebar_y_scale2 = 0.75
+			Change nowbar_scale_x2 = 0.66
+			Change nowbar_scale_y2 = 0.8
+			Change string_scale_x2 = 0.65000004
+			Change string_scale_y2 = 0.5
+		case RB1
+			Change highway_playline1 = 637
+			Change highway_height1 = 340
+			Change highway_top_width1 = 222.0
+			Change widthoffsetfactor1 = 1.17
+			Change highway_fade1 = 70.0
+			Change gem_start_scale1 = 0.34
+			Change fretbar_start_scale1 = 0.21
+			Change sidebar_x_offset1 = 5.0
+			Change sidebar_x_scale1 = 0.35
+			Change sidebar_y_scale1 = 0.94
+			Change nowbar_scale_x1 = 0.75
+			Change nowbar_scale_y1 = 0.795
+			Change string_scale_x1 = 0.0
+			Change string_scale_y1 = 0.0
+			Change highway_height2 = 300.0
+			Change highway_fade2 = 80.0
+			Change sidebar_y_scale2 = 0.85
+			Change nowbar_scale_x2 = 0.6
+			Change nowbar_scale_y2 = 0.6
+			Change string_scale_x2 = 2.6
+			Change string_scale_y2 = 0.7
+		case GH2
+			Change highway_playline1 = 676
+			Change highway_height1 = 325
+			Change highway_top_width1 = 191.0
+			Change widthOffsetFactor1 = 1.83
+			Change highway_fade1 = 75.0
+			Change gem_start_scale1 = 0.3
+			Change fretbar_start_scale1 = 0.19
+			Change sidebar_y_scale1 = 0.92
+		case NONE
+			ScriptAssert "hey, you forgot to pass an Action to set_highway_angle!"
+	endswitch
+endscript
+
+script set_highway_length
+	GetGlobalTags \{user_options}
+	if (<highway_length> = 0)
+		Change ghighwaytiling1 = 1.5
+		Change highway_height1 = 350
+		Change highway_top_width1 = 160.0
+		Change widthoffsetfactor1 = 2.2
+		Change gem_start_scale1 = 0.25
+		Change fretbar_start_scale1 = 0.15
+		Change whammy_top_width1 = 10.0
+		Change whammy_width_offset1 = 1.8
+		Change sidebar_y_scale1 = 1.0
+		Change string_scale_x1 = 0.65000004
+		Change string_scale_y1 = 0.8
+		Change ghighwaytiling2 = 1.4
+		Change highway_height2 = 270
+		Change highway_top_width2 = 170.0
+		Change widthoffsetfactor2 = 1.3299999
+		Change gem_start_scale2 = 0.27
+		Change fretbar_start_scale2 = 0.16
+		Change whammy_top_width2 = 9.2
+		Change whammy_width_offset2 = 1.5
+		Change sidebar_y_scale2 = 0.75
+		Change string_scale_y2 = 0.5
+	elseif (<highway_length> > 165)
+		Change ghighwaytiling1 = (0.012 * 165 + 0.3)
+		Change highway_height1 = (2.1 * 165 + 140)
+		Change highway_top_width1 = (-2.16 * 165 + 376)
+		Change widthoffsetfactor1 = (512 / $highway_top_width1 - 1)
+		Change gem_start_scale1 = (-0.0034 * 165 + 0.59)
+		Change fretbar_start_scale1 = (-0.00203 * 165 + 0.353)
+		Change whammy_top_width1 = (-0.13 * 165 + 23)
+		Change whammy_width_offset1 = (28 / $whammy_top_width1 - 1)
+		Change sidebar_y_scale1 = (0.0054 * 165 + 0.46)
+		Change string_scale_x1 = (-0.00102 * 165 + 0.752)
+		Change string_scale_y1 = (0.0044 * 165 + 0.36)
+		Change ghighwaytiling2 = (1.4 * <highway_length> / 100)
+		Change highway_height2 = (270 * <highway_length> / 100)
+		Change highway_top_width2 = (-2.29 * <highway_length> + 399)
+		Change widthoffsetfactor2 = (396.099983 / $highway_top_width2 - 1)
+		Change gem_start_scale2 = (-0.003647 * <highway_length> + 0.6347)
+		Change fretbar_start_scale2 = (-0.002148 * <highway_length> + 0.3748)
+		Change whammy_top_width2 = (-0.124 * <highway_length> + 21.6)
+		Change whammy_width_offset2 = (23 / $whammy_top_width2 - 1)
+		Change sidebar_y_scale2 = (0.006914 * <highway_length> + 0.0586)
+		Change string_scale_y2 = (0.007 * <highway_length> - 0.2)
+	else
+		Change ghighwaytiling1 = (0.012 * <highway_length> + 0.3)
+		Change highway_height1 = (2.1 * <highway_length> + 140)
+		Change highway_top_width1 = (-2.16 * <highway_length> + 376)
+		Change widthoffsetfactor1 = (512 / $highway_top_width1 - 1)
+		Change gem_start_scale1 = (-0.0034 * <highway_length> + 0.59)
+		Change fretbar_start_scale1 = (-0.00203 * <highway_length> + 0.353)
+		Change whammy_top_width1 = (-0.13 * <highway_length> + 23)
+		Change whammy_width_offset1 = (28 / $whammy_top_width1 - 1)
+		Change sidebar_y_scale1 = (0.0054 * <highway_length> + 0.46)
+		Change string_scale_x1 = (-0.00102 * <highway_length> + 0.752)
+		Change string_scale_y1 = (0.0044 * <highway_length> + 0.36)
+		Change ghighwaytiling2 = (1.4 * <highway_length> / 100)
+		Change highway_height2 = (270 * <highway_length> / 100)
+		Change highway_top_width2 = (-2.29 * <highway_length> + 399)
+		Change widthoffsetfactor2 = (396.099983 / $highway_top_width2 - 1)
+		Change gem_start_scale2 = (-0.003647 * <highway_length> + 0.6347)
+		Change fretbar_start_scale2 = (-0.002148 * <highway_length> + 0.3748)
+		Change whammy_top_width2 = (-0.124 * <highway_length> + 21.6)
+		Change whammy_width_offset2 = (23 / $whammy_top_width2 - 1)
+		Change sidebar_y_scale2 = (0.006914 * <highway_length> + 0.0586)
+		Change string_scale_y2 = (0.007 * <highway_length> - 0.2)
+	endif
 endscript
 
 script dx_set_postproc {Action = NONE}
@@ -1136,6 +1235,14 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			else
 				FormatText TextName = mod_text '%n: %p\%' n = ($modifier_options [<Index>].Name) p = <transparent_highway_int>
+				<Element_Id> :SetProps text = <mod_text>
+			endif
+		case HIGHWAY_LENGTH
+			if (<highway_length> = 0)
+				FormatText TextName = mod_text '%n: 100\%' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+			else
+				FormatText TextName = mod_text '%n: %p\%' n = ($modifier_options [<Index>].Name) p = <highway_length>
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case BLACK_BACKGROUND
@@ -1382,7 +1489,10 @@ script menu_dx_mods_setprop
 				<Element_Id> :SetProps text = <mod_text>
 			endif
 		case HIGHWAY_ANGLE
-        	if (<hw_angle> = "GH2")
+        	if (<hw_angle> = "GH3_2P")
+			 	FormatText TextName = mod_text '%n: GH3 Credits' n = ($modifier_options [<Index>].Name)
+				<Element_Id> :SetProps text = <mod_text>
+        	elseif (<hw_angle> = "GH2")
 			 	FormatText TextName = mod_text '%n: GH2' n = ($modifier_options [<Index>].Name)
 				<Element_Id> :SetProps text = <mod_text>
 			elseif (<hw_angle> = "RB1")
